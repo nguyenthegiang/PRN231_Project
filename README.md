@@ -1,2 +1,4 @@
 # PRN231_Project
-"Netflix Vietnam": ASP.NET Core Web API + Angular
+## Technology:
+ - WebAPI: ASP.NET Core Web API 5.0
+ - WebClient: HTML5 + CSS3 + Javascript (jQuery & AJAX)
