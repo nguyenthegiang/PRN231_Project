@@ -14,11 +14,13 @@ namespace WebAPI.Controllers
     public class VideoController : ControllerBase
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
+
         public VideoController(IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
         }
 
+        //Function [Watch Video]
         [HttpGet("GetVideoContent")]
         public async Task<IActionResult> GetVideoContent(string fileName)
         {
@@ -29,7 +31,8 @@ namespace WebAPI.Controllers
                 await stream.CopyToAsync(memory);
             }
             memory.Position = 0;
-            return File(memory, "application/octet-stream", Path.GetFileName(path), true); //enableRangeProcessing = true
+            //enableRangeProcessing = true
+            return File(memory, "application/octet-stream", Path.GetFileName(path), true); 
         }
     }
 }

@@ -48,6 +48,9 @@ namespace WebAPI
 
             app.UseRouting();
 
+            //For [Watch Video]
+            app.UseDefaultFiles();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
