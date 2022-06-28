@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             }
             memory.Position = 0;
             //enableRangeProcessing = true
-            return File(memory, "application/octet-stream", Path.GetFileName(path), true); 
+            return File(memory, "application/octet-stream", Path.GetFileName(path), true);
         }
     }
 }
