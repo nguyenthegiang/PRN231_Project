@@ -14,7 +14,6 @@ namespace BT2TrenLop.DTO
         {
             CreateMap<Movie, MovieDTO>();
             CreateMap<Category, CategoryDTO>();
-            
         }
     }
 }
