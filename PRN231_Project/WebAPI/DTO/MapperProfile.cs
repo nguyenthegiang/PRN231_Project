@@ -13,6 +13,7 @@ namespace BT2TrenLop.DTO
         public MapperProfile()
         {
             CreateMap<Movie, MovieDTO>();
+            CreateMap<Category, CategoryDTO>();
             
         }
     }

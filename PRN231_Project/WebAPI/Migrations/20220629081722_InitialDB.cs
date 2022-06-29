@@ -7,6 +7,19 @@ namespace WebAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
                 {
@@ -27,23 +40,30 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Movies",
-                columns: new[] { "MovieId", "Country", "Description", "Duration", "Image", "MovieName", "Path", "PublishedYear", "Rated" },
-                values: new object[] { 1, null, null, null, null, "Iron Man", null, null, 0 });
+                table: "Category",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[,]
+                {
+                    { 1, "Marvel" },
+                    { 2, "DC" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Movies",
                 columns: new[] { "MovieId", "Country", "Description", "Duration", "Image", "MovieName", "Path", "PublishedYear", "Rated" },
-                values: new object[] { 2, null, null, null, null, "Spider Man", null, null, 0 });
-
-            migrationBuilder.InsertData(
-                table: "Movies",
-                columns: new[] { "MovieId", "Country", "Description", "Duration", "Image", "MovieName", "Path", "PublishedYear", "Rated" },
-                values: new object[] { 3, null, null, null, null, "Ant Man", null, null, 0 });
+                values: new object[,]
+                {
+                    { 1, null, null, null, null, "Iron Man", null, null, 0 },
+                    { 2, null, null, null, null, "Spider Man", null, null, 0 },
+                    { 3, null, null, null, null, "Ant Man", null, null, 0 }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Category");
+
             migrationBuilder.DropTable(
                 name: "Movies");
         }

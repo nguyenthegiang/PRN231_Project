@@ -31,6 +31,11 @@ namespace WebAPI.Models
                 new Movie { MovieId = 2, MovieName = "Spider Man" },
                 new Movie { MovieId = 3, MovieName = "Ant Man" }
             );
+
+            optionsBuilder.Entity<Category>().HasData(
+                new Category { CategoryId = 1, CategoryName = "Marvel" },
+                new Category { CategoryId = 2, CategoryName = "DC" }              
+            );
         }
     }
 }
