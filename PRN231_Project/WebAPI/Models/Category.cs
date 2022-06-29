@@ -11,6 +11,7 @@ namespace WebAPI.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CategoryId { get; set; }
+
         [Required]
         [StringLength(500)]
         public string CategoryName { get; set; }
