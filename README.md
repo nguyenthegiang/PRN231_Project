@@ -3,7 +3,6 @@
  - Mở _Powershell_ và chạy lệnh:  **dotnet ef database update**
 ## Sau khi Clone Project lại từ đầu:
  - Thêm file _appsettings.json_ (xin các bạn khác), cho vào trong project WebAPI và chỉnh lại _ConnectionString_ (username, password)
- - (Nếu bạn đã xóa Database ở _SQL Server_): Chạy lệnh:  **dotnet ef migrations add "InitialDB"**
  - Mở _Powershell_ và chạy lệnh:  **dotnet ef database update**
 ## Code:
  - Chỉ Code ở branch _**Main**_!!!
