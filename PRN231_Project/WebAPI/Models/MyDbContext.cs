@@ -25,6 +25,8 @@ namespace WebAPI.Models
         }
         public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
             optionsBuilder.Entity<Movie>().HasData(
@@ -36,6 +38,17 @@ namespace WebAPI.Models
             optionsBuilder.Entity<Category>().HasData(
                 new Category { CategoryId = 1, CategoryName = "Marvel" },
                 new Category { CategoryId = 2, CategoryName = "DC" }              
+            );
+
+            optionsBuilder.Entity<Role>().HasData(
+                new Role { RoleId = 1, RoleName = "User" },
+                new Role { RoleId = 2, RoleName = "Admin" }
+            );
+
+            optionsBuilder.Entity<User>().HasData(
+                new User { UserId = 1, Email = "adminse1501@gmail.com", Username = "admin", Password = "admin", RoleId = 2 },
+                new User { UserId = 2, Email = "a@gmail.com", Username = "a", Password = "aaa", RoleId = 1 },
+                new User { UserId = 3, Email = "b@gmail.com", Username = "b", Password = "bbb", RoleId = 1 }
             );
         }
     }

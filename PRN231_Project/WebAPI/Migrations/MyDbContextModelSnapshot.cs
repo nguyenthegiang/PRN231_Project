@@ -104,6 +104,105 @@ namespace WebAPI.Migrations
                             Rated = 0
                         });
                 });
+
+            modelBuilder.Entity("WebAPI.Models.Role", b =>
+            {
+                b.Property<int>("RoleId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("RoleName")
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasColumnType("nvarchar(500)");
+
+                b.HasKey("RoleId");
+
+                b.ToTable("Roles");
+
+                b.HasData(
+                    new
+                    {
+                        RoleId = 1,
+                        RoleName = "User"
+                    },
+                    new
+                    {
+                        RoleId = 2,
+                        RoleName = "Admin"
+                    });
+            });
+
+            modelBuilder.Entity("WebAPI.Models.User", b =>
+            {
+                b.Property<int>("UserId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasColumnType("nvarchar(500)");
+
+                b.Property<string>("Password")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<int>("RoleId")
+                    .HasColumnType("int");
+
+                b.Property<string>("Username")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("UserId");
+
+                b.HasIndex("RoleId");
+
+                b.ToTable("Users");
+
+                b.HasData(
+                    new
+                    {
+                        UserId = 1,
+                        Email = "adminse1501@gmail.com",
+                        Password = "admin",
+                        RoleId = 2,
+                        Username = "admin"
+                    },
+                    new
+                    {
+                        UserId = 2,
+                        Email = "a@gmail.com",
+                        Password = "aaa",
+                        RoleId = 1,
+                        Username = "a"
+                    },
+                    new
+                    {
+                        UserId = 3,
+                        Email = "b@gmail.com",
+                        Password = "bbb",
+                        RoleId = 1,
+                        Username = "b"
+                    });
+            });
+
+            modelBuilder.Entity("WebAPI.Models.User", b =>
+            {
+                b.HasOne("WebAPI.Models.Role", "Role")
+                    .WithMany("Users")
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("Role");
+            });
+
+            modelBuilder.Entity("WebAPI.Models.Role", b =>
+            {
+                b.Navigation("Users");
+            });
 #pragma warning restore 612, 618
         }
     }
