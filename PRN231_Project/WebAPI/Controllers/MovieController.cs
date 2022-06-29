@@ -68,13 +68,14 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetMovieById(int id)
         {
-            MovieDTO movieDTO;
-            movieDTO = context.Movies.ProjectTo<MovieDTO>(config).FirstOrDefault(m => m.MovieId == id);
-            if (movieDTO == null)
+            var m = repository.GetMovieById(id);
+            /*MovieDTO movieDTO;
+            movieDTO = context.Movies.ProjectTo<MovieDTO>(config).FirstOrDefault(m => m.MovieId == id);*/
+            if (m == null)
             {
                 return NotFound(); //Response with status code: 404
             }
-            return Ok(movieDTO);
+            return Ok(m);
         }
 
         [HttpPost]

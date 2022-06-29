@@ -19,9 +19,9 @@ namespace WebAPI.DataAccess
             {
                 using (var context = new MyDbContext())
                 {
-                    MapperConfiguration config1;
-                    config1 = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    movieDTOs = context.Movies.ProjectTo<MovieDTO>(config1).ToList();
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    movieDTOs = context.Movies.ProjectTo<MovieDTO>(config).ToList();
                 }
             }
             catch (Exception e)
@@ -29,7 +29,25 @@ namespace WebAPI.DataAccess
                 throw new Exception(e.Message);
             }
             return movieDTOs;
+        }
 
+        public static MovieDTO GetMovieById(int id)
+        {
+            MovieDTO movieDTO;
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    movieDTO = context.Movies.ProjectTo<MovieDTO>(config).SingleOrDefault(m => m.MovieId == id);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return movieDTO;
         }
     }
 }
