@@ -92,19 +92,18 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("id")]
         public IActionResult UpdateMovie(int id, Movie movie)
         {
             try
             {
-                Movie movi = context.Movies.FirstOrDefault(m => m.MovieId == id);
-                if (movi == null)
+                var mTmp = repository.GetMovieById(id);
+                
+                if (mTmp == null)
                 {
                     return NotFound();
                 }
-                context.Entry<Movie>(movi).State = EntityState.Detached;
-                context.Movies.Update(movie);
-                context.SaveChanges();
+                repository.UpdateMovie(movie);
                 return Ok(movie);
             }
             catch (Exception)
@@ -118,13 +117,12 @@ namespace WebAPI.Controllers
         {
             try
             {
-                Movie movie = context.Movies.FirstOrDefault(m => m.MovieId == id);
-                if (movie == null)
+                var m = repository.GetMovieById(id);
+                if (m == null)
                 {
                     return NotFound();
                 }
-                context.Movies.Remove(movie);
-                context.SaveChanges();
+                repository.DeleteMovie(id);
                 return Ok();
             }
             catch (Exception)

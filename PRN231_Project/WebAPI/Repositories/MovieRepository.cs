@@ -16,5 +16,8 @@ namespace WebAPI.Repositories
         public MovieDTO GetMovieById(int id) => MovieDAO.GetMovieById(id);
 
         public void SaveMovie(Movie movie) => MovieDAO.SaveMovie(movie);
+
+        public void UpdateMovie(Movie movie) => MovieDAO.UpdateMovie(movie);
+        public void DeleteMovie(int id) =>MovieDAO.DeleteMovie(id);
     }
 }

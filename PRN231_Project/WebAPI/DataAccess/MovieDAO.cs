@@ -65,5 +65,40 @@ namespace WebAPI.DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static void UpdateMovie(Movie movie)
+        {
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    context.Entry<Movie>(movie).State =
+                        Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public static void DeleteMovie(int id)
+        {
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    var m = GetMovieById(id);
+                    var m1 = context.Movies.SingleOrDefault(c => c.MovieId == m.MovieId);
+                    context.Movies.Remove(m1);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
