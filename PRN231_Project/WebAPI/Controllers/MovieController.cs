@@ -83,8 +83,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                context.Movies.Add(movie);
-                context.SaveChanges();
+                repository.SaveMovie(movie);           
                 return Ok(movie);
             }
             catch (Exception)

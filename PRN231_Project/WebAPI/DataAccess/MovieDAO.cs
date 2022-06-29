@@ -49,5 +49,21 @@ namespace WebAPI.DataAccess
             }
             return movieDTO;
         }
+
+        public static void SaveMovie(Movie movie)
+        {
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    context.Movies.Add(movie);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

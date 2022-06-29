@@ -11,7 +11,7 @@ namespace WebAPI.IRepository
     {
         List<MovieDTO> GetListMovies();
         MovieDTO GetMovieById(int id);
-        //void SaveMovie(MovieDTO movie);
+        void SaveMovie(Movie movie);
         //void UpdateMovie(MovieDTO movie);
         //void DeleteMovie(MovieDTO movie);
     }
