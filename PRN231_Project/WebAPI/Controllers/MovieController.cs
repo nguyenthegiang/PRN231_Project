@@ -21,6 +21,7 @@ namespace WebAPI.Controllers
         private MapperConfiguration config;
         private IMapper mapper;
 
+
         public MovieController(MyDbContext _context)
         {
             context = _context;
@@ -28,11 +29,34 @@ namespace WebAPI.Controllers
             mapper = config.CreateMapper();
         }
 
-        [HttpGet]
+
+        /// <summary>
+        ///khong co phan trang
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+
+       /* [HttpGet]
         public IActionResult GetAllMovie()
         {
             List<MovieDTO> movieDTOs;
             movieDTOs = context.Movies.ProjectTo<MovieDTO>(config).ToList();
+            if (movieDTOs == null)
+            {
+                return NotFound(); //Response with status code: 404
+            }
+            return Ok(movieDTOs);
+        }*/
+
+
+
+        //co phan trang
+
+        [HttpGet]
+        public IActionResult GetAllMoviePaging(int page=1)
+        {
+            List<MovieDTO> movieDTOs;
+            movieDTOs = context.Movies.ProjectTo<MovieDTO>(config).Skip((page - 1) * 5).Take(5).ToList();
             if (movieDTOs == null)
             {
                 return NotFound(); //Response with status code: 404
