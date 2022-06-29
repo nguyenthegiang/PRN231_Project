@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace WebAPI.DTO
 {
-    public class CategoryDTO
+    public class ActorDTO
     {
-        public int CategoryId { get; set; }
-       
-        public string CategoryName { get; set; }
+        public int ActorId { get; set; }
+
+        public string ActorName { get; set; }
     }
 }
