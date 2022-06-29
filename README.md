@@ -1,4 +1,9 @@
 # For Team Member: Đọc kỹ nhé các bạn
+## Sau Khi Pull Code:
+ - Mở Powershell và chạy lệnh:  dotnet ef database update
+## Sau khi Clone Project lại từ đầu:
+ - Thêm file appsettings.json (xin các bạn) và chỉnh lại ConnectionString
+ - Mở Powershell và chạy lệnh:  dotnet ef database update
 ## Code:
  - Chỉ Code ở branch Main!!!
  - Hiện tại: chỉ cần code API, nếu cần demo xem thử thì có thể code tạm trong project WebClient (HTML-CSS-JS)
