@@ -16,6 +16,7 @@ namespace WebAPI.Models
         [StringLength(500)]
         public string MovieName { get; set; }
         
+        //path to location of video of movie
         public string VideoPath { get; set; }
         
         public string Description { get; set; }
@@ -23,12 +24,14 @@ namespace WebAPI.Models
         //Duration in minutes
         public int Duration { get; set; }
         
+        //age allowed for movie
         public int Rated { get; set; }
         
         public int PublishedYear { get; set; }
         
         public string Country { get; set; }
         
+        //pathto location of poster of movie
         public string ImagePath { get; set; }
 
 

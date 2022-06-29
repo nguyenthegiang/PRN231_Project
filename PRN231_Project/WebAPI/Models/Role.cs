@@ -11,9 +11,11 @@ namespace WebAPI.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoleId { get; set; }
+
         [Required]
         [StringLength(500)]
         public string RoleName { get; set; }
+
         public virtual ICollection<User> Users { get; set; }
     }
 }

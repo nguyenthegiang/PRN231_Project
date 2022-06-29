@@ -11,6 +11,7 @@ namespace WebAPI.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
+
         [Required]
         [StringLength(500)]
         public string Email { get; set; }
@@ -20,6 +21,7 @@ namespace WebAPI.Models
         public string Password { get; set; }
 
         public int RoleId { get; set; }
+
         public virtual Role Role { get; set; }
     }
 }
