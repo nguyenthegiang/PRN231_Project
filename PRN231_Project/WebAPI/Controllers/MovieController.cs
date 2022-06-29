@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.DTO;
+using WebAPI.IRepository;
 using WebAPI.Models;
+using WebAPI.Repositories;
 
 namespace WebAPI.Controllers
 {
@@ -20,6 +22,8 @@ namespace WebAPI.Controllers
         private readonly MyDbContext context;
         private MapperConfiguration config;
         private IMapper mapper;
+
+        private IMovieRepository repository = new MovieRepository();
 
         public MovieController(MyDbContext _context)
         {
@@ -46,7 +50,7 @@ namespace WebAPI.Controllers
         }*/
 
         // With Paging
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult GetAllMoviePaging(int page=1)
         {
             List<MovieDTO> movieDTOs;
@@ -56,7 +60,10 @@ namespace WebAPI.Controllers
                 return NotFound(); //Response with status code: 404
             }
             return Ok(movieDTOs);
-        }
+        }*/
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Movie>> GetMovies() => repository.GetListMovies();
 
         [HttpGet("{id}")]
         public IActionResult GetMovieById(int id)
