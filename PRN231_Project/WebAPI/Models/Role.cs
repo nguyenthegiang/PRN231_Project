@@ -16,6 +16,7 @@ namespace WebAPI.Models
         [StringLength(500)]
         public string RoleName { get; set; }
 
+        //one-to-many relationship
         public virtual ICollection<User> Users { get; set; }
     }
 }

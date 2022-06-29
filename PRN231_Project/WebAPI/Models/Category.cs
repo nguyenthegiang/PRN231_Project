@@ -15,5 +15,9 @@ namespace WebAPI.Models
         [Required]
         [StringLength(500)]
         public string CategoryName { get; set; }
+
+        //many-to-many relationship
+        public virtual ICollection<Movie> Movies { get; set; }
+
     }
 }

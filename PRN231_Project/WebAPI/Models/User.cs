@@ -22,6 +22,7 @@ namespace WebAPI.Models
 
         public int RoleId { get; set; }
 
+        //one-to-many relationship
         public virtual Role Role { get; set; }
     }
 }

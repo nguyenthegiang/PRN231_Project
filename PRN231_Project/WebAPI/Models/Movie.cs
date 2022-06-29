@@ -31,9 +31,11 @@ namespace WebAPI.Models
         
         public string Country { get; set; }
         
-        //pathto location of poster of movie
+        //path to location of poster of movie
         public string ImagePath { get; set; }
 
+        //many-to-many relationship
+        public virtual ICollection<Category> Categories { get; set; }
 
     }
 }
