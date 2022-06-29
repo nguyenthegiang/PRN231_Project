@@ -24,6 +24,7 @@ namespace WebAPI.Models
             optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
         }
         public virtual DbSet<Movie> Movies { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
             optionsBuilder.Entity<Movie>().HasData(
