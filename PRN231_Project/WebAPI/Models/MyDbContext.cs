@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace WebAPI.Models
 {
-    public class MyDbContext: DbContext
+    public class MyDbContext : DbContext
     {
         public MyDbContext()
         {
@@ -30,14 +30,47 @@ namespace WebAPI.Models
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
             optionsBuilder.Entity<Movie>().HasData(
-                new Movie { MovieId = 1, MovieName = "Iron Man" },
-                new Movie { MovieId = 2, MovieName = "Spider Man" },
-                new Movie { MovieId = 3, MovieName = "Ant Man" }
+                new Movie
+                {
+                    MovieId = 1,
+                    MovieName = "Iron Man",
+                    VideoPath = "Video/IronMan.mp4",
+                    Description = "Very cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/IronMan.jpg"
+                },
+                new Movie
+                {
+                    MovieId = 2,
+                    MovieName = "Spider Man",
+                    VideoPath = "Video/SpiderMan.mp4",
+                    Description = "Very good",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/SpiderMan.jpg"
+                },
+                new Movie
+                {
+                    MovieId = 3,
+                    MovieName = "Ant Man",
+                    VideoPath = "Video/AntMan.mp4",
+                    Description = "So cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/AntMan.jpg"
+                }
             );
 
             optionsBuilder.Entity<Category>().HasData(
                 new Category { CategoryId = 1, CategoryName = "Marvel" },
-                new Category { CategoryId = 2, CategoryName = "DC" }              
+                new Category { CategoryId = 2, CategoryName = "DC" }
             );
 
             optionsBuilder.Entity<Role>().HasData(

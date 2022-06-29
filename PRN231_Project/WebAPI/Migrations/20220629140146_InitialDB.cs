@@ -7,6 +7,19 @@ namespace WebAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Actor",
+                columns: table => new
+                {
+                    ActorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ActorName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Actor", x => x.ActorId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -26,13 +39,13 @@ namespace WebAPI.Migrations
                     MovieId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MovieName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VideoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Duration = table.Column<int>(type: "int", nullable: false),
                     Rated = table.Column<int>(type: "int", nullable: false),
-                    PublishedYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublishedYear = table.Column<int>(type: "int", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,6 +63,54 @@ namespace WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.RoleId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActorMovie",
+                columns: table => new
+                {
+                    ActorsActorId = table.Column<int>(type: "int", nullable: false),
+                    MoviesMovieId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActorMovie", x => new { x.ActorsActorId, x.MoviesMovieId });
+                    table.ForeignKey(
+                        name: "FK_ActorMovie_Actor_ActorsActorId",
+                        column: x => x.ActorsActorId,
+                        principalTable: "Actor",
+                        principalColumn: "ActorId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ActorMovie_Movies_MoviesMovieId",
+                        column: x => x.MoviesMovieId,
+                        principalTable: "Movies",
+                        principalColumn: "MovieId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryMovie",
+                columns: table => new
+                {
+                    CategoriesCategoryId = table.Column<int>(type: "int", nullable: false),
+                    MoviesMovieId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryMovie", x => new { x.CategoriesCategoryId, x.MoviesMovieId });
+                    table.ForeignKey(
+                        name: "FK_CategoryMovie_Categories_CategoriesCategoryId",
+                        column: x => x.CategoriesCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryMovie_Movies_MoviesMovieId",
+                        column: x => x.MoviesMovieId,
+                        principalTable: "Movies",
+                        principalColumn: "MovieId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,12 +146,12 @@ namespace WebAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Movies",
-                columns: new[] { "MovieId", "Country", "Description", "Duration", "Image", "MovieName", "Path", "PublishedYear", "Rated" },
+                columns: new[] { "MovieId", "Country", "Description", "Duration", "ImagePath", "MovieName", "PublishedYear", "Rated", "VideoPath" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, null, "Iron Man", null, null, 0 },
-                    { 2, null, null, null, null, "Spider Man", null, null, 0 },
-                    { 3, null, null, null, null, "Ant Man", null, null, 0 }
+                    { 1, "America", "Very cool", 120, "Image/IronMan.jpg", "Iron Man", 2001, 12, "Video/IronMan.mp4" },
+                    { 2, "America", "Very good", 120, "Image/SpiderMan.jpg", "Spider Man", 2001, 12, "Video/SpiderMan.mp4" },
+                    { 3, "America", "So cool", 120, "Image/AntMan.jpg", "Ant Man", 2001, 12, "Video/AntMan.mp4" }
                 });
 
             migrationBuilder.InsertData(
@@ -118,6 +179,16 @@ namespace WebAPI.Migrations
                 values: new object[] { 1, "adminse1501@gmail.com", "admin", 2, "admin" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ActorMovie_MoviesMovieId",
+                table: "ActorMovie",
+                column: "MoviesMovieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryMovie_MoviesMovieId",
+                table: "CategoryMovie",
+                column: "MoviesMovieId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
                 table: "Users",
                 column: "RoleId");
@@ -126,13 +197,22 @@ namespace WebAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ActorMovie");
+
+            migrationBuilder.DropTable(
+                name: "CategoryMovie");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Actor");
+
+            migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Movies");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Roles");
