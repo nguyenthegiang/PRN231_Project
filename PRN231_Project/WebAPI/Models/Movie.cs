@@ -11,23 +11,25 @@ namespace WebAPI.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MovieId { get; set; }
+
         [Required]
         [StringLength(500)]
         public string MovieName { get; set; }
         
-        public string Path { get; set; }
+        public string VideoPath { get; set; }
         
         public string Description { get; set; }
        
-        public string Duration { get; set; }
+        //Duration in minutes
+        public int Duration { get; set; }
         
         public int Rated { get; set; }
         
-        public string PublishedYear { get; set; }
+        public int PublishedYear { get; set; }
         
         public string Country { get; set; }
         
-        public string Image { get; set; }
+        public string ImagePath { get; set; }
 
 
     }
