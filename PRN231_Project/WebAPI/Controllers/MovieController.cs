@@ -88,5 +88,25 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpDelete("id")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                Movie movie = context.Movies.FirstOrDefault(m => m.MovieId == id);
+                if (movie == null)
+                {
+                    return NotFound();
+                }
+                context.Movies.Remove(movie);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
