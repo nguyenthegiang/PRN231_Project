@@ -37,5 +37,8 @@ namespace WebAPI.Models
         //many-to-many relationship
         public virtual ICollection<Category> Categories { get; set; }
 
+        //many-to-many relationship
+        public virtual ICollection<Actor> Actors { get; set; }
+
     }
 }
