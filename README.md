@@ -2,8 +2,9 @@
 ## Sau Khi Pull Code:
  - Mở Powershell và chạy lệnh:  dotnet ef database update
 ## Sau khi Clone Project lại từ đầu:
- - Thêm file appsettings.json (xin các bạn) và chỉnh lại ConnectionString
+ - Thêm file appsettings.json (xin các bạn khác) và chỉnh lại ConnectionString
  - Mở Powershell và chạy lệnh:  dotnet ef database update
+ - (Nếu bạn đã xóa Database ở SQL Server): Chạy lệnh:  dotnet ef migrations add "InitialDB"
 ## Code:
  - Chỉ Code ở branch Main!!!
  - Hiện tại: chỉ cần code API, nếu cần demo xem thử thì có thể code tạm trong project WebClient (HTML-CSS-JS)
