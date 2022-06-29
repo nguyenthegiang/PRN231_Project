@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using BT2TrenLop.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,27 @@ namespace WebAPI.Controllers
             try
             {
                 context.Movies.Add(movie);
+                context.SaveChanges();
+                return Ok(movie);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Put(int id, Movie movie)
+        {
+            try
+            {
+                Movie movi = context.Movies.FirstOrDefault(m => m.MovieId == id);
+                if (movi == null)
+                {
+                    return NotFound();
+                }
+                context.Entry<Movie>(movi).State = EntityState.Detached;
+                context.Movies.Update(movie);
                 context.SaveChanges();
                 return Ok(movie);
             }
