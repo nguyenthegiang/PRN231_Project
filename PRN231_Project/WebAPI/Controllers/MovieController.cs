@@ -51,5 +51,20 @@ namespace WebAPI.Controllers
             return Ok(movieDTO);
         }
 
+        [HttpPost]
+        public IActionResult Post([FromBody] Movie movie)
+        {
+            try
+            {
+                context.Movies.Add(movie);
+                context.SaveChanges();
+                return Ok(movie);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
