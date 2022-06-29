@@ -38,5 +38,18 @@ namespace WebAPI.Controllers
             }
             return Ok(movieDTOs);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetAllMovie(int id)
+        {
+            MovieDTO movieDTO;
+            movieDTO = context.Movies.ProjectTo<MovieDTO>(config).FirstOrDefault(m => m.MovieId == id);
+            if (movieDTO == null)
+            {
+                return NotFound(); //Response with status code: 404
+            }
+            return Ok(movieDTO);
+        }
+
     }
 }
