@@ -22,9 +22,9 @@ namespace WebAPI.Controllers
 
         //Function [Watch Video]
         [HttpGet("GetVideoContent")]
-        public async Task<IActionResult> GetVideoContent(string fileName)
+        public async Task<IActionResult> GetVideoContent(int videoId)
         {
-            string path = Path.Combine(_hostingEnvironment.WebRootPath, "Video/") + fileName;
+            string path = Path.Combine(_hostingEnvironment.WebRootPath);
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536, FileOptions.Asynchronous | FileOptions.SequentialScan))
             {

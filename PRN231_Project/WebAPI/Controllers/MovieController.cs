@@ -21,7 +21,6 @@ namespace WebAPI.Controllers
         private MapperConfiguration config;
         private IMapper mapper;
 
-
         public MovieController(MyDbContext _context)
         {
             context = _context;
@@ -29,13 +28,11 @@ namespace WebAPI.Controllers
             mapper = config.CreateMapper();
         }
 
-
         /// <summary>
         ///khong co phan trang
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-
        /* [HttpGet]
         public IActionResult GetAllMovie()
         {
@@ -48,10 +45,7 @@ namespace WebAPI.Controllers
             return Ok(movieDTOs);
         }*/
 
-
-
-        //co phan trang
-
+        // With Paging
         [HttpGet]
         public IActionResult GetAllMoviePaging(int page=1)
         {
@@ -65,7 +59,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetAllMovie(int id)
+        public IActionResult GetMovieById(int id)
         {
             MovieDTO movieDTO;
             movieDTO = context.Movies.ProjectTo<MovieDTO>(config).FirstOrDefault(m => m.MovieId == id);
@@ -77,7 +71,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Movie movie)
+        public IActionResult AddMovie([FromBody] Movie movie)
         {
             try
             {
@@ -92,7 +86,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put(int id, Movie movie)
+        public IActionResult UpdateMovie(int id, Movie movie)
         {
             try
             {
@@ -113,7 +107,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("id")]
-        public IActionResult Delete(int id)
+        public IActionResult DeleteMovie(int id)
         {
             try
             {
