@@ -9,11 +9,11 @@ namespace WebAPI.IRepository
 {
     public interface IUserRepository
     {
-        List<UserDTO> GetListUsers();
-        UserDTO GetUserById(int id);
+        List<User> GetListUsers();
+        User GetUserById(int id);
         void SaveUser(User user);
         void UpdateUser(User user);
         void DeleteUser(int id);
-        UserDTO Login(string email, string rawPassword);
+        User Login(string email, string rawPassword);
     }
 }
