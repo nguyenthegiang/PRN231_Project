@@ -166,17 +166,17 @@ namespace WebAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 2, "a@gmail.com", "aaa", 1, "a" });
+                values: new object[] { 2, "a@gmail.com", "9834876dcfb05cb167a5c24953eba58c4ac89b1adf57f28f2f9d09af107ee8f0", 1, "a" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 3, "b@gmail.com", "bbb", 1, "b" });
+                values: new object[] { 3, "b@gmail.com", "3e744b9dc39389baf0c5a0660589b8402f3dbb49b89b3e75f2c9355852a3c677", 1, "b" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 1, "adminse1501@gmail.com", "admin", 2, "admin" });
+                values: new object[] { 1, "adminse1501@gmail.com", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", 2, "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActorMovie_MoviesMovieId",

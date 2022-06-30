@@ -13,7 +13,7 @@ namespace WebAPI.Repositories
     {
         public List<MovieDTO> GetListMovies() => MovieDAO.GetMovies();
 
-        public MovieDTO GetMovieById(int id) => MovieDAO.GetMovieById(id);
+        public Movie GetMovieById(int id) => MovieDAO.GetMovieById(id);
 
         public void SaveMovie(Movie movie) => MovieDAO.SaveMovie(movie);
 

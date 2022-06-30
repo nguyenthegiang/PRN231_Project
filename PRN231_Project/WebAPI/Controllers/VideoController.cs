@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using WebAPI.Repositories;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +16,7 @@ namespace WebAPI.Controllers
     public class VideoController : ControllerBase
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private MovieRepository movieRepository = new MovieRepository();
 
         public VideoController(IWebHostEnvironment hostingEnvironment)
         {
@@ -24,7 +27,8 @@ namespace WebAPI.Controllers
         [HttpGet("GetVideoContent")]
         public async Task<IActionResult> GetVideoContent(int videoId)
         {
-            string path = Path.Combine(_hostingEnvironment.WebRootPath);
+            Movie movie = movieRepository.GetMovieById(videoId);
+            string path = Path.Combine(_hostingEnvironment.WebRootPath, movie.VideoPath);
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536, FileOptions.Asynchronous | FileOptions.SequentialScan))
             {

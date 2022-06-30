@@ -9,8 +9,8 @@ using WebAPI.Models;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220630065406_EncryptSamplePassword")]
-    partial class EncryptSamplePassword
+    [Migration("20220630080726_InitialDB")]
+    partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

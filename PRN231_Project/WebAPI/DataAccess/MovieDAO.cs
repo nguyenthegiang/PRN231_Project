@@ -32,23 +32,21 @@ namespace WebAPI.DataAccess
             return movieDTOs;
         }
 
-        public static MovieDTO GetMovieById(int id)
+        public static Movie GetMovieById(int id)
         {
-            MovieDTO movieDTO;
+            Movie movie;
             try
             {
                 using (var context = new MyDbContext())
                 {
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    movieDTO = context.Movies.ProjectTo<MovieDTO>(config).SingleOrDefault(m => m.MovieId == id);
+                    movie = context.Movies.SingleOrDefault(m => m.MovieId == id);
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return movieDTO;
+            return movie;
         }
 
         public static void SaveMovie(Movie movie)
