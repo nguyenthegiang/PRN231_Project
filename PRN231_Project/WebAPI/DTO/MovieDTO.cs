@@ -26,5 +26,7 @@ namespace WebAPI.DTO
 
         public string Image { get; set; }
 
+        public virtual CategoryDTO Category { get; set; }
+
     }
 }

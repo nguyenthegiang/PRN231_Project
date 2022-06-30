@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BT2TrenLop.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace WebAPI.DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    movieDTOs = context.Movies.ProjectTo<MovieDTO>(config).ToList();
+                    movieDTOs = context.Movies.Include(m => m.Categories ).ProjectTo<MovieDTO>(config).ToList();
                 }
             }
             catch (Exception e)
