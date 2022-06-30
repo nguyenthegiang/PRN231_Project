@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.DTO;
+using WebAPI.IRepository;
 using WebAPI.Models;
+using WebAPI.Repositories;
 
 namespace WebAPI.Controllers
 {
@@ -16,18 +18,13 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly MyDbContext context;
-        private MapperConfiguration config;
-        private IMapper mapper;
 
-        public CategoryController(MyDbContext _context)
-        {
-            context = _context;
-            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-            mapper = config.CreateMapper();
-        }
+        private ICategoryRepository repository = new CategoryRepository();
 
         [HttpGet]
+        public ActionResult<IEnumerable<CategoryDTO>> GetCategories() => repository.GetListCategories();
+
+        /*[HttpGet]
         public IActionResult GetAllCategory()
         {
             List<CategoryDTO> categoryDTOs;
@@ -37,6 +34,6 @@ namespace WebAPI.Controllers
                 return NotFound(); //Response with status code: 404
             }
             return Ok(categoryDTOs);
-        }
+        }*/
     }
 }
