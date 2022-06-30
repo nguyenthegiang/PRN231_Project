@@ -13,23 +13,23 @@ namespace WebAPI.DataAccess
 {
     public class MovieDAO
     {
-        public static  List<MovieDTO> GetMovies()
+        public static  List<Movie> GetMovies()
         {
-            List<MovieDTO> movieDTOs;
+            List<Movie> movies;
             try
             {
                 using (var context = new MyDbContext())
                 {
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    movieDTOs = context.Movies.Include(m => m.Categories ).ProjectTo<MovieDTO>(config).ToList();
+                   /* MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));*/
+                    movies = context.Movies.ToList();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return movieDTOs;
+            return movies;
         }
 
         public static Movie GetMovieById(int id)

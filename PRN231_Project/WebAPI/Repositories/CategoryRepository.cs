@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using WebAPI.DataAccess;
 using WebAPI.DTO;
 using WebAPI.IRepository;
+using WebAPI.Models;
 
 namespace WebAPI.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        public List<CategoryDTO> GetListCategories() => CategoryDAO.GetCategories();
+        public List<Category> GetListCategories() => CategoryDAO.GetCategories();
     }
 }

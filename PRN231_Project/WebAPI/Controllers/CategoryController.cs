@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
         private ICategoryRepository repository = new CategoryRepository();
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryDTO>> GetCategories() => repository.GetListCategories();
+        public ActionResult<IEnumerable<Category>> GetCategories() => repository.GetListCategories();
 
         /*[HttpGet]
         public IActionResult GetAllCategory()

@@ -13,23 +13,22 @@ namespace WebAPI.DataAccess
 {
     public class CategoryDAO
     {
-        public static List<CategoryDTO> GetCategories()
+        public static List<Category> GetCategories()
         {
-            List<CategoryDTO> categoryDTOs;
+            List<Category> categories;
             try
             {
                 using (var context = new MyDbContext())
                 {
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    categoryDTOs = context.Categories.ProjectTo<CategoryDTO>(config).ToList();
+                  
+                    categories = context.Categories.ToList();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return categoryDTOs;
+            return categories;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace WebAPI.Repositories
 {
     public class MovieRepository : IMovieRepository
     {
-        public List<MovieDTO> GetListMovies() => MovieDAO.GetMovies();
+        public List<Movie> GetListMovies() => MovieDAO.GetMovies();
 
         public Movie GetMovieById(int id) => MovieDAO.GetMovieById(id);
 

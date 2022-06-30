@@ -9,7 +9,7 @@ namespace WebAPI.IRepository
 {
     public interface IMovieRepository
     {
-        List<MovieDTO> GetListMovies();
+        List<Movie> GetListMovies();
         Movie GetMovieById(int id);
         void SaveMovie(Movie movie);
         void UpdateMovie(Movie movie);

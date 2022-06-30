@@ -63,7 +63,7 @@ namespace WebAPI.Controllers
         }*/
 
         [HttpGet]
-        public ActionResult<IEnumerable<MovieDTO>> GetMovies() => repository.GetListMovies();
+        public ActionResult<IEnumerable<Movie>> GetMovies() => repository.GetListMovies();
 
         [HttpGet("{id}")]
         public IActionResult GetMovieById(int id)
