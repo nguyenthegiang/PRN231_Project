@@ -20,21 +20,17 @@ namespace WebAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly MyDbContext context;
-        private MapperConfiguration config;
-        private IMapper mapper;
 
         private IUserRepository repository;
 
         public UserController(MyDbContext _context, IUserRepository repo)
         {
             context = _context;
-            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-            mapper = config.CreateMapper();
             repository = repo;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<UserDTO>> GetUsers() => repository.GetListUsers();
+        public ActionResult<IEnumerable<User>> GetUsers() => repository.GetListUsers();
 
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
@@ -109,23 +105,23 @@ namespace WebAPI.Controllers
         [HttpGet("search")]
         public IActionResult Search(string name)
         {
-            List<UserDTO> userDTOs;
-            userDTOs = context.Users.Include(p => p.Role)
-                .Where(p => p.Username.Contains(name)).ProjectTo<UserDTO>(config).ToList();
+            List<User> users;
+            users = context.Users.Include(p => p.Role)
+                .Where(p => p.Username.Contains(name)).ToList();
 
-            if (userDTOs == null)
+            if (users == null)
             {
                 return NotFound(); // Response with status code: 404
             }
 
-            return Ok(userDTOs);
+            return Ok(users);
         }
         [HttpPost("login")]
         public IActionResult Login(string email, string password)
         {
             try
             {
-                UserDTO user = null;
+                User user = null;
                 user = repository.Login(email, password);
                 if (user == null)
                     return NotFound();
