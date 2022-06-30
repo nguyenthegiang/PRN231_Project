@@ -23,13 +23,14 @@ namespace WebAPI.Controllers
         private MapperConfiguration config;
         private IMapper mapper;
 
-        private IUserRepository repository = new UserRepository();
+        private IUserRepository repository;
 
-        public UserController(MyDbContext _context)
+        public UserController(MyDbContext _context, IUserRepository repo)
         {
             context = _context;
             config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
             mapper = config.CreateMapper();
+            repository = repo;
         }
 
         [HttpGet]
@@ -118,6 +119,22 @@ namespace WebAPI.Controllers
             }
 
             return Ok(userDTOs);
+        }
+        [HttpPost("login")]
+        public IActionResult Login(string email, string password)
+        {
+            try
+            {
+                UserDTO user = null;
+                user = repository.Login(email, password);
+                if (user == null)
+                    return NotFound();
+                return Ok(user);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

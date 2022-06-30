@@ -20,5 +20,11 @@ namespace WebAPI.Repositories
         public void UpdateUser(User user) => UserDAO.UpdateUser(user);
 
         public void DeleteUser(int id) => UserDAO.DeleteUser(id);
+
+        public UserDTO Login(string email, string rawPassword)
+        {
+            string hashedPassword = Helper.Hashing.Encrypt(rawPassword);
+            return UserDAO.Login(email, hashedPassword);
+        }
     }
 }

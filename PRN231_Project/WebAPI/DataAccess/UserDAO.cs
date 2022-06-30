@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BT2TrenLop.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,6 +100,25 @@ namespace WebAPI.DataAccess
             {
                 throw new Exception(e.Message);
             }
+        }
+        public static UserDTO Login(string email, string password)
+        {
+            UserDTO userDto = null;
+            try
+            {
+                using var db = new MyDbContext();
+                MapperConfiguration config = new MapperConfiguration(
+                    cfg => cfg.AddProfile(new MapperProfile()));
+                userDto = db.Users.Where(u =>
+                    EF.Functions.Like(u.Email, email)
+                    && u.Password.Equals(password)
+                ).ProjectTo<UserDTO>(config).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return userDto;
         }
     }
 }

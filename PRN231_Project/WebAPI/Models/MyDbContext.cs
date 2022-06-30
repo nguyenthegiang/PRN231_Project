@@ -79,9 +79,9 @@ namespace WebAPI.Models
             );
 
             optionsBuilder.Entity<User>().HasData(
-                new User { UserId = 1, Email = "adminse1501@gmail.com", Username = "admin", Password = "admin", RoleId = 2 },
-                new User { UserId = 2, Email = "a@gmail.com", Username = "a", Password = "aaa", RoleId = 1 },
-                new User { UserId = 3, Email = "b@gmail.com", Username = "b", Password = "bbb", RoleId = 1 }
+                new User { UserId = 1, Email = "adminse1501@gmail.com", Username = "admin", Password = Helper.Hashing.Encrypt("admin"), RoleId = 2 },
+                new User { UserId = 2, Email = "a@gmail.com", Username = "a", Password = Helper.Hashing.Encrypt("aaa"), RoleId = 1 },
+                new User { UserId = 3, Email = "b@gmail.com", Username = "b", Password = Helper.Hashing.Encrypt("bbb"), RoleId = 1 }
             );
         }
     }
