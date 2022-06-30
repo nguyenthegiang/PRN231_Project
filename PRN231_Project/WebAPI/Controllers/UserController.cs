@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.DTO;
+using WebAPI.IRepository;
 using WebAPI.Models;
+using WebAPI.Repositories;
 
 namespace WebAPI.Controllers
 {
@@ -21,6 +23,8 @@ namespace WebAPI.Controllers
         private MapperConfiguration config;
         private IMapper mapper;
 
+        private IUserRepository repository = new UserRepository();
+
         public UserController(MyDbContext _context)
         {
             context = _context;
@@ -28,36 +32,76 @@ namespace WebAPI.Controllers
             mapper = config.CreateMapper();
         }
 
-        // Get all 
         [HttpGet]
-        public IActionResult GetAll()
-        {
-            List<UserDTO> userDTOs;
-            userDTOs = context.Users.Include(p => p.Role)
-                .ProjectTo<UserDTO>(config).ToList();
+        public ActionResult<IEnumerable<UserDTO>> GetUsers() => repository.GetListUsers();
 
-            if (userDTOs == null)
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            var u = repository.GetUserById(id);
+
+            if (u == null)
             {
-                return NotFound(); // Response with status code: 404
+                return NotFound(); //Response with status code: 404
             }
 
-            return Ok(userDTOs);
+            return Ok(u);
         }
 
-        // Get by id
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        [HttpPost]
+        public IActionResult AddUser([FromBody] User user)
         {
-            UserDTO userDTO;
-            userDTO = context.Users.Include(p => p.Role).ProjectTo<UserDTO>(config)
-                .FirstOrDefault(p1 => p1.UserId == id);
-
-            if (userDTO == null)
+            try
             {
-                return NotFound(); // Response with status code: 404
+                repository.SaveUser(user);
+                return Ok(user);
             }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
 
-            return Ok(userDTO);
+        [HttpPut("id")]
+        public IActionResult UpdateUser(int id, User user)
+        {
+            try
+            {
+                var uTmp = repository.GetUserById(id);
+
+                if (uTmp == null)
+                {
+                    return NotFound();
+                }
+
+                repository.UpdateUser(user);
+                return Ok(user);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("id")]
+        public IActionResult DeleteUser(int id)
+        {
+            try
+            {
+                var u = repository.GetUserById(id);
+
+                if (u == null)
+                {
+                    return NotFound();
+                }
+
+                repository.DeleteUser(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         // Search
@@ -74,46 +118,6 @@ namespace WebAPI.Controllers
             }
 
             return Ok(userDTOs);
-        }
-
-        // Create
-        [HttpPost]
-        public IActionResult Post([FromBody] User user)
-        {
-            try
-            {
-                context.Users.Add(user);
-                context.SaveChanges();
-                return Ok(user);
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
-
-        // Delete
-        [HttpDelete("id")]
-        public IActionResult Detele(int id)
-        {
-            try
-            {
-                User u = context.Users.FirstOrDefault(u1 => u1.UserId == id);
-
-                if (u == null)
-                {
-                    return NotFound();
-                }
-
-                context.Users.Remove(u);
-                context.SaveChanges();
-
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
         }
     }
 }
