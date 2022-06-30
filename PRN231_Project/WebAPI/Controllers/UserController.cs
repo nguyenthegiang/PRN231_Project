@@ -106,8 +106,7 @@ namespace WebAPI.Controllers
         public IActionResult Search(string name)
         {
             List<User> users;
-            users = context.Users.Include(p => p.Role)
-                .Where(p => p.Username.Contains(name)).ToList();
+            users = repository.GetUserByName(name);
 
             if (users == null)
             {
