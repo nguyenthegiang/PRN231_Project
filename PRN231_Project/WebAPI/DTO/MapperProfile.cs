@@ -14,6 +14,8 @@ namespace BT2TrenLop.DTO
         {
             CreateMap<Movie, MovieDTO>();
             CreateMap<Category, CategoryDTO>();
+            CreateMap<Role, RoleDTO>();
+            CreateMap<User, UserDTO>();
         }
     }
 }
