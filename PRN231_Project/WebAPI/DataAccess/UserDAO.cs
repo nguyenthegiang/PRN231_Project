@@ -13,42 +13,38 @@ namespace WebAPI.DataAccess
 {
     public class UserDAO
     {
-        public static List<UserDTO> GetUsers()
+        public static List<User> GetUsers()
         {
-            List<UserDTO> userDTOs;
+            List<User> users;
             try
             {
                 using (var context = new MyDbContext())
                 {
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    userDTOs = context.Movies.ProjectTo<UserDTO>(config).ToList();
+                    users = context.Users.ToList();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return userDTOs;
+            return users;
         }
 
-        public static UserDTO GetUserById(int id)
+        public static User GetUserById(int id)
         {
-            UserDTO userDTO;
+            User user;
             try
             {
                 using (var context = new MyDbContext())
                 {
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    userDTO = context.Movies.ProjectTo<UserDTO>(config).SingleOrDefault(m => m.UserId == id);
+                    user = context.Users.SingleOrDefault(u => u.UserId == id);
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return userDTO;
+            return user;
         }
 
         public static void SaveUser(User user)
@@ -90,9 +86,8 @@ namespace WebAPI.DataAccess
             {
                 using (var context = new MyDbContext())
                 {
-                    var m = GetUserById(id);
-                    var m1 = context.Users.SingleOrDefault(c => c.UserId == m.UserId);
-                    context.Users.Remove(m1);
+                    var u = GetUserById(id);
+                    context.Users.Remove(u);
                     context.SaveChanges();
                 }
             }
@@ -101,24 +96,24 @@ namespace WebAPI.DataAccess
                 throw new Exception(e.Message);
             }
         }
-        public static UserDTO Login(string email, string password)
+        public static User Login(string email, string password)
         {
-            UserDTO userDto = null;
+            User User = null;
             try
             {
                 using var db = new MyDbContext();
                 MapperConfiguration config = new MapperConfiguration(
                     cfg => cfg.AddProfile(new MapperProfile()));
-                userDto = db.Users.Where(u =>
+                User = db.Users.Where(u =>
                     EF.Functions.Like(u.Email, email)
                     && u.Password.Equals(password)
-                ).ProjectTo<UserDTO>(config).FirstOrDefault();
+                ).ProjectTo<User>(config).FirstOrDefault();
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return userDto;
+            return User;
         }
     }
 }
