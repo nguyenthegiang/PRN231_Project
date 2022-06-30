@@ -11,9 +11,9 @@ namespace WebAPI.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public List<UserDTO> GetListUsers() => UserDAO.GetUsers();
+        public List<User> GetListUsers() => UserDAO.GetUsers();
 
-        public UserDTO GetUserById(int id) => UserDAO.GetUserById(id);
+        public User GetUserById(int id) => UserDAO.GetUserById(id);
 
         public void SaveUser(User user) => UserDAO.SaveUser(user);
 
@@ -21,7 +21,7 @@ namespace WebAPI.Repositories
 
         public void DeleteUser(int id) => UserDAO.DeleteUser(id);
 
-        public UserDTO Login(string email, string rawPassword)
+        public User Login(string email, string rawPassword)
         {
             string hashedPassword = Helper.Hashing.Encrypt(rawPassword);
             return UserDAO.Login(email, hashedPassword);
