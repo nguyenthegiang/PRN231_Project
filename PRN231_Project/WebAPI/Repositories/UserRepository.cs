@@ -15,6 +15,8 @@ namespace WebAPI.Repositories
 
         public User GetUserById(int id) => UserDAO.GetUserById(id);
 
+        public List<User> GetUserByName(string name) => UserDAO.GetUserByName(name);
+
         public void SaveUser(User user) => UserDAO.SaveUser(user);
 
         public void UpdateUser(User user) => UserDAO.UpdateUser(user);

@@ -47,6 +47,23 @@ namespace WebAPI.DataAccess
             return user;
         }
 
+        public static List<User> GetUserByName(string name)
+        {
+            List<User> users;
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    users = context.Users.Where(u => u.Username.Contains(name)).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return users;
+        }
+
         public static void SaveUser(User user)
         {
             try
