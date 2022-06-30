@@ -148,6 +148,18 @@ namespace WebAPI.Models
                           PublishedYear = 2001,
                           Country = "America",
                           ImagePath = "Image/ScarletWitch.jpg"
+                      },
+                      new Movie
+                      {
+                          MovieId = 11,
+                          MovieName = "Thong dz va nhung nguoi ban",
+                          VideoPath = "Video/ScarletWitch.mp4",
+                          Description = "So cool",
+                          Duration = 120,
+                          Rated = 12,
+                          PublishedYear = 2001,
+                          Country = "America",
+                          ImagePath = "Image/ScarletWitch.jpg"
                       }
 
             );
