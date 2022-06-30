@@ -13,7 +13,7 @@ namespace WebAPI.DataAccess
 {
     public class MovieDAO
     {
-        public static  List<Movie> GetMovies()
+        public static  List<Movie> GetMovies(int page)
         {
             List<Movie> movies;
             try
@@ -22,7 +22,7 @@ namespace WebAPI.DataAccess
                 {
                    /* MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));*/
-                    movies = context.Movies.ToList();
+                    movies = context.Movies.Skip((page - 1) * 5).Take(5).ToList();
                 }
             }
             catch (Exception e)
