@@ -66,89 +66,89 @@ namespace WebAPI.Models
                     Country = "America",
                     ImagePath = "Image/AntMan.jpg"
                 },
-                 new Movie
-                 {
-                     MovieId = 4,
-                     MovieName = "Black Panther",
-                     VideoPath = "Video/BlackPanther.mp4",
-                     Description = "So cool",
-                     Duration = 120,
-                     Rated = 12,
-                     PublishedYear = 2001,
-                     Country = "America",
-                     ImagePath = "Image/BlackPanther.jpg"
-                 },
-                  new Movie
-                  {
-                      MovieId = 5,
-                      MovieName = "Black Widow",
-                      VideoPath = "Video/BlackWidow.mp4",
-                      Description = "So cool",
-                      Duration = 120,
-                      Rated = 12,
-                      PublishedYear = 2001,
-                      Country = "America",
-                      ImagePath = "Image/BlackWidow.jpg"
-                  },
-                   new Movie
-                   {
-                       MovieId = 6,
-                       MovieName = "Captain America",
-                       VideoPath = "Video/CaptainAmerica.mp4",
-                       Description = "So cool",
-                       Duration = 120,
-                       Rated = 12,
-                       PublishedYear = 2001,
-                       Country = "America",
-                       ImagePath = "Image/CaptainAmerica.jpg"
-                   },
-                    new Movie
-                    {
-                        MovieId = 7,
-                        MovieName = "Captain Marvel",
-                        VideoPath = "Video/CaptainMarvel.mp4",
-                        Description = "So cool",
-                        Duration = 120,
-                        Rated = 12,
-                        PublishedYear = 2001,
-                        Country = "America",
-                        ImagePath = "Image/CaptainMarvel.jpg"
-                    },
-                     new Movie
-                     {
-                         MovieId = 8,
-                         MovieName = "Doctor Strange",
-                         VideoPath = "Video/DoctorStrange.mp4",
-                         Description = "So cool",
-                         Duration = 120,
-                         Rated = 12,
-                         PublishedYear = 2001,
-                         Country = "America",
-                         ImagePath = "Image/DoctorStrange.jpg"
-                     },
-                      new Movie
-                      {
-                          MovieId = 9,
-                          MovieName = "Hulk",
-                          VideoPath = "Video/Hulk.mp4",
-                          Description = "So cool",
-                          Duration = 120,
-                          Rated = 12,
-                          PublishedYear = 2001,
-                          Country = "America",
-                          ImagePath = "Image/Hulk.jpg"
-                      }, new Movie
-                      {
-                          MovieId = 10,
-                          MovieName = "Scarlet Witch",
-                          VideoPath = "Video/ScarletWitch.mp4",
-                          Description = "So cool",
-                          Duration = 120,
-                          Rated = 12,
-                          PublishedYear = 2001,
-                          Country = "America",
-                          ImagePath = "Image/ScarletWitch.jpg"
-                      }
+                new Movie
+                {
+                    MovieId = 4,
+                    MovieName = "Black Panther",
+                    VideoPath = "Video/BlackPanther.mp4",
+                    Description = "So cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/BlackPanther.jpg"
+                },
+                new Movie
+                {
+                    MovieId = 5,
+                    MovieName = "Black Widow",
+                    VideoPath = "Video/BlackWidow.mp4",
+                    Description = "So cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/BlackWidow.jpg"
+                },
+                new Movie
+                {
+                    MovieId = 6,
+                    MovieName = "Captain America",
+                    VideoPath = "Video/CaptainAmerica.mp4",
+                    Description = "So cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/CaptainAmerica.jpg"
+                },
+                new Movie
+                {
+                    MovieId = 7,
+                    MovieName = "Captain Marvel",
+                    VideoPath = "Video/CaptainMarvel.mp4",
+                    Description = "So cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/CaptainMarvel.jpg"
+                },
+                new Movie
+                {
+                    MovieId = 8,
+                    MovieName = "Doctor Strange",
+                    VideoPath = "Video/DoctorStrange.mp4",
+                    Description = "So cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/DoctorStrange.jpg"
+                },
+                new Movie
+                {
+                    MovieId = 9,
+                    MovieName = "Hulk",
+                    VideoPath = "Video/Hulk.mp4",
+                    Description = "So cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/Hulk.jpg"
+                }, new Movie
+                {
+                    MovieId = 10,
+                    MovieName = "Scarlet Witch",
+                    VideoPath = "Video/ScarletWitch.mp4",
+                    Description = "So cool",
+                    Duration = 120,
+                    Rated = 12,
+                    PublishedYear = 2001,
+                    Country = "America",
+                    ImagePath = "Image/ScarletWitch.jpg"
+                }
             );
 
             optionsBuilder.Entity<Category>().HasData(
