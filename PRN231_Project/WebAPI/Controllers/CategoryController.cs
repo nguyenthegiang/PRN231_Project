@@ -18,7 +18,12 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private ICategoryRepository repository = new CategoryRepository();
+        private ICategoryRepository repository;
+
+        public CategoryController(ICategoryRepository repository)
+        {
+            this.repository = repository;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Category>> GetCategories() => repository.GetListCategories();

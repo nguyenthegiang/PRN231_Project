@@ -19,17 +19,11 @@ namespace WebAPI.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly MyDbContext context;
-        private MapperConfiguration config;
-        private IMapper mapper;
+        private IMovieRepository repository;
 
-        private IMovieRepository repository = new MovieRepository();
-
-        public MovieController(MyDbContext _context)
+        public MovieController(IMovieRepository repository)
         {
-            context = _context;
-            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-            mapper = config.CreateMapper();
+            this.repository = repository;
         }
 
         //Without Paging
