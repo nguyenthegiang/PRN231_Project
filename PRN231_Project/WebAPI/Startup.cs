@@ -30,14 +30,20 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+
+            //For AJAX in Clients
             services.AddCors();
-            services.AddDbContext<MyDbContext>(otp => otp.UseSqlServer(Configuration.GetConnectionString("DBContext")));
+            //Database
+            services.AddDbContext<MyDbContext>(otp => 
+                otp.UseSqlServer(Configuration.GetConnectionString("DBContext")));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
+
+            //Inject Repository to Controllers
             services.AddSingleton(typeof(IUserRepository), typeof(UserRepository));
             services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
             services.AddSingleton(typeof(IMovieRepository), typeof(MovieRepository));

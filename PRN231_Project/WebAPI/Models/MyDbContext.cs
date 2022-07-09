@@ -20,15 +20,19 @@ namespace WebAPI.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //Read JSON File -> ConnectionString
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
         }
+
         public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
+            /*************Data Seed*************/
             optionsBuilder.Entity<Movie>().HasData(
                 new Movie
                 {

@@ -32,11 +32,7 @@ namespace WebAPI.Controllers
             mapper = config.CreateMapper();
         }
 
-        /// <summary>
-        ///khong co phan trang
-        /// </summary>
-        /// <param name="page"></param>
-        /// <returns></returns>
+        //Without Paging
        /* [HttpGet]
         public IActionResult GetAllMovie()
         {

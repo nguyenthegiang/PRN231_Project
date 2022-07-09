@@ -25,6 +25,7 @@ namespace WebAPI.Repositories
 
         public User Login(string email, string rawPassword)
         {
+            //Encryption
             string hashedPassword = Helper.Hashing.Encrypt(rawPassword);
             return UserDAO.Login(email, hashedPassword);
         }

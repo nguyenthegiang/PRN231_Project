@@ -19,14 +19,11 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly MyDbContext context;
-
         private IUserRepository repository;
 
-        public UserController(MyDbContext _context, IUserRepository repo)
+        public UserController(IUserRepository repository)
         {
-            context = _context;
-            repository = repo;
+            this.repository = repository;
         }
 
         [HttpGet]
@@ -101,7 +98,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        // Search
+        // Search by Name
         [HttpGet("search")]
         public IActionResult Search(string name)
         {
@@ -115,6 +112,8 @@ namespace WebAPI.Controllers
 
             return Ok(users);
         }
+
+        /********Authentication********/
         [HttpPost("login")]
         public IActionResult Login(string email, string password)
         {

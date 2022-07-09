@@ -18,7 +18,6 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-
         private ICategoryRepository repository = new CategoryRepository();
 
         [HttpGet]

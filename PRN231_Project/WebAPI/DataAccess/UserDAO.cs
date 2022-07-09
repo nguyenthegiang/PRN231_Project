@@ -113,6 +113,8 @@ namespace WebAPI.DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        /***********Authentication***********/
         public static User Login(string email, string password)
         {
             User User = null;
