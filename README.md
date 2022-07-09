@@ -6,7 +6,6 @@
  - Mở _Powershell_ và chạy lệnh:  **dotnet ef database update**
 ## Code:
  - Chỉ Code ở branch _**Main**_!!!
- - Hiện tại: chỉ cần code API, nếu cần demo xem thử thì có thể code tạm trong project _WebClient (HTML-CSS-JS)_
  - Nếu Sửa Database: Mở _Powershell_ và Chạy 2 lệnh:
    +  **dotnet ef migrations add "InitialDB"**
    +  **dotnet ef database update**
