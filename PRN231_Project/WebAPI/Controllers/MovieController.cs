@@ -58,10 +58,10 @@ namespace WebAPI.Controllers
 
 
         //Function [Watch Video]
-        [HttpGet("GetVideoContent")]
-        public async Task<IActionResult> WatchMovie(int videoId)
+        [HttpGet("WatchMovie")]
+        public async Task<IActionResult> WatchMovie(int movieId)
         {
-            Movie movie = repository.GetMovieById(videoId);
+            Movie movie = repository.GetMovieById(movieId);
             string path = Path.Combine(_hostingEnvironment.WebRootPath, movie.VideoPath);
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536, FileOptions.Asynchronous | FileOptions.SequentialScan))
