@@ -32,6 +32,25 @@ namespace WebAPI.DataAccess
             return movies;
         }
 
+        public static List<Movie> Paging10Movie(int page)
+        {
+            List<Movie> movies;
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    /* MapperConfiguration config;
+                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));*/
+                    movies = context.Movies.Skip((page - 1) * 10).Take(10).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return movies;
+        }
+
         public static Movie GetMovieById(int id)
         {
             Movie movie;

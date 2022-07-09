@@ -13,6 +13,8 @@ namespace WebAPI.Repositories
     {
         public List<Movie> GetListMovies(int page) => MovieDAO.GetMovies(page);
 
+        public List<Movie> Paging10Movie(int page) => MovieDAO.Paging10Movie(page); 
+
         public Movie GetMovieById(int id) => MovieDAO.GetMovieById(id);
 
         public void SaveMovie(Movie movie) => MovieDAO.SaveMovie(movie);

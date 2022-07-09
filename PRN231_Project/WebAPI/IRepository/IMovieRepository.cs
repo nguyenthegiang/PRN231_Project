@@ -10,6 +10,8 @@ namespace WebAPI.IRepository
     public interface IMovieRepository
     {
         List<Movie> GetListMovies(int page);
+
+        List<Movie> Paging10Movie(int page);
         Movie GetMovieById(int id);
         void SaveMovie(Movie movie);
         void UpdateMovie(Movie movie);
