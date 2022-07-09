@@ -56,13 +56,13 @@ namespace WebAPI.Controllers
         /**************Client: Paging Movies & Watch Movie**************/
         //Paging List Movies
         [HttpGet]
-        public ActionResult<IEnumerable<Movie>> Paging10Movie(int page = 1) => repository.Paging10Movie(page);
+        public ActionResult<IEnumerable<Movie>> Paging5Movies(int page = 1) => repository.Paging5Movies(page);
 
         //Function [Watch Video]
-        [HttpGet("GetVideoContent")]
-        public async Task<IActionResult> WatchMovie(int videoId)
+        [HttpGet("WatchMovie")]
+        public async Task<IActionResult> WatchMovie(int movieId)
         {
-            Movie movie = repository.GetMovieById(videoId);
+            Movie movie = repository.GetMovieById(movieId);
             string path = Path.Combine(_hostingEnvironment.WebRootPath, movie.VideoPath);
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536, FileOptions.Asynchronous | FileOptions.SequentialScan))
@@ -75,8 +75,9 @@ namespace WebAPI.Controllers
         }
 
         /**************Admin: CRUD Movie**************/
+        //Paging List Movies
         [HttpGet]
-        public ActionResult<IEnumerable<Movie>> Paging5Movie(int page = 1) => repository.GetListMovies(page);
+        public ActionResult<IEnumerable<Movie>> Paging10Movie(int page = 1) => repository.Paging10Movie(page);
 
 
         [HttpGet("{id}")]

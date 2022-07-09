@@ -13,15 +13,14 @@ namespace WebAPI.DataAccess
 {
     public class MovieDAO
     {
-        public static  List<Movie> GetMovies(int page)
+        //Get List Movies for Client
+        public static  List<Movie> Paging5Movies(int page)
         {
             List<Movie> movies;
             try
             {
                 using (var context = new MyDbContext())
                 {
-                   /* MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));*/
                     movies = context.Movies.Skip((page - 1) * 5).Take(5).ToList();
                 }
             }
@@ -32,6 +31,7 @@ namespace WebAPI.DataAccess
             return movies;
         }
 
+        //Get List Movies for Admin
         public static List<Movie> Paging10Movie(int page)
         {
             List<Movie> movies;
@@ -39,8 +39,6 @@ namespace WebAPI.DataAccess
             {
                 using (var context = new MyDbContext())
                 {
-                    /* MapperConfiguration config;
-                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));*/
                     movies = context.Movies.Skip((page - 1) * 10).Take(10).ToList();
                 }
             }
