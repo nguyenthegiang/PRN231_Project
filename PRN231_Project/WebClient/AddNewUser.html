@@ -87,20 +87,12 @@
                         }),
                         success: function (result, status, xhr) 
                         {
-                            $(document).ready(function()
-                            {
-                                $(document).ajaxSuccess(function()
-                                {
-                                    alert("AJAX request successfully completed");
-                                });
-                                $("button").click(function()
-                                {
-                                    window.location = "UserManagement.html";
-                                });
-                            });
+                            alert("Add successfully");
+                            window.location.href = "UserManagement.html";
                         },
                         error: function (xhr, status, error) 
                         {
+                            alert("Add fail");
                             console.log(xhr);
                         }
                     });
