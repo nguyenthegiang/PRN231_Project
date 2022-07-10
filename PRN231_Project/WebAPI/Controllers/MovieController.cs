@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
 
         /**************Client: Paging Movies & Watch Movie**************/
         //Paging List Movies
-        [HttpGet]
+        [HttpGet("paging5")]
         public ActionResult<IEnumerable<Movie>> Paging5Movies(int page = 1) => repository.Paging5Movies(page);
 
         //Function [Watch Video]
@@ -76,7 +76,7 @@ namespace WebAPI.Controllers
 
         /**************Admin: CRUD Movie**************/
         //Paging List Movies
-        [HttpGet]
+        [HttpGet("paging10")]
         public ActionResult<IEnumerable<Movie>> Paging10Movie(int page = 1) => repository.Paging10Movie(page);
 
 
