@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <h2>Update a Reservation <a href="Index.html" class="btn btn-sm btn-primary">Back</a></h2>
+        <div class="form-group">
+            <label for="Id">Product ID</label>
+            <input type="text" name="" id="proId" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+            <label for="Name">Product Name</label>
+            <input type="text" name="" id="proName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="startLocation">Unit Price</label>
+            <input type="number" name="" id="price" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="EndLocation">Unit in Stock</label>
+            <input type="number" name="" id="stock" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Category">Category</label>
+            <select title="" name="" id="category">
+            </select>
+        </div>
+        <div class="text-center panel-body">
+            <button type="submit" class="btn btn-sm btn-primary" id="UpdateButton">Update Product</button>
+        </div>
+
+        <div id="resultDiv" style="display: none;">
+            <h2>Product Updated:</h2>
+            <table class="table table-sm table-striped table-bordered m-2">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                        <th>Unit in Stock</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () 
+        {
+            //lấy param từ URL
+            let params = (new URL(document.location)).searchParams;
+            let id = params.get("id");
+            
+            //get product by Id
+            ShowAllCategories();
+            GetProduct(id);
+
+            function ShowAllCategories() 
+            {
+                $.ajax({
+                    url: "http://localhost:5000/api/Category",
+                    type: "get",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result, status, xhr) 
+                    {
+                        console.log(result);
+                        $.each(result, function (index, value) 
+                        {
+                            appendElement = $("#category");
+                            appendElement.append($("<option>").attr("value", value["categoryId"]).html(value["categoryName"]));
+                        });
+                    },
+
+                    error: function (xhr, status, error) 
+                    {
+                        console.log(xhr);
+                    }
+                });
+            };
+
+            //call API để lấy product theo id 
+            function GetProduct(id) 
+            {
+                $.ajax({
+                    url: "http://localhost:5000/api/Product/"+id,
+                    type: "get",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result, status, xhr) 
+                    {
+                        console.log(result);
+                        $("#proId").attr("value", id);
+                        $("#proName").attr("value", result["productName"]);
+                        $("#price").attr("value", result["unitPrice"]);
+                        $("#stock").attr("value", result["unitslnStock"]);
+                        $("#category").val(result["category"]["categoryId"]).change();
+                    },
+                    error: function (xhr, status, error) 
+                    {
+                        console.log(xhr);
+                    }
+                });
+            };
+        });
+        $("#UpdateButton").on("click", function (e) 
+        {
+            let params = (new URL(document.location)).searchParams;
+            let id = params.get("id");
+            var json = {
+                productId: id,
+                productName: $("#proName").val(),
+                unitPrice: $("#price").val(),
+                unitslnStock: $("#stock").val(),
+                categoryId: $("#category").find(":selected").val()
+            };
+            $.ajax({
+                type: "put",
+                contentType: "application/json; charset=UTF-8",
+                url: "http://localhost:5000/api/Product?id="+id,
+                data: JSON.stringify(json),
+                dataType: "json",
+                success: function (result, status, xhr) 
+                {
+                    $("tbody").append($("<tr>"));
+                    appendElement = $("tbody tr").last();
+                    appendElement.append($("<td>").html(id));
+                    appendElement.append($("<td>").html($("#proName").val()));
+                    appendElement.append($("<td>").html($("#price").val()));
+                    appendElement.append($("<td>").html($("#stock").val()));
+                    appendElement.append($("<td>").html($("#category").find(":selected").val()));
+
+                    $("#resultDiv").show();
+                },
+                error: function (e) 
+                {
+                    console.log(e);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

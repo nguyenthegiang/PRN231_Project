@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Title -->
-        <title>Admin - User Management</title>
+        <title>Admin - Add User</title>
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -47,19 +47,46 @@
             </div>
         </nav>
         <!-- End Navbar -->
-        
-        <div class="container">
-            <div class="row">
-                <!-- Code here: Add, Edit, Delete User -->
-                <table class="table table-sm table-hover table-dark mt-5">
+
+        <div class="container-fluid">
+            <h2>Add a User <a href="index.html" class="btn btn-sm btn-primary">Back</a></h2>
+            <div class="form-group">
+                <label for="Id">User ID</label>
+                <input type="text" name="" id="id" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="startLocation">Email</label>
+                <input type="text" name="" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Name">User Name</label>
+                <input type="text" name="" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="startLocation">Password</label>
+                <input type="text" name="" id="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="EndLocation">Role Id</label>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="text-center panel-body">
+                <button type="submit" class="btn btn-sm btn-primary" id="AddButton">Add</button>
+            </div>
+            <div id="resultDiv" style="display: none;">
+                <h2>Product Added:</h2>
+                <table class="table table-sm table-striped table-bordered m-2">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Email</th>
                             <th>User Name</th>
                             <th>Role Id</th>
-                            <th>Update</th>
-                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -75,60 +102,40 @@
         <script type="text/javascript">
             $(document).ready(function () 
             {
-                ShowUsers();
-            });
-
-            function ShowUsers() 
-            {
-                    $("table tbody").html("");
+                //when submit form
+                $("#AddButton").click(function (e) 
+                {
                     $.ajax({
-                        url: "https://localhost:5001/api/User",
-                        type: "get",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
+                        url: "http://localhost:5000/api/Product",
+                        type: "post",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            productId: 0,
+                            productName: $("#proName").val(),
+                            unitPrice: $("#price").val(),
+                            unitslnStock: $("#stock").val(),
+                            categoryId: $("#category").find(":selected").val()
+                        }),
                         success: function (result, status, xhr) 
                         {
-                            $.each(result, function (index, value) 
-                            {
-                                $("tbody").append($("<tr>"));
-                                appendElement = $("tbody tr").last();
-                                appendElement.append($("<td>").html(value["userId"]));
-                                appendElement.append($("<td>").html(value["email"]));
-                                appendElement.append($("<td>").html(value["username"]));
-                                appendElement.append($("<td>").html(value["roleId"]));
+                            console.log(result);
+                            $("tbody").append($("<tr>"));
+                            appendElement = $("tbody tr").last();
+                            appendElement.append($("<td>").html(result["productId"]));
+                            appendElement.append($("<td>").html(result["productName"]));
+                            appendElement.append($("<td>").html(result["unitPrice"]));
+                            appendElement.append($("<td>").html(result["unitslnStock"]));
+                            appendElement.append($("<td>").html(result["categoryId"]));
 
-                                appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["productId"]
-                                    + "\"><img src=\"image/edit.png\" width=\"30\" /></a>"));
-                                appendElement.append($("<td>")
-                                    .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
-                            });
+                            $("#resultDiv").show();
                         },
                         error: function (xhr, status, error) 
                         {
-                            console.log(xhr)
-                        }
-                    });
-                }
-
-                $("table").on("click", "img.delete", function () 
-                {
-                    //fix code of slide
-                    var productId = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
-
-                    $.ajax({
-                        url: "http://localhost:5000/api/Product/id?id=" + productId,
-                        type: "delete",
-                        contentType: "application/json",
-                        success: function (result, status, xhr)
-                        {
-                            ShowProducts();
-                        },
-                        error: function (xhr, status, error) 
-                        {
-                            console.log(xhr)
+                            console.log(xhr);
                         }
                     });
                 });
+            });
         </script>
     </body>
 </html>
