@@ -68,11 +68,9 @@
             </div>
             <div class="form-group">
                 <label for="EndLocation">Role Id</label>
-                <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-control" id="role">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
                 </select>
             </div>
             <div class="text-center panel-body">
@@ -106,26 +104,26 @@
                 $("#AddButton").click(function (e) 
                 {
                     $.ajax({
-                        url: "http://localhost:5000/api/Product",
+                        url: "https://localhost:5001/api/User",
                         type: "post",
                         contentType: "application/json",
                         data: JSON.stringify({
-                            productId: 0,
-                            productName: $("#proName").val(),
-                            unitPrice: $("#price").val(),
-                            unitslnStock: $("#stock").val(),
-                            categoryId: $("#category").find(":selected").val()
+                            userId: 0,
+                            email: $("#email").val(),
+                            username: $("#name").val(),
+                            password: $("#password").val(),
+                            roleId: $("#role").val()
                         }),
                         success: function (result, status, xhr) 
                         {
                             console.log(result);
                             $("tbody").append($("<tr>"));
                             appendElement = $("tbody tr").last();
-                            appendElement.append($("<td>").html(result["productId"]));
-                            appendElement.append($("<td>").html(result["productName"]));
-                            appendElement.append($("<td>").html(result["unitPrice"]));
-                            appendElement.append($("<td>").html(result["unitslnStock"]));
-                            appendElement.append($("<td>").html(result["categoryId"]));
+                            appendElement.append($("<td>").html(value["userId"]));
+                            appendElement.append($("<td>").html(value["email"]));
+                            appendElement.append($("<td>").html(value["username"]));
+                            appendElement.append($("<td>").html(value["password"]));
+                            appendElement.append($("<td>").html(value["roleId"]));
 
                             $("#resultDiv").show();
                         },
