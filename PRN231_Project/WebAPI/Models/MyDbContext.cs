@@ -33,6 +33,111 @@ namespace WebAPI.Models
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
             /*************Data Seed*************/
+            //************Role
+            optionsBuilder.Entity<Role>().HasData(
+                new Role { RoleId = 1, RoleName = "User" },
+                new Role { RoleId = 2, RoleName = "Admin" }
+            );
+
+            //************User
+            optionsBuilder.Entity<User>().HasData(
+                new User
+                {
+                    UserId = 1,
+                    Email = "admin@gmail.com",
+                    Username = "admin",
+                    Password = Helper.Hashing.Encrypt("admin"),
+                    RoleId = 2
+                },
+                new User
+                {
+                    UserId = 2,
+                    Email = "buingochuyen17462@gmail.com",
+                    Username = "Huyen",
+                    Password = Helper.Hashing.Encrypt("huyen"),
+                    RoleId = 1
+                },
+                new User
+                {
+                    UserId = 3,
+                    Email = "nguyenthe.giang.775@gmail.com",
+                    Username = "Giang",
+                    Password = Helper.Hashing.Encrypt("giang"),
+                    RoleId = 1
+                },
+                new User
+                {
+                    UserId = 4,
+                    Email = "thong21145@gmail.com",
+                    Username = "Thong",
+                    Password = Helper.Hashing.Encrypt("thong"),
+                    RoleId = 1
+                }
+            );
+
+            //************Category
+            optionsBuilder.Entity<Category>().HasData(
+                new Category
+                {
+                    CategoryId = 1,
+                    CategoryName = "Marvel"
+                },
+                new Category
+                {
+                    CategoryId = 2,
+                    CategoryName = "Action & Adventure"
+                },
+                new Category
+                {
+                    CategoryId = 3,
+                    CategoryName = "Sci-Fi & Fantasy"
+                },
+                new Category
+                {
+                    CategoryId = 4,
+                    CategoryName = "Comedy"
+                },
+                new Category
+                {
+                    CategoryId = 5,
+                    CategoryName = "20th Century Fox"
+                }
+            );
+
+            //************Actor
+            optionsBuilder.Entity<Actor>().HasData(
+                new Actor
+                {
+                    ActorId = 1,
+                    ActorName = "Robert Downey Jr"
+                },
+                new Actor
+                {
+                    ActorId = 2,
+                    ActorName = "Paul Rudd"
+                },
+                new Actor
+                {
+                    ActorId = 3,
+                    ActorName = "Scarlett Johansson"
+                },
+                new Actor
+                {
+                    ActorId = 4,
+                    ActorName = "Chadwick Boseman"
+                },
+                new Actor
+                {
+                    ActorId = 5,
+                    ActorName = "Chris Evans"
+                },
+                new Actor
+                {
+                    ActorId = 6,
+                    ActorName = "Anthony Mackie"
+                }
+            );
+
             optionsBuilder.Entity<Movie>().HasData(
                 new Movie
                 {
@@ -153,22 +258,6 @@ namespace WebAPI.Models
                     Country = "America",
                     ImagePath = "Image/ScarletWitch.jpg"
                 }
-            );
-
-            optionsBuilder.Entity<Category>().HasData(
-                new Category { CategoryId = 1, CategoryName = "Marvel" },
-                new Category { CategoryId = 2, CategoryName = "DC" }
-            );
-
-            optionsBuilder.Entity<Role>().HasData(
-                new Role { RoleId = 1, RoleName = "User" },
-                new Role { RoleId = 2, RoleName = "Admin" }
-            );
-
-            optionsBuilder.Entity<User>().HasData(
-                new User { UserId = 1, Email = "adminse1501@gmail.com", Username = "admin", Password = Helper.Hashing.Encrypt("admin"), RoleId = 2 },
-                new User { UserId = 2, Email = "a@gmail.com", Username = "a", Password = Helper.Hashing.Encrypt("aaa"), RoleId = 1 },
-                new User { UserId = 3, Email = "b@gmail.com", Username = "b", Password = Helper.Hashing.Encrypt("bbb"), RoleId = 1 }
             );
         }
     }
