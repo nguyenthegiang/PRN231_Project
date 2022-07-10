@@ -113,15 +113,15 @@
                 $("table").on("click", "img.delete", function () 
                 {
                     //fix code of slide
-                    var productId = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
+                    var userId = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
 
                     $.ajax({
-                        url: "http://localhost:5000/api/Product/id?id=" + productId,
+                        url: "https://localhost:5001/api/User/id?id=" + userId,
                         type: "delete",
                         contentType: "application/json",
                         success: function (result, status, xhr)
                         {
-                            ShowProducts();
+                            ShowUsers();
                         },
                         error: function (xhr, status, error) 
                         {

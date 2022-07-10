@@ -30,26 +30,11 @@
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="AddNewUser.html">Add New</a>
-                        </li>
-                    </ul>
-
-                    <!-- Search Movie -->
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
-                    </form>
-                </div>
             </div>
         </nav>
         <!-- End Navbar -->
 
         <div class="container-fluid">
-            <h2>Add a User <a href="index.html" class="btn btn-sm btn-primary">Back</a></h2>
             <div class="form-group">
                 <label for="Id">User ID</label>
                 <input type="text" name="" id="id" class="form-control" readonly>
@@ -75,20 +60,6 @@
             </div>
             <div class="text-center panel-body">
                 <button type="submit" class="btn btn-sm btn-primary" id="AddButton">Add</button>
-            </div>
-            <div id="resultDiv" style="display: none;">
-                <h2>Product Added:</h2>
-                <table class="table table-sm table-striped table-bordered m-2">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Email</th>
-                            <th>User Name</th>
-                            <th>Role Id</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
             </div>
         </div>
 
@@ -116,16 +87,17 @@
                         }),
                         success: function (result, status, xhr) 
                         {
-                            console.log(result);
-                            $("tbody").append($("<tr>"));
-                            appendElement = $("tbody tr").last();
-                            appendElement.append($("<td>").html(value["userId"]));
-                            appendElement.append($("<td>").html(value["email"]));
-                            appendElement.append($("<td>").html(value["username"]));
-                            appendElement.append($("<td>").html(value["password"]));
-                            appendElement.append($("<td>").html(value["roleId"]));
-
-                            $("#resultDiv").show();
+                            $(document).ready(function()
+                            {
+                                $(document).ajaxSuccess(function()
+                                {
+                                    alert("AJAX request successfully completed");
+                                });
+                                $("button").click(function()
+                                {
+                                    window.location = "UserManagement.html";
+                                });
+                            });
                         },
                         error: function (xhr, status, error) 
                         {
