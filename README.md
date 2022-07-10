@@ -6,8 +6,8 @@
  - Mở _Powershell_ và chạy lệnh:  **dotnet ef database update**
 ## Code:
  - Chỉ Code ở branch _**Main**_!!!
- - Nếu Sửa Database: Mở _Powershell_ và Chạy 2 lệnh:
-   +  **dotnet ef migrations add "InitialDB"**
+ - Nếu Sửa Database (cấu trúc DB hoặc Data Seed): Mở _Powershell_ và Chạy 2 lệnh:
+   +  **dotnet ef migrations add "InitialDB"** (thay InitialDB bằng 1 tên khác, ko trùng với các file Migrations cũ)
    +  **dotnet ef database update**
  - Ghi chép lại sau khi code xong: theo như dưới đây:
 ## Process.docx:
