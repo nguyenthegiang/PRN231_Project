@@ -22,7 +22,7 @@
     
  ------------------------------------------------------------------------------------------------------------------------
 
-# PRN231_Project
+# PRN231_Project: Phim18.net
 ## Technology:
  - WebAPI: ASP.NET Core Web API 5.0
  - WebClient: HTML5 + CSS3 + Javascript (jQuery & AJAX)
