@@ -1,13 +1,20 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BT2TrenLop.DTO;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using WebAPI.Authentication;
 using WebAPI.DTO;
 using WebAPI.IRepository;
 using WebAPI.Models;
@@ -20,10 +27,12 @@ namespace WebAPI.Controllers
     public class UserController : ControllerBase
     {
         private IUserRepository repository;
+        private IAuthenticationManager authentication;
 
-        public UserController(IUserRepository repository)
+        public UserController(IUserRepository repository, IAuthenticationManager authentication)
         {
             this.repository = repository;
+            this.authentication = authentication;
         }
 
         [HttpGet]
@@ -119,16 +128,25 @@ namespace WebAPI.Controllers
         {
             try
             {
-                User user = null;
+                UserDTO user = null;
                 user = repository.Login(email, password);
-                if (user == null)
-                    return NotFound();
+                var token = authentication.Authenticate(user);
+                if (token == null)
+                    return Unauthorized();
+                user.Token = token;
                 return Ok(user);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
+        }
+        /********Authentication********/
+        [HttpPost("autho")]
+        [Authorize]
+        public IActionResult Auth()
+        {
+            return Ok();
         }
     }
 }

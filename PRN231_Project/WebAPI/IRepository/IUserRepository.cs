@@ -15,6 +15,6 @@ namespace WebAPI.IRepository
         void SaveUser(User user);
         void UpdateUser(User user);
         void DeleteUser(int id);
-        User Login(string email, string rawPassword);
+        UserDTO Login(string email, string rawPassword);
     }
 }
