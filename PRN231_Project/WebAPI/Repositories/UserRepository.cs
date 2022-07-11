@@ -23,7 +23,7 @@ namespace WebAPI.Repositories
 
         public void DeleteUser(int id) => UserDAO.DeleteUser(id);
 
-        public User Login(string email, string rawPassword)
+        public UserDTO Login(string email, string rawPassword)
         {
             //Encryption
             string hashedPassword = Helper.Hashing.Encrypt(rawPassword);

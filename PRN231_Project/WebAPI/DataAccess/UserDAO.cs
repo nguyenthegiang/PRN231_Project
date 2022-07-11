@@ -115,9 +115,9 @@ namespace WebAPI.DataAccess
         }
 
         /***********Authentication***********/
-        public static User Login(string email, string password)
+        public static UserDTO Login(string email, string password)
         {
-            User User = null;
+            UserDTO User = null;
             try
             {
                 using var db = new MyDbContext();
@@ -126,7 +126,7 @@ namespace WebAPI.DataAccess
                 User = db.Users.Where(u =>
                     EF.Functions.Like(u.Email, email)
                     && u.Password.Equals(password)
-                ).ProjectTo<User>(config).FirstOrDefault();
+                ).ProjectTo<UserDTO>(config).FirstOrDefault();
             }
             catch (Exception e)
             {

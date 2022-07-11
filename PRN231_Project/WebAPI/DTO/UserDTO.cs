@@ -14,8 +14,8 @@ namespace WebAPI.DTO
 
         public string Username { get; set; }
 
-        public int RoleId { get; set; }
+        public string Token { get; set; }
 
-        public virtual Role Role { get; set; }
+        public virtual RoleDTO Role { get; set; }
     }
 }
