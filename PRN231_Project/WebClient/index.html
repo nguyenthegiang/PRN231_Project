@@ -108,15 +108,16 @@
                     $.each(result, function (index, value) {
                         $("tbody").append($("<tr>"));
                         appendElement = $("tbody tr").last();
-                        appendElement.append($("<td>").html(value["userId"]));
-                        appendElement.append($("<td>").html(value["email"]));
-                        appendElement.append($("<td>").html(value["username"]));
-                        appendElement.append($("<td>").html(value["roleId"]));
-
-                        appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
-                            + "\"><img src=\"image/edit.png\" width=\"30\" /></a>"));
+                        appendElement.append($("<td>").html(value["movieId"]));
+                        appendElement.append($("<td>").html(value["movieName"]));
+                        appendElement.append($("<td>").html(value["videoPath"]));
+                        appendElement.append($("<td>").html(value["description"]));
+                        appendElement.append($("<td>").html(value["duration"]));
+                        appendElement.append($("<td>").html(value["rated"]));
+                        appendElement.append($("<td>").html(value["publishedYear"]));
+                        appendElement.append($("<td>").html(value["country"]));
                         appendElement.append($("<td>")
-                            .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
+                            .html("<img src=\"" + value["imagePath"] + "\" width=\"30\" />"));
                     });
                 },
                 error: function (xhr, status, error) {

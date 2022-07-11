@@ -185,7 +185,7 @@ namespace WebAPI.Models
                     Rated = 10,
                     PublishedYear = 2008,
                     Country = "America",
-                    ImagePath = "image/movies/IronMan.jpg"
+                    ImagePath = "IronMan.jpg"
                 },
                 new Movie
                 {
@@ -197,7 +197,7 @@ namespace WebAPI.Models
                     Rated = 13,
                     PublishedYear = 2021,
                     Country = "America",
-                    ImagePath = "image/movies/SpiderMan.jpg"
+                    ImagePath = "SpiderMan.jpg"
                 },
                 new Movie
                 {
@@ -209,7 +209,7 @@ namespace WebAPI.Models
                     Rated = 9,
                     PublishedYear = 2015,
                     Country = "America",
-                    ImagePath = "image/movies/AntMan.jpg"
+                    ImagePath = "AntMan.jpg"
                 },
                 new Movie
                 {
@@ -221,7 +221,7 @@ namespace WebAPI.Models
                     Rated = 12,
                     PublishedYear = 2018,
                     Country = "America",
-                    ImagePath = "image/movies/BlackPanther.jpg"
+                    ImagePath = "BlackPanther.jpg"
                 },
                 new Movie
                 {
@@ -233,7 +233,7 @@ namespace WebAPI.Models
                     Rated = 15,
                     PublishedYear = 2021,
                     Country = "America",
-                    ImagePath = "image/movies/BlackWidow.jpg"
+                    ImagePath = "BlackWidow.jpg"
                 },
                 new Movie
                 {
@@ -245,7 +245,7 @@ namespace WebAPI.Models
                     Rated = 14,
                     PublishedYear = 2011,
                     Country = "America",
-                    ImagePath = "image/movies/CaptainAmerica.jpg"
+                    ImagePath = "CaptainAmerica.jpg"
                 },
                 new Movie
                 {
@@ -257,7 +257,7 @@ namespace WebAPI.Models
                     Rated = 14,
                     PublishedYear = 2019,
                     Country = "America",
-                    ImagePath = "image/movies/CaptainMarvel.jpg"
+                    ImagePath = "CaptainMarvel.jpg"
                 },
                 new Movie
                 {
@@ -269,7 +269,7 @@ namespace WebAPI.Models
                     Rated = 16,
                     PublishedYear = 2022,
                     Country = "America",
-                    ImagePath = "image/movies/DoctorStrange.jpg"
+                    ImagePath = "DoctorStrange.jpg"
                 },
                 new Movie
                 {
@@ -281,7 +281,7 @@ namespace WebAPI.Models
                     Rated = 15,
                     PublishedYear = 2003,
                     Country = "America",
-                    ImagePath = "image/movies/Hulk.jpg"
+                    ImagePath = "Hulk.jpg"
                 }, new Movie
                 {
                     MovieId = 10,
@@ -292,7 +292,7 @@ namespace WebAPI.Models
                     Rated = 18,
                     PublishedYear = 2021,
                     Country = "America",
-                    ImagePath = "image/movies/ScarletWitch.jpg"
+                    ImagePath = "ScarletWitch.jpg"
                 }
             );
         }
