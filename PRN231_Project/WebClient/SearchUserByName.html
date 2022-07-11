@@ -1,82 +1,146 @@
-<!DOCTYPE html> 
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width"/>
-        <title>Get Reservation</title>
-        <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-        <script src="lib/jquery/dist/jquery.js"></script>
-    </head>
+<!doctype html>
+<html lang="en">
 
-    <body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title -->
+    <title>Admin - Search User</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Jquery -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <!-- Navbar: Dark color & Stick at top of page -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <h2>Search Reservation <a href="index.html"class="btn btn-sm btn-primary">Back</a></h2>
-            <div class="form-group">
-                <label for="id">Name: </label>
-                <input type="text" class="form-control" id="Name"/>
-            </div>
-            <div class="text-center panel-body">
-                <button id="GetButton" class="btn btn-sm btn-primary">Search</button>
-            </div>
+            <!-- Home button -->
+            <a class="navbar-brand" href="#">
+                <!-- Logo image -->
+                <img src="image/logo.png" alt="Logo" height="24" class="d-inline-block align-text-top">
+            </a>
 
-            <div id="resultDiv" style="display:none">
-                <h2>Product</h2>
-                <table class="table table-sm table-striped table-bordered m-2">
-                    <thead>
-                        <tr>
-                            <th>Product ID</th>
-                            <th>Product Name</th>
-                            <th>Unit Price</th>
-                            <th>Unit in Stock</th>
-                            <th>Category</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <!-- Collapse button (for responsive) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+
+                <!-- Search Movie -->
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
             </div>
         </div>
+    </nav>
+    <!-- End Navbar -->
 
-        <script type="text/javascript">
-            $(document).ready(function () 
+    <div class="container-fluid">
+        <h2>Search Reservation <a href="index.html"class="btn btn-sm btn-primary">Back</a></h2>
+        <div class="form-group">
+            <label for="id">Name: </label>
+            <input type="text" class="form-control" id="Name"/>
+        </div>
+        <div class="text-center panel-body">
+            <button id="GetButton" class="btn btn-sm btn-primary">Search</button>
+        </div>
+    
+        <div id="resultDiv" style="display:none">
+            <h2>Product</h2>
+            <table class="table table-sm table-striped table-bordered m-2">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                        <th>Unit in Stock</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function () 
+        {
+            $("#GetButton").click(function (e)
             {
-                $("#GetButton").click(function (e)
-                {
-                    console.log($("#Name").val());
-                    $("table tbody").html("");
-                    $.ajax({
-                        url: "http://localhost:5000/api/Product/search?name=" + $("#Name").val(),
-                        type: "get",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (result, status, xhr) 
+                console.log($("#Name").val());
+                $("table tbody").html("");
+                $.ajax({
+                    url: "http://localhost:5000/api/Product/search?name=" + $("#Name").val(),
+                    type: "get",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result, status, xhr) 
+                    {
+                        $("#resultDiv").show();
+                        if (typeof result !== 'undefined') 
                         {
-                            $("#resultDiv").show();
-                            if (typeof result !== 'undefined') 
+                            $.each(result, function (index, value) 
                             {
-                                $.each(result, function (index, value) 
-                                {
-                                    $("tbody").append($("<tr>"));
-                                    appendElement = $("tbody tr").last();
-                                    appendElement.append($("<td>").html(value["productId"]));
-                                    appendElement.append($("<td>").html(value["productName"]));
-                                    appendElement.append($("<td>").html(value["unitPrice"]));
-                                    appendElement.append($("<td>").html(value["unitslnStock"]));
-                                    appendElement.append($("<td>").html(value["category"]["categoryName"]));
-                                });
-                            } 
-                            
-                            else 
-                            {
-                                $("table tbody").append("<td colspan=\"4\">No Product</td>");
-                            }
-                        },
-                        error: function (xhr, status, error) 
+                                $("tbody").append($("<tr>"));
+                                appendElement = $("tbody tr").last();
+                                appendElement.append($("<td>").html(value["productId"]));
+                                appendElement.append($("<td>").html(value["productName"]));
+                                appendElement.append($("<td>").html(value["unitPrice"]));
+                                appendElement.append($("<td>").html(value["unitslnStock"]));
+                                appendElement.append($("<td>").html(value["category"]["categoryName"]));
+                            });
+                        } 
+                        
+                        else 
                         {
-                            console.log(xhr)
+                            $("table tbody").append("<td colspan=\"4\">No Product</td>");
                         }
-                    });
+                    },
+                    error: function (xhr, status, error) 
+                    {
+                        console.log(xhr)
+                    }
                 });
             });
-        </script>
-    </body>
+        });
+    </script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
