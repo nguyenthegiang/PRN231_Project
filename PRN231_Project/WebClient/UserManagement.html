@@ -75,52 +75,50 @@
             $(document).ready(function () 
             {
                 ShowUsers();
-
-                
             });
 
             $("#GetButton").click(function (e)
-                {
-                    console.log($("#Name").val());
-                    $("table tbody").empty();
-                    $.ajax({
-                        url: "https://localhost:5001/api/User/search?name=" + $("#Name").val(),
-                        type: "get",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (result, status, xhr) 
+            {
+                console.log($("#Name").val());
+                $("table tbody").empty();
+                $.ajax({
+                    url: "https://localhost:5001/api/User/search?name=" + $("#Name").val(),
+                    type: "get",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result, status, xhr) 
+                    {
+                        $("#resultDiv").show();
+
+                        if (typeof result !== 'undefined') 
                         {
-                            $("#resultDiv").show();
-
-                            if (typeof result !== 'undefined') 
+                            $.each(result, function (index, value) 
                             {
-                                $.each(result, function (index, value) 
-                                {
-                                    $("tbody").append($("<tr>"));
-                                    appendElement = $("tbody tr").last();
-                                    appendElement.append($("<td>").html(value["userId"]));
-                                    appendElement.append($("<td>").html(value["email"]));
-                                    appendElement.append($("<td>").html(value["username"]));
-                                    appendElement.append($("<td>").html(value["roleId"]));
+                                $("tbody").append($("<tr>"));
+                                appendElement = $("tbody tr").last();
+                                appendElement.append($("<td>").html(value["userId"]));
+                                appendElement.append($("<td>").html(value["email"]));
+                                appendElement.append($("<td>").html(value["username"]));
+                                appendElement.append($("<td>").html(value["roleId"]));
 
-                                    appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
-                                        + "\"><img src=\"image/edit.png\" width=\"30\" /></a>"));
-                                    appendElement.append($("<td>")
-                                        .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
-                                });
-                            } 
+                                appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
+                                    + "\"><img src=\"image/edit.png\" width=\"30\" /></a>"));
+                                appendElement.append($("<td>")
+                                    .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
+                            });
+                        } 
                                 
-                            else 
-                            {
-                                $("table tbody").append("<td colspan=\"4\">No User</td>");
-                            }
-                        },
-                        error: function (xhr, status, error) 
+                        else 
                         {
-                            console.log(xhr)
+                            $("table tbody").append("<td colspan=\"4\">No User</td>");
                         }
-                    });
+                    },
+                    error: function (xhr, status, error) 
+                    {
+                        console.log(xhr)
+                    }
                 });
+            });
 
             function ShowUsers() 
             {
