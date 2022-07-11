@@ -60,7 +60,7 @@
                 </select>
             </div>
             <div class="text-center panel-body mt-4">
-                <button type="submit" class="btn btn-sm btn-danger px-5" id="AddButton">Update</button>
+                <button type="submit" class="btn btn-sm btn-danger px-5" id="UpdateButton">Update</button>
             </div>
 
             <div id="resultDiv" style="display: none;">
@@ -123,6 +123,7 @@
             {
                 let params = (new URL(document.location)).searchParams;
                 let id = params.get("id");
+                console.log(id);
                 var json = {
                     userId: id,
                     email: $("#email").val(),
@@ -133,7 +134,7 @@
                 $.ajax({
                     type: "put",
                     contentType: "application/json; charset=UTF-8",
-                    url: "https://localhost:5001/api/User?id="+id,
+                    url: "https://localhost:5001/api/User/id?id="+id,
                     data: JSON.stringify(json),
                     dataType: "json",
                     success: function (result, status, xhr) 
