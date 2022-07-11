@@ -38,10 +38,10 @@
                     </ul>
 
                     <!-- Search Movie -->
-                    <form class="d-flex" role="search">
+                    <div class="form-group d-flex">
                         <input class="form-control me-2" type="text" id="Name" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit" id="GetButton">Search</button>
-                    </form>
+                        <button class="btn btn-outline-light" id="GetButton">Search</button>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -76,7 +76,10 @@
             {
                 ShowUsers();
 
-                $("#GetButton").click(function (e)
+                
+            });
+
+            $("#GetButton").click(function (e)
                 {
                     console.log($("#Name").val());
                     $("table tbody").empty();
@@ -118,7 +121,6 @@
                         }
                     });
                 });
-            });
 
             function ShowUsers() 
             {
