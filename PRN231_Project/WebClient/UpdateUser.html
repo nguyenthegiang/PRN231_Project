@@ -90,7 +90,6 @@
                 //lấy param từ URL
                 let params = (new URL(document.location)).searchParams;
                 let id = params.get("id");
-                console.log(id);
                 
                 //get user by Id
                 GetUser(id);
@@ -119,6 +118,7 @@
                     });
                 };
             });
+            
             $("#UpdateButton").on("click", function (e) 
             {
                 let params = (new URL(document.location)).searchParams;
@@ -128,7 +128,7 @@
                     email: $("#email").val(),
                     username: $("#name").val(),
                     password: $("#password").val(),
-                    roleId: $("#role").find(":selected").val()
+                    roleId: $("#role").val()
                 };
                 $.ajax({
                     type: "put",
@@ -138,18 +138,21 @@
                     dataType: "json",
                     success: function (result, status, xhr) 
                     {
+                        alert("Update Successfully");
+                        window.location.href = "UserManagement.html";
                         $("tbody").append($("<tr>"));
                         appendElement = $("tbody tr").last();
                         appendElement.append($("<td>").html(id));
                         appendElement.append($("<td>").html($("#email").val()));
                         appendElement.append($("<td>").html($("#name").val()));
                         appendElement.append($("<td>").html($("#password").val()));
-                        appendElement.append($("<td>").html($("#role").find(":selected").val()));
+                        appendElement.append($("<td>").html($("#role").val()));
 
                         $("#resultDiv").show();
                     },
                     error: function (e) 
                     {
+                        alert("Update Fail");
                         console.log(e);
                     }
                 });
