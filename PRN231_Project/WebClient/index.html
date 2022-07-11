@@ -98,7 +98,7 @@
             ShowMovies();
         });
 
-        //Test
+        //Test: show data
         function ShowMovies() {
             $("table tbody").html("");
             $.ajax({
@@ -119,7 +119,7 @@
                         appendElement.append($("<td>").html(value["publishedYear"]));
                         appendElement.append($("<td>").html(value["country"]));
                         appendElement.append($("<td>")
-                            .html("<img src=\"" + value["imagePath"] + "\" width=\"30\" />"));
+                            .html("<img src=\"image\\movies\\" + value["imagePath"] + "\" width=\"100\" />"));
                     });
                 },
                 error: function (xhr, status, error) {
