@@ -1,151 +1,159 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <script src="lib/jquery/dist/jquery.js"></script>
-</head>
-<body>
-    <div class="container-fluid">
-        <h2>Update a Reservation <a href="Index.html" class="btn btn-sm btn-primary">Back</a></h2>
-        <div class="form-group">
-            <label for="Id">Product ID</label>
-            <input type="text" name="" id="proId" class="form-control" readonly>
-        </div>
-        <div class="form-group">
-            <label for="Name">Product Name</label>
-            <input type="text" name="" id="proName" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="startLocation">Unit Price</label>
-            <input type="number" name="" id="price" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="EndLocation">Unit in Stock</label>
-            <input type="number" name="" id="stock" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="Category">Category</label>
-            <select title="" name="" id="category">
-            </select>
-        </div>
-        <div class="text-center panel-body">
-            <button type="submit" class="btn btn-sm btn-primary" id="UpdateButton">Update Product</button>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Title -->
+        <title>Admin - User Management</title>
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- Jquery -->
+        <script src="lib/jquery/dist/jquery.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    </head>
+
+    <body class="bg-danger">
+        <!-- Navbar: Dark color & Stick at top of page -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <div class="container-fluid">
+                <!-- Home button -->
+                <a class="navbar-brand" href="UserManagement.html">
+                    <!-- Logo image -->
+                    <img src="image/logo.png" alt="Logo" height="24"
+                        class="d-inline-block align-text-top">
+                </a>
+
+                <!-- Collapse button (for responsive) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <div class="container mt-5 text-white bg-dark p-4 rounded">
+            <h3>Update a User</h3>
+            <div class="form-group">
+                <label for="Id">User ID</label>
+                <input type="text" name="" id="id" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="startLocation">Email</label>
+                <input type="text" name="" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Name">User Name</label>
+                <input type="text" name="" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="startLocation">Password</label>
+                <input type="text" name="" id="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="EndLocation">Role Id</label>
+                <select class="form-control" id="role">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                </select>
+            </div>
+            <div class="text-center panel-body mt-4">
+                <button type="submit" class="btn btn-sm btn-danger px-5" id="AddButton">Update</button>
+            </div>
+
+            <div id="resultDiv" style="display: none;">
+                <h2>Product Updated:</h2>
+                <table class="table table-sm table-striped table-bordered m-2">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>User Name</th>
+                            <th>Role Id</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
 
-        <div id="resultDiv" style="display: none;">
-            <h2>Product Updated:</h2>
-            <table class="table table-sm table-striped table-bordered m-2">
-                <thead>
-                    <tr>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Unit Price</th>
-                        <th>Unit in Stock</th>
-                        <th>Category</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function () 
-        {
-            //lấy param từ URL
-            let params = (new URL(document.location)).searchParams;
-            let id = params.get("id");
-            
-            //get product by Id
-            ShowAllCategories();
-            GetProduct(id);
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 
-            function ShowAllCategories() 
+        <script>
+            $(document).ready(function () 
             {
-                $.ajax({
-                    url: "http://localhost:5000/api/Category",
-                    type: "get",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (result, status, xhr) 
-                    {
-                        console.log(result);
-                        $.each(result, function (index, value) 
+                //lấy param từ URL
+                let params = (new URL(document.location)).searchParams;
+                let id = params.get("id");
+                console.log(id);
+                
+                //get user by Id
+                GetUser(id);
+
+                //call API để lấy user theo id 
+                function GetUser(id) 
+                {
+                    $.ajax({
+                        url: "https://localhost:5001/api/User/"+id,
+                        type: "get",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (result, status, xhr) 
                         {
-                            appendElement = $("#category");
-                            appendElement.append($("<option>").attr("value", value["categoryId"]).html(value["categoryName"]));
-                        });
-                    },
-
-                    error: function (xhr, status, error) 
-                    {
-                        console.log(xhr);
-                    }
-                });
-            };
-
-            //call API để lấy product theo id 
-            function GetProduct(id) 
+                            console.log(result);
+                            $("#id").attr("value", id);
+                            $("#email").attr("value", result["email"]);
+                            $("#name").attr("value", result["username"]);
+                            $("#password").attr("value", result["password"]);
+                            $("#role").val(result["roleId"]).change();
+                        },
+                        error: function (xhr, status, error) 
+                        {
+                            console.log(xhr);
+                        }
+                    });
+                };
+            });
+            $("#UpdateButton").on("click", function (e) 
             {
+                let params = (new URL(document.location)).searchParams;
+                let id = params.get("id");
+                var json = {
+                    userId: id,
+                    email: $("#email").val(),
+                    username: $("#name").val(),
+                    password: $("#password").val(),
+                    roleId: $("#role").find(":selected").val()
+                };
                 $.ajax({
-                    url: "http://localhost:5000/api/Product/"+id,
-                    type: "get",
-                    contentType: "application/json; charset=utf-8",
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/User/"+id,
+                    data: JSON.stringify(json),
                     dataType: "json",
                     success: function (result, status, xhr) 
                     {
-                        console.log(result);
-                        $("#proId").attr("value", id);
-                        $("#proName").attr("value", result["productName"]);
-                        $("#price").attr("value", result["unitPrice"]);
-                        $("#stock").attr("value", result["unitslnStock"]);
-                        $("#category").val(result["category"]["categoryId"]).change();
+                        $("tbody").append($("<tr>"));
+                        appendElement = $("tbody tr").last();
+                        appendElement.append($("<td>").html(id));
+                        appendElement.append($("<td>").html($("#email").val()));
+                        appendElement.append($("<td>").html($("#name").val()));
+                        appendElement.append($("<td>").html($("#password").val()));
+                        appendElement.append($("<td>").html($("#role").find(":selected").val()));
+
+                        $("#resultDiv").show();
                     },
-                    error: function (xhr, status, error) 
+                    error: function (e) 
                     {
-                        console.log(xhr);
+                        console.log(e);
                     }
                 });
-            };
-        });
-        $("#UpdateButton").on("click", function (e) 
-        {
-            let params = (new URL(document.location)).searchParams;
-            let id = params.get("id");
-            var json = {
-                productId: id,
-                productName: $("#proName").val(),
-                unitPrice: $("#price").val(),
-                unitslnStock: $("#stock").val(),
-                categoryId: $("#category").find(":selected").val()
-            };
-            $.ajax({
-                type: "put",
-                contentType: "application/json; charset=UTF-8",
-                url: "http://localhost:5000/api/Product?id="+id,
-                data: JSON.stringify(json),
-                dataType: "json",
-                success: function (result, status, xhr) 
-                {
-                    $("tbody").append($("<tr>"));
-                    appendElement = $("tbody tr").last();
-                    appendElement.append($("<td>").html(id));
-                    appendElement.append($("<td>").html($("#proName").val()));
-                    appendElement.append($("<td>").html($("#price").val()));
-                    appendElement.append($("<td>").html($("#stock").val()));
-                    appendElement.append($("<td>").html($("#category").find(":selected").val()));
-
-                    $("#resultDiv").show();
-                },
-                error: function (e) 
-                {
-                    console.log(e);
-                }
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>

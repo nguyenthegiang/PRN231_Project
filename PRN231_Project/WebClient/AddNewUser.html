@@ -13,7 +13,7 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     </head>
 
-    <body>
+    <body class="bg-danger">
         <!-- Navbar: Dark color & Stick at top of page -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div class="container-fluid">
@@ -34,7 +34,8 @@
         </nav>
         <!-- End Navbar -->
 
-        <div class="container-fluid">
+        <div class="container mt-5 text-white bg-dark p-4 rounded">
+            <h3>Add a User</h3>
             <div class="form-group">
                 <label for="Id">User ID</label>
                 <input type="text" name="" id="id" class="form-control" readonly>
@@ -58,8 +59,8 @@
                     <option value="2">2</option>
                 </select>
             </div>
-            <div class="text-center panel-body">
-                <button type="submit" class="btn btn-sm btn-primary" id="AddButton">Add</button>
+            <div class="text-center panel-body mt-4">
+                <button type="submit" class="btn btn-sm btn-danger px-5" id="AddButton">Add</button>
             </div>
         </div>
 
@@ -87,12 +88,12 @@
                         }),
                         success: function (result, status, xhr) 
                         {
-                            alert("Add successfully");
+                            alert("Add Successfully");
                             window.location.href = "UserManagement.html";
                         },
                         error: function (xhr, status, error) 
                         {
-                            alert("Add fail");
+                            alert("Add Fail");
                             console.log(xhr);
                         }
                     });
