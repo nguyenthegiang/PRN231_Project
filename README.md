@@ -2,12 +2,12 @@
 ## Sau Khi Pull Code:
  - Mở _Powershell_ và chạy lệnh:  **dotnet ef database update**
 ## Sau khi Clone Project lại từ đầu:
- - Thêm file _appsettings.json_ (xin các bạn khác), cho vào trong project WebAPI và chỉnh lại _ConnectionString_ (username, password)
+ - Thêm file _appsettings.json_ (xin các bạn khác), cho vào trong project WebAPI và chỉnh lại _ConnectionString_ (username, password, tên DB thì phải giống với tên DB trong SQL Server)
  - Mở _Powershell_ và chạy lệnh:  **dotnet ef database update**
 ## Code:
  - Chỉ Code ở branch _**Main**_!!!
- - Nếu Sửa Database: Mở _Powershell_ và Chạy 2 lệnh:
-   +  **dotnet ef migrations add "InitialDB"**
+ - Nếu Sửa Database (cấu trúc DB hoặc Data Seed): Mở _Powershell_ và Chạy 2 lệnh:
+   +  **dotnet ef migrations add "InitialDB"** (thay InitialDB bằng 1 tên khác, ko trùng với các file Migrations cũ)
    +  **dotnet ef database update**
  - Ghi chép lại sau khi code xong: theo như dưới đây:
 ## Process.docx:
@@ -22,7 +22,7 @@
     
  ------------------------------------------------------------------------------------------------------------------------
 
-# PRN231_Project
+# PRN231_Project: Phim18.net
 ## Technology:
  - WebAPI: ASP.NET Core Web API 5.0
  - WebClient: HTML5 + CSS3 + Javascript (jQuery & AJAX)

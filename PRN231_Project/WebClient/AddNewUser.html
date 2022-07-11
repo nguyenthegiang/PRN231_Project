@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Title -->
+        <title>Admin - Add User</title>
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- Jquery -->
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    </head>
+
+    <body class="bg-danger">
+        <!-- Navbar: Dark color & Stick at top of page -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <div class="container-fluid">
+                <!-- Home button -->
+                <a class="navbar-brand" href="UserManagement.html">
+                    <!-- Logo image -->
+                    <img src="image/logo.png" alt="Logo" height="24"
+                        class="d-inline-block align-text-top">
+                </a>
+
+                <!-- Collapse button (for responsive) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <div class="container mt-5 text-white bg-dark p-4 rounded">
+            <h3>Add a User</h3>
+            <div class="form-group">
+                <label for="startLocation">Email</label>
+                <input type="text" name="" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Name">User Name</label>
+                <input type="text" name="" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="startLocation">Password</label>
+                <input type="password" name="" id="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="EndLocation">Role Id</label>
+                <select class="form-control" id="role">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                </select>
+            </div>
+            <div class="text-center panel-body mt-4">
+                <button type="submit" class="btn btn-sm btn-danger px-5" id="AddButton">Add</button>
+            </div>
+        </div>
+
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () 
+            {
+                //when submit form
+                $("#AddButton").click(function (e) 
+                {
+                    $.ajax({
+                        url: "https://localhost:5001/api/User",
+                        type: "post",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            userId: 0,
+                            email: $("#email").val(),
+                            username: $("#name").val(),
+                            password: $("#password").val(),
+                            roleId: $("#role").val()
+                        }),
+                        success: function (result, status, xhr) 
+                        {
+                            alert("Add Successfully");
+                            window.location.href = "UserManagement.html";
+                        },
+                        error: function (xhr, status, error) 
+                        {
+                            alert("Add Fail");
+                            console.log(xhr);
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
