@@ -80,7 +80,7 @@
                 $("#GetButton").click(function (e)
                 {
                     console.log($("#Name").val());
-                    $("table tbody").html("");
+                    $("table tbody").empty();
                     $.ajax({
                         url: "https://localhost:5001/api/User/search?name=" + $("#Name").val(),
                         type: "get",
@@ -89,6 +89,7 @@
                         success: function (result, status, xhr) 
                         {
                             $("#resultDiv").show();
+
                             if (typeof result !== 'undefined') 
                             {
                                 $.each(result, function (index, value) 
@@ -98,8 +99,12 @@
                                     appendElement.append($("<td>").html(value["userId"]));
                                     appendElement.append($("<td>").html(value["email"]));
                                     appendElement.append($("<td>").html(value["username"]));
-                                    appendElement.append($("<td>").html(value["password"]));
                                     appendElement.append($("<td>").html(value["roleId"]));
+
+                                    appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
+                                        + "\"><img src=\"image/edit.png\" width=\"30\" /></a>"));
+                                    appendElement.append($("<td>")
+                                        .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
                                 });
                             } 
                                 
@@ -159,10 +164,12 @@
                     contentType: "application/json",
                     success: function (result, status, xhr)
                     {
+                        alert("Delete Successfully");
                         ShowUsers();
                     },
                     error: function (xhr, status, error) 
                     {
+                        alert("Delete Fail");
                         console.log(xhr)
                     }
                 });
