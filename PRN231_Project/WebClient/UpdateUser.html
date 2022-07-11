@@ -118,7 +118,7 @@
                     });
                 };
             });
-            
+
             $("#UpdateButton").on("click", function (e) 
             {
                 let params = (new URL(document.location)).searchParams;
@@ -133,7 +133,7 @@
                 $.ajax({
                     type: "put",
                     contentType: "application/json; charset=UTF-8",
-                    url: "https://localhost:5001/api/User/"+id,
+                    url: "https://localhost:5001/api/User?id="+id,
                     data: JSON.stringify(json),
                     dataType: "json",
                     success: function (result, status, xhr) 
