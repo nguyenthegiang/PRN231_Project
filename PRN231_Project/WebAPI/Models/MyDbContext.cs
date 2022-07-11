@@ -101,6 +101,26 @@ namespace WebAPI.Models
                 {
                     CategoryId = 5,
                     CategoryName = "20th Century Fox"
+                },
+                new Category
+                {
+                    CategoryId = 6,
+                    CategoryName = "Family"
+                },
+                new Category
+                {
+                    CategoryId = 7,
+                    CategoryName = "Insect"
+                },
+                new Category
+                {
+                    CategoryId = 8,
+                    CategoryName = "Blood"
+                },
+                new Category
+                {
+                    CategoryId = 9,
+                    CategoryName = "Robot"
                 }
             );
 
@@ -135,6 +155,21 @@ namespace WebAPI.Models
                 {
                     ActorId = 6,
                     ActorName = "Anthony Mackie"
+                },
+                new Actor
+                {
+                    ActorId = 7,
+                    ActorName = "John Favreau"
+                },
+                new Actor
+                {
+                    ActorId = 8,
+                    ActorName = "Stan Lee"
+                },
+                new Actor
+                {
+                    ActorId = 9,
+                    ActorName = "Gwyneth Paltrow"
                 }
             );
 
