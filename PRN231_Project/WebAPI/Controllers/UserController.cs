@@ -16,6 +16,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using WebAPI.Authentication;
 using WebAPI.DTO;
+using WebAPI.DTO.Request;
 using WebAPI.IRepository;
 using WebAPI.Models;
 using WebAPI.Repositories;
@@ -124,12 +125,12 @@ namespace WebAPI.Controllers
 
         /********Authentication********/
         [HttpPost("login")]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(LoginRequestDTO request)
         {
             try
             {
                 UserDTO user = null;
-                user = repository.Login(email, password);
+                user = repository.Login(request.Email, request.Password);
                 var token = authentication.Authenticate(user);
                 if (token == null)
                     return Unauthorized();
