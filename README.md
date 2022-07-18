@@ -22,9 +22,18 @@
     
  ------------------------------------------------------------------------------------------------------------------------
 
-# PRN231_Project: Phim18.net
+# PRN231_Project: CloudStream
 ## Technology:
  - WebAPI: ASP.NET Core Web API 5.0
  - WebClient: HTML5 + CSS3 + Javascript (jQuery & AJAX)
 ## Functionality:
-### Watch Video
+### Client
+#### List Movies
+
+#### Watch Movie
+
+### Admin
+#### Movie Management
+
+#### User Management
+
