@@ -8,16 +8,13 @@ namespace WebAPI.DataAccess
 {
     public class ActorDAO
     {
-        /*public static List<Actor> GetActors()
+        public static List<Actor> GetActors()
         {
             List<Actor> actors;
             try
             {
-                using (var context = new MyDbContext())
-                {
-
-                    actors = context.Actors.ToList();
-                }
+                MyDbContext context = new MyDbContext();
+                actors = context.Actors.ToList();
             }
             catch (Exception e)
             {
@@ -41,6 +38,6 @@ namespace WebAPI.DataAccess
                 throw new Exception(e.Message);
             }
             return actor;
-        }*/
+        }
     }
 }
