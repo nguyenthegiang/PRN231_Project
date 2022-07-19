@@ -1,7 +1,6 @@
 # For Team Member: Đọc kỹ nhé các bạn
 ## Sau Khi Pull Code:
- - Mở _Powershell_ và chạy lệnh:  **dotnet ef database update**
- - Nếu chạy Project lỗi thì xóa Database trong SQL Server đi và chạy lệnh: **dotnet ef database update**
+ - Xóa Database trong SQL Server đi và chạy lệnh: **dotnet ef database update**
 ## Sau khi Clone Project lại từ đầu:
  - Thêm file _appsettings.json_ (xin các bạn khác), cho vào trong project WebAPI và chỉnh lại _ConnectionString_ (username, password, tên DB thì phải giống với tên DB trong SQL Server)
  - Mở _Powershell_ và chạy lệnh:  **dotnet ef database update**
