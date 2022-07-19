@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.Authentication;
+using WebAPI.IRepository;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -11,6 +14,14 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ActorController : ControllerBase
     {
+        private IActorRepository repository;
 
+        public ActorController(IActorRepository repository)
+        {
+            this.repository = repository;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Actor>> GetActors() => repository.GetListActors();
     }
 }
