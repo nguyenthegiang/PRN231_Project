@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using WebAPI.Authentication;
 using WebAPI.DTO;
 using WebAPI.DTO.Request;
+using WebAPI.Helper;
 using WebAPI.IRepository;
 using WebAPI.Models;
 using WebAPI.Repositories;
@@ -136,6 +137,38 @@ namespace WebAPI.Controllers
                     return Unauthorized();
                 user.Token = token;
                 return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("signup")]
+        public IActionResult Signup(SignupRequestDTO request)
+        {
+            try
+            {
+                if (request.Password != request.RePassword)
+                    return BadRequest("Password does not match!");
+                
+                if (repository.GetUserByEmail(request.Email).Count > 0)
+                    return Conflict("This email has been used!");
+
+                User user = new User { 
+                    Email = request.Email, 
+                    RoleId = (int)Roles.User, 
+                    Username = request.Username, 
+                    Password = Hashing.Encrypt(request.Password)
+                };
+                repository.SaveUser(user);
+                UserDTO userDTO = null;
+                userDTO = repository.Login(request.Email, request.Password);
+                var token = authentication.Authenticate(userDTO);
+                if (token == null)
+                    return Unauthorized();
+                userDTO.Token = token;
+                return Ok(userDTO);
             }
             catch (Exception e)
             {

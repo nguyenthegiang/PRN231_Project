@@ -12,6 +12,7 @@ namespace WebAPI.IRepository
         List<User> GetListUsers();
         User GetUserById(int id);
         List<User> GetUserByName(string name);
+        List<User> GetUserByEmail(string email);
         void SaveUser(User user);
         void UpdateUser(User user);
         void DeleteUser(int id);

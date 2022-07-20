@@ -63,6 +63,22 @@ namespace WebAPI.DataAccess
             }
             return users;
         }
+        public static List<User> GetUserByEmail(string email)
+        {
+            List<User> users;
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    users = context.Users.Where(u => u.Email == email).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return users;
+        }
 
         public static void SaveUser(User user)
         {

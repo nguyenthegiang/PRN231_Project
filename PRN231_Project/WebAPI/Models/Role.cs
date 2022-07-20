@@ -19,4 +19,9 @@ namespace WebAPI.Models
         //one-to-many relationship
         public virtual ICollection<User> Users { get; set; }
     }
+    public enum Roles
+    {
+        User = 1,
+        Admin = 2
+    }
 }
