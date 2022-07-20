@@ -13,6 +13,29 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- Jquery -->
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    
+    <style>
+        div.pager {
+            text-align: center;
+            margin: 1em 0;
+        }
+
+            div.pager span {
+                display: inline-block;
+                width: 1.8em;
+                height: 1.8em;
+                line-height: 1.8;
+                text-align: center;
+                cursor: pointer;
+                background: #000;
+                color: #fff;
+                margin-right: 0.5em;
+            }
+
+                div.pager span.active {
+                    background: grey;
+                }
+    </style>
 </head>
 
 <body class="bg-danger">
@@ -69,14 +92,14 @@
     </nav>
     <!-- End Navbar -->
 
-    <div class="container mt-5" id="resultDiv">
-        <div class="row rounded">
+    <div class="container-fluid " id="resultDiv">
+        <div class="row rounded p-5">
             <!-- Code here: Add, Edit, Delete User -->
-            <table class="table table-sm table-hover table-dark">
+            <table class="table table-sm table-hover table-dark paginated">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Movie Name</th>
+                        <th style="width:150px">Movie Name</th>
                         <th>Video Path</th>
                         <th>Description</th>
                         <th>Duration</th>
@@ -153,8 +176,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            ShowUsers();
+            ShowUsers();           
         });
+       
 
         $("#GetButton").click(function (e) {
             console.log($("#Name").val());
@@ -181,8 +205,8 @@
                             appendElement.append($("<td>")
                                 .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
                         });
-                    }
 
+                    }
                     else {
                         $("table tbody").append("<td colspan=\"4\">No User</td>");
                     }
@@ -194,17 +218,13 @@
         });
 
         function ShowUsers() {
-            $("table tbody").html("");
             $.ajax({
                 url: "https://localhost:5001/api/Movie",
                 type: "get",
                 contentType: "application/json; charset=utf-8",
-                data: {
-                    page: 1,
-                    pagelimit: 5
-                },
                 dataType: "json",
                 success: function (result, status, xhr) {
+                    console.log(result);
                     $.each(result, function (index, value) {
                         $("tbody").append($("<tr>"));
                         appendElement = $("tbody tr").last();
@@ -222,6 +242,29 @@
                             + "\"><img src=\"image/edit.png\" width=\"30\" /></a>"));
                         appendElement.append($("<td>")
                             .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
+                    });
+                    $('table.paginated').each(function () {
+                        var currentPage = 0;
+                        var numPerPage = 5;
+                        console.log(numPerPage);
+                        var $table = $(this);
+                        $table.bind('repaginate', function () {
+                            $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+                        });
+                        $table.trigger('repaginate');
+                        var numRows = $table.find('tbody tr').length;
+                        var numPages = Math.ceil(numRows / numPerPage);
+                        var $pager = $('<div class="pager"></div>');
+                        for (var page = 0; page < numPages; page++) {
+                            $('<span class="page-number"></span>').text(page + 1).bind('click', {
+                                newPage: page
+                            }, function (event) {
+                                currentPage = event.data['newPage'];
+                                $table.trigger('repaginate');
+                                $(this).addClass('active').siblings().removeClass('active');
+                            }).appendTo($pager).addClass('clickable');
+                        }
+                        $pager.insertAfter($table).find('span.page-number:first').addClass('active');
                     });
                 },
                 error: function (xhr, status, error) {
@@ -254,6 +297,7 @@
             });
         });
     </script>
+    
 </body>
 
 </html>
