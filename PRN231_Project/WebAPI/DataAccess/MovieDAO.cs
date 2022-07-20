@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using BT2TrenLop.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Authentication;
+using WebAPI.DTO;
 using WebAPI.IRepository;
 using WebAPI.Models;
 
@@ -23,5 +24,8 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         public ActionResult<IEnumerable<Actor>> GetActors() => repository.GetListActors();
+
+        [HttpGet("id")]
+        public ActionResult<IEnumerable<Actor>> GetActorByMoiveId(int id) => repository.GetActorsByMovieId(id);
     }
 }
