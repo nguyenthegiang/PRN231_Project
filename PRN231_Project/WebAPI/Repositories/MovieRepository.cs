@@ -11,6 +11,7 @@ namespace WebAPI.Repositories
 {
     public class MovieRepository : IMovieRepository
     {
+        public List<Movie> GetAll() => MovieDAO.GetAll();
         public List<Movie> Paging5Movies(int page) => MovieDAO.Paging5Movies(page);
 
         public List<Movie> Paging10Movie(int page) => MovieDAO.Paging10Movie(page); 
