@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Actor>> GetActors() => repository.GetListActors();
 
-        [HttpGet("{id}")]
+        [HttpGet("/GetActorsByMovieId/{id}")]
         public ActionResult<IEnumerable<Actor>> GetActorByMoiveId(int id) => repository.GetActorsByMovieId(id);
     }
 }

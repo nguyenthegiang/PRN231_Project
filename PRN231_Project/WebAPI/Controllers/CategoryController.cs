@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Category>> GetCategories() => repository.GetListCategories();
 
-        [HttpGet("{id}")]
+        [HttpGet("/GetCategoriesByMovieId/{id}")]
         public ActionResult<IEnumerable<Category>> GetCategoriesByMoiveId(int id) => repository.GetCategoriesByMovieId(id);
 
         /*[HttpGet]
