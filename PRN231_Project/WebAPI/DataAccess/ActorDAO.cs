@@ -1,54 +1,53 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
+using WebAPI.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAPI.DTO;
 using WebAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper.QueryableExtensions;
 
 namespace WebAPI.DataAccess
 {
-    public class CategoryDAO
+    public class ActorDAO
     {
-        public static List<Category> GetCategories()
+        public static List<Actor> GetActors()
         {
-            List<Category> categories;
+            List<Actor> actors;
             try
             {
                 using (var context = new MyDbContext())
                 {
-                  
-                    categories = context.Categories.ToList();
+                    actors = context.Actors.ToList();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return categories;
+            return actors;
         }
 
-        public static List<Category> GetCategoriesByMovieId(int id)
+        public static List<Actor> GetActorsByMovieId(int id)
         {
-            List<CategoryMovieDTO> categoryMovieDTOs;
-            List<Category> categories;
-            List<Category> result = new List<Category>();
+            List<ActorMovieDTO> actormovies;
+            List<Actor> actors;
+            List<Actor> result = new List<Actor>();
             try
             {
-
+                
                 using (var context = new MyDbContext())
                 {
                     MapperConfiguration config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile())); ;
                     IMapper mapper = config.CreateMapper();
-                    categoryMovieDTOs = context.CategoryMovie.Where(o => o.MovieId == id).ProjectTo<CategoryMovieDTO>(config).ToList();
-                    categories = context.Categories.ToList();
-                    foreach (CategoryMovieDTO o in categoryMovieDTOs)
+                    actormovies = context.ActorMovies.Where(o => o.MovieId == id).ProjectTo<ActorMovieDTO>(config).ToList();
+                    actors = context.Actors.ToList();
+                    foreach(ActorMovieDTO o in actormovies)
                     {
-                        foreach (Category o2 in categories)
+                        foreach(Actor o2 in actors)
                         {
-                            if (o.CategoryId == o2.CategoryId)
+                            if(o.ActorId == o2.ActorId)
                             {
                                 result.Add(o2);
                             }

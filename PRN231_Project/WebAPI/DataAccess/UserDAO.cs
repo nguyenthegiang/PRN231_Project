@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using BT2TrenLop.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -55,6 +54,22 @@ namespace WebAPI.DataAccess
                 using (var context = new MyDbContext())
                 {
                     users = context.Users.Where(u => u.Username.Contains(name)).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return users;
+        }
+        public static List<User> GetUserByEmail(string email)
+        {
+            List<User> users;
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    users = context.Users.Where(u => u.Email == email).ToList();
                 }
             }
             catch (Exception e)

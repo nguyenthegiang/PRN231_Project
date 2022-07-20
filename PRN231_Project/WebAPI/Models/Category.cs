@@ -17,7 +17,6 @@ namespace WebAPI.Models
         public string CategoryName { get; set; }
 
         //many-to-many relationship
-        public virtual ICollection<Movie> Movies { get; set; }
-
+        public virtual ICollection<CategoryMovie> CategoryMovies { get; set; }
     }
 }

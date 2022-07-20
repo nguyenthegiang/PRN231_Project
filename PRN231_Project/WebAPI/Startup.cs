@@ -83,6 +83,7 @@ namespace WebAPI
             services.AddSingleton(typeof(IUserRepository), typeof(UserRepository));
             services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
             services.AddSingleton(typeof(IMovieRepository), typeof(MovieRepository));
+            services.AddSingleton(typeof(IActorRepository), typeof(ActorRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

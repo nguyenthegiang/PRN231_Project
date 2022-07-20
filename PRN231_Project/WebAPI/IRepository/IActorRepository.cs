@@ -7,9 +7,9 @@ using WebAPI.Models;
 
 namespace WebAPI.IRepository
 {
-    public interface ICategoryRepository
+    public interface IActorRepository
     {
-        List<Category> GetListCategories();
-        List<Category> GetCategoriesByMovieId(int id);
+        List<Actor> GetListActors();
+        List<Actor> GetActorsByMovieId(int id);
     }
 }
