@@ -196,9 +196,13 @@
         function ShowUsers() {
             $("table tbody").html("");
             $.ajax({
-                url: "https://localhost:5001/api/Movie/paging10?page=1",
+                url: "https://localhost:5001/api/Movie",
                 type: "get",
                 contentType: "application/json; charset=utf-8",
+                data: {
+                    page: 1,
+                    pagelimit: 5
+                },
                 dataType: "json",
                 success: function (result, status, xhr) {
                     $.each(result, function (index, value) {

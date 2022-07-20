@@ -56,7 +56,11 @@ namespace WebAPI.Controllers
 
         /**************Client: Paging Movies & Watch Movie**************/
         //Paging List Movies
-        [Microsoft.AspNetCore.Mvc.HttpGet("paging5")]
+
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Movie>> GetAll() => repository.GetAll();
+        [HttpGet("paging5")]
         public ActionResult<IEnumerable<Movie>> Paging5Movies(int page = 1) => repository.Paging5Movies(page);
 
         //Function [Watch Video]
