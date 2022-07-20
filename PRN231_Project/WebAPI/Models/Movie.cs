@@ -35,10 +35,10 @@ namespace WebAPI.Models
         public string ImagePath { get; set; }
 
         //many-to-many relationship
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<ActorMovie> ActorMovies { get; set; }
 
         //many-to-many relationship
-        public virtual ICollection<Actor> Actors { get; set; }
+        public virtual ICollection<CategoryMovie> CategoryMovie { get; set; }
 
     }
 }

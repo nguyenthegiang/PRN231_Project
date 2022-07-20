@@ -29,6 +29,9 @@ namespace WebAPI.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Actor> Actors { get; set; }
+        public virtual DbSet<ActorMovie> ActorMovies { get; set; }
+        public virtual DbSet<CategoryMovie> CategoryMovie { get; set; }
 
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
@@ -170,6 +173,31 @@ namespace WebAPI.Models
                 {
                     ActorId = 9,
                     ActorName = "Gwyneth Paltrow"
+                },
+                new Actor
+                {
+                    ActorId = 10,
+                    ActorName = "Tom Holland"
+                },
+                new Actor
+                {
+                    ActorId = 11,
+                    ActorName = "Brie Larson"
+                },
+                new Actor
+                {
+                    ActorId = 12,
+                    ActorName = "Elizabeth Olsen"
+                },
+                new Actor
+                {
+                    ActorId = 13,
+                    ActorName = "Benedict Cumberbatch"
+                },
+                new Actor
+                {
+                    ActorId = 14,
+                    ActorName = "Mark Ruffalo"
                 }
             );
 
@@ -293,6 +321,400 @@ namespace WebAPI.Models
                     PublishedYear = 2021,
                     Country = "America",
                     ImagePath = "ScarletWitch.jpg"
+                }
+            );
+
+            //************ActorMovie
+            optionsBuilder.Entity<ActorMovie>().HasData(
+                //Iron man
+                new ActorMovie 
+                { 
+                    ConnectionId = 1,
+                    MovieId = 1,
+                    ActorId = 1
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 2,
+                    MovieId = 1,
+                    ActorId = 3
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 3,
+                    MovieId = 1,
+                    ActorId = 3
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 4,
+                    MovieId = 1,
+                    ActorId = 8
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 5,
+                    MovieId = 1,
+                    ActorId = 9
+                },
+                //Spider man
+                new ActorMovie
+                {
+                    ConnectionId = 6,
+                    MovieId = 2,
+                    ActorId = 1
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 7,
+                    MovieId = 2,
+                    ActorId = 10
+                },
+                //Ant man
+                new ActorMovie
+                {
+                    ConnectionId = 8,
+                    MovieId = 3,
+                    ActorId = 2
+                },
+                //Black Panther
+                new ActorMovie
+                {
+                    ConnectionId = 9,
+                    MovieId = 4,
+                    ActorId = 4
+                },
+                //Black Widow
+                new ActorMovie
+                {
+                    ConnectionId = 10,
+                    MovieId = 5,
+                    ActorId = 9
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 11,
+                    MovieId = 5,
+                    ActorId = 8
+                },
+                //Captain America
+                new ActorMovie
+                {
+                    ConnectionId = 12,
+                    MovieId = 6,
+                    ActorId = 5
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 13,
+                    MovieId = 6,
+                    ActorId = 8
+                },
+                //Captain Marvel
+                new ActorMovie
+                {
+                    ConnectionId = 14,
+                    MovieId = 7,
+                    ActorId = 11
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 15,
+                    MovieId = 7,
+                    ActorId = 8
+                },
+                //Doctor Strange in the Multiverse of Madness
+                new ActorMovie
+                {
+                    ConnectionId = 16,
+                    MovieId = 8,
+                    ActorId = 12
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 17,
+                    MovieId = 8,
+                    ActorId = 13
+                },
+                //The Hulk
+                new ActorMovie
+                {
+                    ConnectionId = 18,
+                    MovieId = 9,
+                    ActorId = 14
+                },
+                new ActorMovie
+                {
+                    ConnectionId = 19,
+                    MovieId = 9,
+                    ActorId = 8
+                },
+                //WandaVision
+                new ActorMovie
+                {
+                    ConnectionId = 20,
+                    MovieId = 10,
+                    ActorId = 12
+                }
+            );
+
+            //************CategoryMovie
+            optionsBuilder.Entity<CategoryMovie>().HasData(
+                //Iron man
+                new CategoryMovie
+                {
+                    ConnectionId = 1,
+                    MovieId = 1,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 2,
+                    MovieId = 1,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 3,
+                    MovieId = 1,
+                    CategoryId = 3
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 4,
+                    MovieId = 1,
+                    CategoryId = 9
+                },
+                //Spider Man: No way home
+                new CategoryMovie
+                {
+                    ConnectionId = 5,
+                    MovieId = 2,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 6,
+                    MovieId = 2,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 7,
+                    MovieId = 2,
+                    CategoryId = 3
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 8,
+                    MovieId = 2,
+                    CategoryId = 6
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 9,
+                    MovieId = 2,
+                    CategoryId = 7
+                },
+                //Ant Man
+                new CategoryMovie
+                {
+                    ConnectionId = 10,
+                    MovieId = 3,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 11,
+                    MovieId = 3,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 12,
+                    MovieId = 3,
+                    CategoryId = 3
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 13,
+                    MovieId = 3,
+                    CategoryId = 7
+                },
+                //Black Panther
+                new CategoryMovie
+                {
+                    ConnectionId = 14,
+                    MovieId = 4,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 15,
+                    MovieId = 4,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 16,
+                    MovieId = 4,
+                    CategoryId = 3
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 17,
+                    MovieId = 4,
+                    CategoryId = 8
+                },
+                //Black Widow
+                new CategoryMovie
+                {
+                    ConnectionId = 18,
+                    MovieId = 5,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 19,
+                    MovieId = 5,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 20,
+                    MovieId = 5,
+                    CategoryId = 3
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 21,
+                    MovieId = 5,
+                    CategoryId = 6
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 22,
+                    MovieId = 5,
+                    CategoryId = 8
+                },
+                //Captain America
+                new CategoryMovie
+                {
+                    ConnectionId = 23,
+                    MovieId = 6,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 24,
+                    MovieId = 6,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 25,
+                    MovieId = 6,
+                    CategoryId = 3
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 26,
+                    MovieId = 6,
+                    CategoryId = 8
+                },
+                //Captain Marvel
+                new CategoryMovie
+                {
+                    ConnectionId = 27,
+                    MovieId = 7,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 28,
+                    MovieId = 7,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 29,
+                    MovieId = 7,
+                    CategoryId = 3
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 30,
+                    MovieId = 7,
+                    CategoryId = 4
+                },
+                //Doctor Strange in the Multiverse of Madness
+                new CategoryMovie
+                {
+                    ConnectionId = 31,
+                    MovieId = 8,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 32,
+                    MovieId = 8,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 33,
+                    MovieId = 8,
+                    CategoryId = 3
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 34,
+                    MovieId = 8,
+                    CategoryId = 8
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 35,
+                    MovieId = 8,
+                    CategoryId = 9
+                },
+                //The Hulk
+                new CategoryMovie
+                {
+                    ConnectionId = 36,
+                    MovieId = 9,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 37,
+                    MovieId = 9,
+                    CategoryId = 6
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 38,
+                    MovieId = 9,
+                    CategoryId = 4
+                },
+                //WandaVision
+                new CategoryMovie
+                {
+                    ConnectionId = 39,
+                    MovieId = 10,
+                    CategoryId = 1
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 40,
+                    MovieId = 10,
+                    CategoryId = 2
+                },
+                new CategoryMovie
+                {
+                    ConnectionId = 41,
+                    MovieId = 10,
+                    CategoryId = 3
                 }
             );
         }
