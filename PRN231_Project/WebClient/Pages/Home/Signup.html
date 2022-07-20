@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../js/auth.js"></script>
     <style>
         body {
             color: #fff;
@@ -150,35 +151,6 @@
                 e.preventDefault();
                 Signup();
             });
-
-
-            function Signup() {
-                var json = {
-                    email: $("#Email").val(),
-                    password: $("#Password").val(),
-                    rePassword: $("#RePassword").val(),
-                    username: $("#Username").val()
-                };
-                $.ajax({
-                    type: "post",
-                    contentType: "application/json; charset=UTF-8",
-                    url: "http://localhost:5000/api/user/signup",
-                    data: JSON.stringify(json),
-                    dataType: "json",
-                    success: function (result, status, xhr) {
-                        console.log("success");
-                        console.log(result["token"]);
-                        window.localStorage.removeItem("token");
-                        window.sessionStorage.removeItem("token");
-                        window.sessionStorage.setItem("token", result["token"]);
-                        window.location.href = "../../index.html";
-                    },
-                    error: function (e) {
-                        console.log(e);
-                    }
-
-                });
-            }
     </script>
 </body>
 </html>
