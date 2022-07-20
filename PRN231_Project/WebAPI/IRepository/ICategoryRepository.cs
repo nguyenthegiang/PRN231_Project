@@ -10,5 +10,6 @@ namespace WebAPI.IRepository
     public interface ICategoryRepository
     {
         List<Category> GetListCategories();
+        List<Category> GetCategoriesByMovieId(int id);
     }
 }

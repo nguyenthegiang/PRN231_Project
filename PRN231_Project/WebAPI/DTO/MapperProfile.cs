@@ -17,6 +17,7 @@ namespace WebAPI.DTO
             CreateMap<Role, RoleDTO>();
             CreateMap<User, UserDTO>();
             CreateMap<ActorMovie, ActorMovieDTO>();
+            CreateMap<CategoryMovie, CategoryMovieDTO>();
         }
     }
 }

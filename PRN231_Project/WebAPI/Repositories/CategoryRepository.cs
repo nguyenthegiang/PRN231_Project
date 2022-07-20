@@ -12,5 +12,6 @@ namespace WebAPI.Repositories
     public class CategoryRepository : ICategoryRepository
     {
         public List<Category> GetListCategories() => CategoryDAO.GetCategories();
+        public List<Category> GetCategoriesByMovieId(int id) => CategoryDAO.GetCategoriesByMovieId(id);
     }
 }
