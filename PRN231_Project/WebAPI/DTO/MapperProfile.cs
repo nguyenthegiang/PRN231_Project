@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WebAPI.DTO;
 using WebAPI.Models;
 
-namespace BT2TrenLop.DTO
+namespace WebAPI.DTO
 {
     public class MapperProfile :Profile
     {
@@ -16,6 +16,7 @@ namespace BT2TrenLop.DTO
             CreateMap<Category, CategoryDTO>();
             CreateMap<Role, RoleDTO>();
             CreateMap<User, UserDTO>();
+            CreateMap<ActorMovie, ActorMovieDTO>();
         }
     }
 }
