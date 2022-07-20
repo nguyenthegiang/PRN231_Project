@@ -13,6 +13,23 @@ namespace WebAPI.DataAccess
     public class MovieDAO
     {
         //Get List Movies for Client
+
+        public static List<Movie> GetAll()
+        {
+            List<Movie> movies;
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    movies = context.Movies.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return movies;
+        }
         public static  List<Movie> Paging5Movies(int page)
         {
             List<Movie> movies;

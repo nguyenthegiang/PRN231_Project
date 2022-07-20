@@ -11,6 +11,7 @@ using WebAPI.Models;
 using WebAPI.Repositories;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using WebAPI.Helper;
 
 namespace WebAPI.Controllers
 {
@@ -55,7 +56,7 @@ namespace WebAPI.Controllers
 
         /**************Client: Paging Movies & Watch Movie**************/
         //Paging List Movies
-        [HttpGet("paging5")]
+        [Microsoft.AspNetCore.Mvc.HttpGet("paging5")]
         public ActionResult<IEnumerable<Movie>> Paging5Movies(int page = 1) => repository.Paging5Movies(page);
 
         //Function [Watch Video]
@@ -145,6 +146,7 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
+
 
     }
 }
