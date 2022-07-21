@@ -12,16 +12,33 @@
             integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <!-- Jquery -->
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+
+        <style>
+            body {
+                color: #fff;
+                background-image: url(../../image/netflixteaser.png);
+        }
+        .updateForm{
+            width: 400px;
+            margin: 0 auto;
+            padding: 100px 0 30px;
+            margin-bottom: 20px;
+        }
+
+        .form-group{
+            margin-top: 20px;
+        }
+        </style>
     </head>
 
     <body class="bg-danger">
         <!-- Navbar: Dark color & Stick at top of page -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #000000;">
             <div class="container-fluid">
                 <!-- Home button -->
                 <a class="navbar-brand" href="UserManagement.html">
                     <!-- Logo image -->
-                    <img src="../../image/CloudStreamLogo.png" alt="Logo" height="24"
+                    <img src="../../image/CloudStreamLogo.png" alt="Logo" width="300px"
                         class="d-inline-block align-text-top">
                 </a>
 
@@ -35,8 +52,8 @@
         </nav>
         <!-- End Navbar -->
 
-        <div class="container mt-5 text-white bg-dark p-4 rounded">
-            <h3>Add a User</h3>
+        <div class="updateForm" style="background-color: rgba(0, 0, 0, 0.6); padding: 30px; margin-top: 100px;">
+            <h2 class="text-center" style="color: white; font-weight: 700; font-size: 30px;">Add an user</h2>
             <div class="form-group">
                 <label for="startLocation">Email</label>
                 <input type="text" name="" id="email" class="form-control">
@@ -54,7 +71,7 @@
                 <select class="form-select" aria-label="Default select example" title="" name="" id="role"></select>
             </div>
             <div class="text-center panel-body mt-4">
-                <button type="submit" class="btn btn-sm btn-danger px-5" id="AddButton">Add</button>
+                <button type="submit" style="background-color: #e50913; width: 100%; color: white; font-size: 12pt; line-height: 35px; border-radius: 5px;" id="AddButton">Add</button>
             </div>
         </div>
 
