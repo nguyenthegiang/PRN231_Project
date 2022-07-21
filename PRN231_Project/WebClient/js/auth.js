@@ -20,7 +20,7 @@
             else {
                 window.sessionStorage.setItem("token", result["token"]);
             }
-            window.location.href = "../../index.html";
+            window.location.href = "../Client/index.html";
         },
         error: function (e) {
             console.log(e);
@@ -31,7 +31,7 @@
 function Logout() {
     window.localStorage.removeItem("token");
     window.sessionStorage.removeItem("token");
-    window.location.href = "../../index.html";
+    window.location.href = "../Client/index.html";
 }
 
 function Signup() {
@@ -53,7 +53,7 @@ function Signup() {
             window.localStorage.removeItem("token");
             window.sessionStorage.removeItem("token");
             window.sessionStorage.setItem("token", result["token"]);
-            window.location.href = "../../index.html";
+            window.location.href = "../Client/index.html";
         },
         error: function (e) {
             console.log(e);
