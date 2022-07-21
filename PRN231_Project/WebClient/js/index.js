@@ -1,9 +1,11 @@
 $(document).ready(function () {
-    ShowMovies();
+    GetFeaturedMovie();
+    GetAllMovies();
 });
 
-//Test: show data
-function ShowMovies() {
+//[Category] All Movies
+function GetAllMovies() {
+    //Call API
     $.ajax({
         url: "https://localhost:5001/api/Movie",
         type: "get",
@@ -33,6 +35,7 @@ function ShowMovies() {
                 //     .html("<img src=\"image\\movies\\" + value["imagePath"] + "\" width=\"100\" />"));
             });
 
+            //Paging
             const arrows = document.querySelectorAll(".arrow");
             const movieLists = document.querySelectorAll(".movie-list");
 
@@ -55,4 +58,9 @@ function ShowMovies() {
             console.log(xhr)
         }
     });
+}
+
+//[Featured Movie]
+function GetFeaturedMovie() {
+
 }
