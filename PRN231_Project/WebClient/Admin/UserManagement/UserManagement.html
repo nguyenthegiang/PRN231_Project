@@ -119,6 +119,7 @@
                 </div>
             </div>
         </div>
+        <img src="../../image/iconDelete.svg">
     </div>
 
     <!-- Bootstrap -->
@@ -152,9 +153,9 @@
                             appendElement.append($("<td>").html(value["roleId"]));
 
                             appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
-                                + "\"><img src=\"../../image/edit.png\" width=\"30\" /></a>"));
+                                + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
                             appendElement.append($("<td>")
-                                .html("<img class=\"delete\" src=\"../../image/close.png\" width=\"30\" />"));
+                                .html("<img src=\"../../image/iconDelete1.png\" width=\"30\" />"));
                         });
                     }
 
@@ -184,10 +185,10 @@
                         appendElement.append($("<td>").html(value["username"]));
                         appendElement.append($("<td>").html(value["roleId"]));
 
-                        appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
-                            + "\"><img src=\"image/edit.png\" width=\"30\" /></a>"));
-                        appendElement.append($("<td>")
-                            .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
+                            appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
+                                + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
+                            appendElement.append($("<td>")
+                                .html("<img src=\"../../image/iconDelete1.png\" width=\"30\" />"));
                     });
                 },
                 error: function (xhr, status, error) {
