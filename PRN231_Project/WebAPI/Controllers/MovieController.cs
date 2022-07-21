@@ -12,6 +12,7 @@ using WebAPI.Repositories;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using WebAPI.Helper;
+using System.Net.Http;
 
 namespace WebAPI.Controllers
 {
@@ -59,7 +60,10 @@ namespace WebAPI.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<Movie>> GetAll() => repository.GetAll();
+        public ActionResult<IEnumerable<Movie>> GetAll(int pageNo = 1)
+        {
+            return repository.GetAll();
+        }
         [HttpGet("paging5")]
         public ActionResult<IEnumerable<Movie>> Paging5Movies(int page = 1) => repository.Paging5Movies(page);
 
@@ -150,7 +154,6 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
-
 
     }
 }
