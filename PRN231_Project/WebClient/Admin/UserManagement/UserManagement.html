@@ -146,7 +146,7 @@
                 </div>
             </div>
         </div>
-        <img src="../../image/iconDelete.svg">
+        <!-- <img src="../../image/iconDelete.svg"> -->
     </div>
 
     <!-- Bootstrap -->
@@ -215,7 +215,7 @@
                         appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
                             + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
                         appendElement.append($("<td>")
-                            .html("<img src=\"../../image/iconDelete1.png\" width=\"30\" />"));
+                            .html("<img class=\"delete\" src=\"../../image/iconDelete1.png\" width=\"30\" />"));
                     });
 
                     $('table.paginated').each(function () {
