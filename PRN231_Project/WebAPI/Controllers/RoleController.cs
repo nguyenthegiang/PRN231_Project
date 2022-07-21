@@ -24,6 +24,6 @@ namespace WebAPI.Controllers
         public ActionResult<IEnumerable<Role>> GetRoles() => repository.GetRoles();
 
         [HttpGet("/GetRolesById/{id}")]
-        public ActionResult<IEnumerable<Role>> GetRoleById(int id) => repository.GetRoleById(id);
+        public ActionResult<Role> GetRoleById(int id) => repository.GetRoleById(id);
     }
 }

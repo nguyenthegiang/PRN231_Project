@@ -49,11 +49,9 @@
                 <label for="startLocation">Password</label>
                 <input type="password" name="" id="password" class="form-control">
             </div>
-            <div class="form-group">
-                <label for="EndLocation">Role Id</label>
-                <select class="form-control" id="role">
-                    <option value="1" selected>1</option>
-                    <option value="2">2</option>
+            <div class="form-group mt-2">
+                <label for="Role">Role</label>
+                <select title="" name="" id="role">
                 </select>
             </div>
             <div class="text-center panel-body mt-4">
@@ -133,6 +131,23 @@
 
             $("#closeBtn").click(function (e) {
                 window.location.href = "UserManagement.html";
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:5001/api/Role",
+                data: "{}",
+                success: function (data) 
+                {
+                    console.log(data);
+                    var s = '';
+                    for (var i = 0; i < data.length; i++) 
+                    {
+                        s += '<option value="' + data[i].roleId + '">' + data[i].roleName + '</option>';
+                    }
+    
+                    $("#role").html(s);
+                }
             });
         </script>
     </body>

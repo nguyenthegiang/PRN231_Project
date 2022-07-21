@@ -66,8 +66,8 @@
             <label for="startLocation">Password</label>
             <input type="password" name="" id="password" class="form-control">
         </div>
-        <div class="form-group">
-            <label for="Category">Role</label>
+        <div class="form-group mt-2">
+            <label for="Role">Role</label>
             <select title="" name="" id="role">
             </select>
         </div>
@@ -123,6 +123,7 @@
             let id = params.get("id");
 
             //get user by Id
+            ShowRoles();
             GetUser(id);
 
             //call API để lấy user theo id 
@@ -150,26 +151,25 @@
         function ShowRoles() 
         {
             $.ajax({
-                url: "http://localhost:5000/api/Category",
+                url: "https://localhost:5001/api/Role",
                 type: "get",
                 contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (result, status, xhr) 
-                    {
-                        console.log(result);
-                        $.each(result, function (index, value) 
-                        {
-                            appendElement = $("#category");
-                            appendElement.append($("<option>").attr("value", value["categoryId"]).html(value["categoryName"]));
-                        });
-                    },
+                dataType: "json",
+                success: function (result, status, xhr) 
+                {
+                    console.log(result);
+                    $.each(result, function (index, value)                         {
+                        appendElement = $("#role");
+                        appendElement.append($("<option>").attr("value", value["roleId"]).html(value["roleName"]));
+                    });
+                },
 
-                    error: function (xhr, status, error) 
-                    {
-                        console.log(xhr);
-                    }
-                });
-            };
+                error: function (xhr, status, error) 
+                {
+                    console.log(xhr);
+                }
+            });
+        };
 
         $("#UpdateButton").on("click", function (e) {
             let params = (new URL(document.location)).searchParams;
