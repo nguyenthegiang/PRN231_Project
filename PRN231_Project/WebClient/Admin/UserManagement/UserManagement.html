@@ -85,7 +85,7 @@
                         <th>ID</th>
                         <th>Email</th>
                         <th>User Name</th>
-                        <th>Role Id</th>
+                        <th>Role Name</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
@@ -177,7 +177,7 @@
                             appendElement.append($("<td>").html(value["userId"]));
                             appendElement.append($("<td>").html(value["email"]));
                             appendElement.append($("<td>").html(value["username"]));
-                            appendElement.append($("<td>").html(value["roleId"]));
+                            appendElement.append($("<td>").html(value["role"]["roleName"]));
 
                             appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
                                 + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
@@ -210,7 +210,7 @@
                         appendElement.append($("<td>").html(value["userId"]));
                         appendElement.append($("<td>").html(value["email"]));
                         appendElement.append($("<td>").html(value["username"]));
-                        appendElement.append($("<td>").html(value["roleId"]));
+                        appendElement.append($("<td>").html(value["role"]["roleName"]));
 
                         appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
                             + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
@@ -221,7 +221,6 @@
                     $('table.paginated').each(function () {
                         var currentPage = 0;
                         var numPerPage = 5;
-                        console.log(numPerPage);
                         var $table = $(this);
                         $table.bind('repaginate', function () {
                             $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
