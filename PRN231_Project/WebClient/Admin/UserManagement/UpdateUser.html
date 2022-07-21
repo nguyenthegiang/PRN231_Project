@@ -67,10 +67,8 @@
             <input type="password" name="" id="password" class="form-control">
         </div>
         <div class="form-group">
-            <label for="EndLocation">Role Id</label>
-            <select class="form-control" id="role">
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
+            <label for="Category">Role</label>
+            <select title="" name="" id="role">
             </select>
         </div>
         <div class="text-center panel-body mt-4">
@@ -140,7 +138,7 @@
                         $("#email").attr("value", result["email"]);
                         $("#name").attr("value", result["username"]);
                         $("#password").attr("value", result["password"]);
-                        $("#role").val(result["roleId"]).change();
+                        $("#role").val(result["role"]["roleName"]).change();
                     },
                     error: function (xhr, status, error) {
                         console.log(xhr);
@@ -148,6 +146,30 @@
                 });
             };
         });
+
+        function ShowRoles() 
+        {
+            $.ajax({
+                url: "http://localhost:5000/api/Category",
+                type: "get",
+                contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result, status, xhr) 
+                    {
+                        console.log(result);
+                        $.each(result, function (index, value) 
+                        {
+                            appendElement = $("#category");
+                            appendElement.append($("<option>").attr("value", value["categoryId"]).html(value["categoryName"]));
+                        });
+                    },
+
+                    error: function (xhr, status, error) 
+                    {
+                        console.log(xhr);
+                    }
+                });
+            };
 
         $("#UpdateButton").on("click", function (e) {
             let params = (new URL(document.location)).searchParams;
