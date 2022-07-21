@@ -56,18 +56,17 @@ namespace WebAPI.Controllers
         }*/
 
         /**************Client: Paging Movies & Watch Movie**************/
-        //Paging List Movies
-
-
         [HttpGet]
-        public ActionResult<IEnumerable<Movie>> GetAll(int pageNo = 1)
+        public ActionResult<IEnumerable<Movie>> GetAll()
         {
             return repository.GetAll();
         }
+
+        //Paging List Movies
         [HttpGet("paging5")]
         public ActionResult<IEnumerable<Movie>> Paging5Movies(int page = 1) => repository.Paging5Movies(page);
 
-        //Function [Watch Video]
+        //Function [Watch Movie]
         [HttpGet("WatchMovie")]
         public async Task<IActionResult> WatchMovie(int movieId)
         {
