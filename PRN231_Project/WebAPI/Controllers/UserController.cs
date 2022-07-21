@@ -29,15 +29,33 @@ namespace WebAPI.Controllers
     {
         private IUserRepository repository;
         private IAuthenticationManager authentication;
+        private readonly MyDbContext context;
+        private MapperConfiguration config;
+        private IMapper mapper;
 
-        public UserController(IUserRepository repository, IAuthenticationManager authentication)
+        public UserController(IUserRepository repository, IAuthenticationManager authentication, MyDbContext _context)
         {
             this.repository = repository;
             this.authentication = authentication;
+            context = _context;
+            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+            mapper = config.CreateMapper();
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<User>> GetUsers() => repository.GetListUsers();
+        public ActionResult<IEnumerable<User>> GetUsers()
+        {
+            List<UserDTO> userDTOs;
+            userDTOs = context.Users.Include(p => p.Role)
+                .ProjectTo<UserDTO>(config).ToList();
+
+            if (userDTOs == null)
+            {
+                return NotFound(); // Response with status code: 404
+            }
+
+            return Ok(userDTOs);
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
