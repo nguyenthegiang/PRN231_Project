@@ -85,7 +85,7 @@
                         <th>ID</th>
                         <th>Email</th>
                         <th>User Name</th>
-                        <th>Role Name</th>
+                        <th>Role</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
@@ -93,6 +93,11 @@
                 <tbody></tbody>
             </table>
         </div>
+    </div>
+
+    <div id="nodata" class="text-center mt-5" style="display: none;">
+        
+        <h2 class="text-white">No Data</h2>
     </div>
 
     <!-- Modal -->
@@ -168,7 +173,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result, status, xhr) {
-                    if (typeof result !== 'undefined') {
+                    if (typeof result !== 'undefined' || result.length > 0) {
                         $.each(result, function (index, value) {
                             $("tbody").append($("<tr>"));
                             appendElement = $("tbody tr").last();
@@ -182,11 +187,12 @@
                             appendElement.append($("<td>")
                                 .html("<img src=\"../../image/iconDelete1.png\" width=\"30\" />"));
                         });
-                    }
-
-                    else {
-                        $("tbody").append($("<tr>"));
-                        appendElement = $("tbody tr").last();
+                    } 
+                    
+                    if(result.length == 0){
+                        console.log("get here");
+                        $("#nodata").show();
+                        $("#resultDiv").hide();
                     }
                 },
                 error: function (xhr, status, error) {
