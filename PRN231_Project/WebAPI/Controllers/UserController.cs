@@ -130,15 +130,16 @@ namespace WebAPI.Controllers
         [HttpGet("search")]
         public IActionResult Search(string name)
         {
-            List<User> users;
-            users = repository.GetUserByName(name);
+            List<UserDTO> userDTOs;
+            userDTOs = context.Users.Include(p => p.Role).Where(u => u.Username.Contains(name))
+                .ProjectTo<UserDTO>(config).ToList();
 
-            if (users == null)
+            if (userDTOs == null)
             {
                 return NotFound(); // Response with status code: 404
             }
 
-            return Ok(users);
+            return Ok(userDTOs);
         }
 
         /********Authentication********/

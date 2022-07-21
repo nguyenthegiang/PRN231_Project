@@ -161,15 +161,13 @@
 
         $("#GetButton").click(function (e) {
             console.log($("#Name").val());
-            $("table tbody").empty();
+            $("table tbody").html("");
             $.ajax({
                 url: "https://localhost:5001/api/User/search?name=" + $("#Name").val(),
                 type: "get",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result, status, xhr) {
-                    $("#resultDiv").show();
-
                     if (typeof result !== 'undefined') {
                         $.each(result, function (index, value) {
                             $("tbody").append($("<tr>"));
@@ -186,8 +184,10 @@
                         });
                     }
 
-                    else {
+                    if (typeof result == 'undefined') {
                         $("table tbody").append("<td colspan=\"4\">No User</td>");
+                        $("tbody").append($("<tr>"));
+                        appendElement = $("tbody tr").last();
                     }
                 },
                 error: function (xhr, status, error) {
