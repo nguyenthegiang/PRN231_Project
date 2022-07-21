@@ -12,9 +12,9 @@
     <script src="../../js/auth.js"></script>
     <style>
         body {
-            color: #fff;
-            background: white;
-        }
+                color: #fff;
+                background-image: url(../image/netflixteaser.png);
+            }
 
         .form-control {
             min-height: 41px;
@@ -53,69 +53,15 @@
                 font-size: 22px;
                 margin: 35px 0 25px;
             }
-
-            .login-form .avatar {
-                position: absolute;
-                margin: 0 auto;
-                left: 0;
-                right: 0;
-                top: -50px;
-                width: 95px;
-                height: 95px;
-                border-radius: 50%;
-                z-index: 9;
-                background: #70c5c0;
-                padding: 15px;
-                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-            }
-
-                .login-form .avatar img {
-                    width: 100%;
-                }
-
-            .login-form input[type="checkbox"] {
-                margin-top: 2px;
-            }
-
-            .login-form .btn {
-                font-size: 16px;
-                font-weight: bold;
-                background: #70c5c0;
-                border: none;
-                margin-bottom: 20px;
-            }
-
-                .login-form .btn:hover, .login-form .btn:focus {
-                    background: #50b8b3;
-                    outline: none !important;
-                }
-
-            .login-form a {
-                color: #70c5c0;
-                text-decoration: underline;
-            }
-
-                .login-form a:hover {
-                    text-decoration: none;
-                }
-
-            .login-form form a {
-                color: #7a7a7a;
-                text-decoration: none;
-            }
-
-                .login-form form a:hover {
-                    text-decoration: underline;
-                }
     </style>
 </head>
 <body>
+    <div>
+        <img src="../image/CloudStreamLogo.png" width="300px">
+    </div>
     <div class="login-form">
-        <form method="post">
-            <div class="avatar">
-                <img src="../../image/backward.png" alt="Avatar">
-            </div>
-            <h2 class="text-center">Register</h2>
+        <form method="post" style="background-color: rgba(0, 0, 0, 0.8); margin: 0px;">
+            <h2 class="text-center" style="color: white; font-weight: 700; font-size: 30px;">Register</h2>
             <div class="form-group">
                 <input type="text" id="Username" class="form-control" placeholder="Username" required="required">
             </div>
@@ -129,11 +75,11 @@
                 <input type="password" id="RePassword" class="form-control" placeholder="Re-enter Password" required="required">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                <button type="submit" style="background-color: #e50913; width: 100%; color: white; font-size: 12pt; line-height: 30px;">Register</button>
             </div>
         </form>
-        <p class="text-center" style="color:#70c5c0">
-            Already have an account? <a href="Login.html">
+        <p class="text-center"  style="background-color: rgba(0, 0, 0, 0.8); margin: 0px; padding-bottom: 20px;">
+            Already have an account? <a href="Login.html" style="color: #7a7a7a;">
                 Login here!
             </a>
         </p>
