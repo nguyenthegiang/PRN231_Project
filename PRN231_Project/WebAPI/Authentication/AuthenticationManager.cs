@@ -14,10 +14,12 @@ namespace WebAPI.Authentication
     public class AuthenticationManager : IAuthenticationManager
     {
         private readonly string key;
+
         public AuthenticationManager(string key)
         {
             this.key = key;
         }
+
         public string Authenticate(UserDTO user)
         {
             if (user == null)
