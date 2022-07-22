@@ -101,6 +101,31 @@ namespace WebAPI.Controllers
             return Ok(m);
         }
 
+        [HttpPost("[action]")]
+        public IActionResult UploadImage(IFormFile file)
+        {
+            string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath, "Image");
+            string filePath = Path.Combine(directoryPath, file.FileName);
+            using(var stream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            return Ok("Upload Ok");
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult UploadVideo(IFormFile file)
+        {
+            string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath, "Video");
+            string filePath = Path.Combine(directoryPath, file.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            return Ok("Upload Ok");
+        }
+
+
         [HttpPost]
         public IActionResult AddMovie([FromBody] Movie movie)
         {
