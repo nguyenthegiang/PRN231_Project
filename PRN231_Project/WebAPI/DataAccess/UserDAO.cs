@@ -46,6 +46,29 @@ namespace WebAPI.DataAccess
             return user;
         }
 
+        public static UserDTO GetUserByFacebookUID(string facebookUID)
+        {
+            UserDTO user;
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    MapperConfiguration config = new MapperConfiguration(
+                       cfg => cfg.AddProfile(new MapperProfile()));
+                    user = context.Users.Where(u =>
+                        u.IsFacebookUser && u.FacebookUID == facebookUID
+                    )
+                    .ProjectTo<UserDTO>(config)
+                    .FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return user;
+        }
+
         public static List<User> GetUserByName(string name)
         {
             List<User> users;

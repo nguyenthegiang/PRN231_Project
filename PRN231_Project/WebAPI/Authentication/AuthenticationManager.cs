@@ -24,13 +24,16 @@ namespace WebAPI.Authentication
         {
             if (user == null)
                 return null;
+            string email = user.Email == null && user.IsFacebookUser ? user.FacebookUID : user.Email;
+            if (email == null) 
+                return null;
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(key);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Email,  email),
                     new Claim(ClaimTypes.Role, user.Role.RoleName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),

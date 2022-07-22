@@ -14,7 +14,7 @@ namespace WebAPI.Repositories
         public List<User> GetListUsers() => UserDAO.GetUsers();
 
         public User GetUserById(int id) => UserDAO.GetUserById(id);
-
+        public UserDTO GetUserByFacebookUID(string uid) => UserDAO.GetUserByFacebookUID(uid);
         public List<User> GetUserByName(string name) => UserDAO.GetUserByName(name);
         public List<User> GetUserByEmail(string email) => UserDAO.GetUserByEmail(email);
 
@@ -29,6 +29,11 @@ namespace WebAPI.Repositories
             //Encryption
             string hashedPassword = Helper.Hashing.Encrypt(rawPassword);
             return UserDAO.Login(email, hashedPassword);
+        }
+
+        public UserDTO LoginByFacebook(string facebookUID)
+        {
+            return UserDAO.GetUserByFacebookUID(facebookUID);
         }
     }
 }

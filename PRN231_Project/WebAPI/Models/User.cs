@@ -20,6 +20,10 @@ namespace WebAPI.Models
 
         public string Password { get; set; }
 
+        public bool IsFacebookUser { get; set; }
+
+        public string FacebookUID { get; set; }
+
         public int RoleId { get; set; }
 
         //one-to-many relationship
