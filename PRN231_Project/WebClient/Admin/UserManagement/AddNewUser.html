@@ -68,10 +68,10 @@
                 <label for="Name">User Name</label>
                 <input type="text" name="" id="name" class="form-control">
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <label for="startLocation">Password</label>
                 <input type="password" name="" id="password" class="form-control">
-            </div> -->
+            </div>
             <div class="form-group">
                 <label for="Role">Role</label>
                 <select class="form-select" aria-label="Default select example" title="" name="" id="role"></select>
@@ -135,7 +135,7 @@
                             userId: 0,
                             email: $("#email").val(),
                             username: $("#name").val(),
-                            //password: $("#password").val(),
+                            password: $("#password").val(),
                             roleId: $("#role").val()
                         }),
                         success: function (result, status, xhr) 
