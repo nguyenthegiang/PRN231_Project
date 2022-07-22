@@ -2,10 +2,11 @@
     margin: 0;
 }
 
+/* Google font */
 body {
     font-family: 'Roboto', sans-serif;
 }
-
+/* Content */
 .myContainer {
     background-color: #151515;
     min-height: 100vh;
@@ -16,6 +17,7 @@ body {
     margin-left: 50px;
 }
 
+/* Featured */
 .featured-content {
     height: 75vh;
     background-color: tomato;
@@ -42,6 +44,7 @@ body {
     font-weight: bold;
 }
 
+/* Movie List */
 .movie-list-container {
     padding: 0 20px;
 }
@@ -123,6 +126,7 @@ body {
     transition: 1s all ease-in-out;
 }
 
+/* Pagin arrow */
 .arrow {
     font-size: 120px;
     position: absolute;
