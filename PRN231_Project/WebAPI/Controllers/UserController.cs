@@ -75,6 +75,7 @@ namespace WebAPI.Controllers
         {
             try
             {
+                user.Password = Hashing.Encrypt(user.Password);
                 repository.SaveUser(user);
                 return Ok(user);
             }

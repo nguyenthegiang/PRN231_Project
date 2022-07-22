@@ -126,6 +126,8 @@ namespace WebAPI.DataAccess
                 {
                     context.Entry<User>(user).State =
                         Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.Entry(user).Property(x => x.FacebookUID).IsModified = false;
+                    context.Entry(user).Property(x => x.IsFacebookUser).IsModified = false;
                     context.SaveChanges();
                 }
             }
