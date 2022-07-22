@@ -193,6 +193,39 @@ namespace WebAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost("login/fb")]
+        public IActionResult FacebookLogin(FacebookLoginRequestDTO request)
+        {
+            try
+            {
+                UserDTO existed = repository.GetUserByFacebookUID(request.FacebookUID);
+                if (existed == null)
+                {
+                    User user = new User
+                    {
+                        Email = request.Email,
+                        IsFacebookUser = true,
+                        FacebookUID = request.FacebookUID,
+                        RoleId = (int)Roles.User,
+                        Username = request.Name,
+                        Password = Hashing.Encrypt(request.FacebookUID)
+                    };
+                    repository.SaveUser(user);
+                }
+                UserDTO userDTO = null;
+                userDTO = repository.LoginByFacebook(request.FacebookUID);
+                var token = authentication.Authenticate(userDTO);
+                if (token == null)
+                    return Unauthorized();
+                userDTO.Token = token;
+                return Ok(userDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         /********Authentication********/
         [HttpPost("autho")]
         [Authorize]

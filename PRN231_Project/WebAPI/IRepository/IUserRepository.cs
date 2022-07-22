@@ -11,11 +11,13 @@ namespace WebAPI.IRepository
     {
         List<User> GetListUsers();
         User GetUserById(int id);
+        UserDTO GetUserByFacebookUID(string uid);
         List<User> GetUserByName(string name);
         List<User> GetUserByEmail(string email);
         void SaveUser(User user);
         void UpdateUser(User user);
         void DeleteUser(int id);
         UserDTO Login(string email, string rawPassword);
+        UserDTO LoginByFacebook(string facebookUID);
     }
 }
