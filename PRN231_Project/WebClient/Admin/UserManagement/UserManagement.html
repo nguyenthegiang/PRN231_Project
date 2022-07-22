@@ -16,6 +16,17 @@
 
     <!-- CSS -->
     <style>
+            body {
+                color: #fff;
+                background-color: #292929;
+                background-image: url(../../image/adminBackground3.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                height: 100vh;
+                overflow-y: hidden;
+            }
+
         div.pager 
         {
             text-align: center;
@@ -42,7 +53,7 @@
     </style>
 </head>
 
-<body class="bg-danger">
+<body>
     <!-- Navbar: Dark color & Stick at top of page -->
     <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #000000;">
         <div class="container-fluid">
@@ -60,14 +71,8 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto" style="background-color: #1f1f1f; border: solid 1px #1f1f1f; border-radius: 5px; padding: 0px 15px;">
-                    <li style="padding: 0px;">
-                        <a class="nav-link active" aria-current="page" href="AddNewUser.html" style="color: #fff; margin: 0px;">
-                            <span style="margin-right: 5px; font-weight: 700; font-size: 20px; padding: 0px;">+</span>
-                            Add New</a>
-                    </li>
+                <ul class="navbar-nav me-auto">
                 </ul>
-
                 <!-- Search Movie -->
                 <div class="form-group d-flex">
                     <input class="form-control me-2" type="text" id="Name" placeholder="Search" aria-label="Search">
@@ -77,11 +82,18 @@
         </div>
     </nav>
     <!-- End Navbar -->
-
-    <div class="container mt-5" id="resultDiv">
+    
+    
+    
+    <div class="container mt-5">
         <div class="row rounded">
+            <a aria-current="page" href="AddNewUser.html" class="btn btn-danger" style="color: #fff; text-align: center;text-decoration: none; margin: 30px 0px; padding: 0px 15px 8px 15px; width: 150px;">
+                <span style="margin-right: 5px; font-weight: 700; font-size: 20px; padding: 0px;">+</span>
+                Add New
+            </a>
+
             <!-- Code here: Add, Edit, Delete User -->
-            <table class="table table-sm table-hover table-dark paginated">
+            <table class="table table-sm table-hover table-dark paginated" id="resultDiv">
                 <thead>
                     <tr>
                         <th>ID</th>
