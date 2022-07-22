@@ -16,25 +16,23 @@
 
     <!-- CSS -->
     <style>
-            body {
-                color: #fff;
-                background-color: #292929;
-                background-image: url(../../image/adminBackground3.png);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
-                height: 100vh;
-                overflow-y: hidden;
-            }
+        body {
+            color: #fff;
+            background-color: #292929;
+            background-image: url(../../image/adminBackground3.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            overflow-y: hidden;
+        }
 
-        div.pager 
-        {
+        div.pager {
             text-align: center;
             margin: 1em 0;
         }
 
-        div.pager span 
-        {
+        div.pager span {
             display: inline-block;
             width: 1.8em;
             height: 1.8em;
@@ -46,9 +44,12 @@
             margin-right: 0.5em;
         }
 
-        div.pager span.active 
-        {
+        div.pager span.active {
             background: grey;
+        }
+
+        #clearSearch {
+            margin-left: 10px;
         }
     </style>
 </head>
@@ -60,7 +61,8 @@
             <!-- Home button -->
             <a class="navbar-brand" href="UserManagement.html">
                 <!-- Logo image -->
-                <img src="../../image/CloudStreamLogo.png" alt="Logo" width="300px" class="d-inline-block align-text-top">
+                <img src="../../image/CloudStreamLogo.png" alt="Logo" width="300px"
+                    class="d-inline-block align-text-top">
             </a>
 
             <!-- Collapse button (for responsive) -->
@@ -78,21 +80,25 @@
                     <input class="form-control me-2" type="text" id="Name" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light" id="GetButton">Search</button>
                 </div>
+                <!-- Clear Search value button -->
+                <div class="form-group d-flex">
+                    <button id="clearSearch" class="btn btn-outline-danger">Clear Search</button>
+                </div>
             </div>
         </div>
     </nav>
     <!-- End Navbar -->
-    
-    
-    
+
     <div class="container mt-5">
         <div class="row rounded">
-            <a aria-current="page" href="AddNewUser.html" class="btn btn-danger" style="color: #fff; text-align: center;text-decoration: none; margin: 30px 0px; padding: 0px 15px 8px 15px; width: 150px;">
+            <!-- Add New User Button -->
+            <a aria-current="page" href="AddNewUser.html" class="btn btn-danger"
+                style="color: #fff; text-align: center;text-decoration: none; margin: 30px 0px; padding: 0px 15px 8px 15px; width: 150px;">
                 <span style="margin-right: 5px; font-weight: 700; font-size: 20px; padding: 0px;">+</span>
                 Add New
             </a>
 
-            <!-- Code here: Add, Edit, Delete User -->
+            <!-- Display List User -->
             <table class="table table-sm table-hover table-dark paginated" id="resultDiv">
                 <thead>
                     <tr>
@@ -110,11 +116,11 @@
     </div>
 
     <div id="nodata" class="text-center mt-5" style="display: none;">
-        
+        <!-- Search Result: No Data -->
         <h2 class="text-white">No Data</h2>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal: Delete -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -133,6 +139,7 @@
         </div>
     </div>
 
+    <!-- Modal: Delete Fail -->
     <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -150,6 +157,7 @@
         </div>
     </div>
 
+    <!-- Modal: Delete Success -->
     <div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -201,9 +209,9 @@
                             appendElement.append($("<td>")
                                 .html("<img src=\"../../image/iconDelete1.png\" width=\"30\" />"));
                         });
-                    } 
-                    
-                    if(result.length == 0){
+                    }
+
+                    if (result.length == 0) {
                         console.log("get here");
                         $("#nodata").show();
                         $("#resultDiv").hide();
@@ -288,6 +296,11 @@
                     console.log(xhr)
                 }
             });
+        });
+
+        // Buttun Click event: Clear Search value
+        $("#clearSearch").click(function (e) {
+            ShowUsers();
         });
     </script>
 </body>
