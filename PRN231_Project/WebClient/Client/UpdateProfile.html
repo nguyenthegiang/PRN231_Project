@@ -1,30 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Title -->
-    <title>CloudStream</title>
+    <title>Admin - Update User</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../image/favicon.png">
+    <link rel="icon" type="image/x-icon" href="../../image/favicon.png">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- Jquery -->
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-    <!-- Font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <style>
+        body {
+            color: #fff;
+            background-image: url(../image/netflixteaser.png);
+        }
+
+        .updateForm{
+            width: 400px;
+            margin: 0 auto;
+            padding: 100px 0 30px;
+            margin-bottom: 20px;
+        }
+
+        .form-group{
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Navbar: Dark color & Stick at top of page -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #000000;">
         <div class="container-fluid">
             <!-- Home button -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.html">
                 <!-- Logo image -->
-                <img src="../image/CloudStreamLogo.png" alt="Logo" height="24" class="d-inline-block align-text-top">
+                <img src="../image/CloudStreamLogo.png" width="300px">
             </a>
 
             <!-- Collapse button (for responsive) -->
@@ -35,55 +50,170 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
+                <ul class="navbar-nav me-auto" style="background-color: #1f1f1f; border: solid 1px #1f1f1f; border-radius: 5px; padding: 0px 15px;">
+                    <li style="padding: 0px;">
+                        <a class="nav-link active" aria-current="page" href="index.html" style="color: #fff; margin: 0px;">
+                            <span style="margin-right: 5px; font-weight: 700; font-size: 20px; padding: 0px;">+</span>
+                            Back</a>
                     </li>
                 </ul>
-
-                <!-- Search Movie -->
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
     <!-- End Navbar -->
 
-    <!-- Content -->
-    
-    <!-- End Content -->
+    <div class="updateForm" style="background-color: rgba(0, 0, 0, 0.6); padding: 30px; margin-top: 100px;">
+        <h2 class="text-center" style="color: white; font-weight: 700; font-size: 30px;">Update an user</h2>
+        <div class="form-group">
+            <label for="Id">User ID</label>
+            <input type="text" name="" id="id" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+            <label for="startLocation">Email</label>
+            <input type="text" name="" id="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Name">User Name</label>
+            <input type="text" name="" id="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="startLocation">Password</label>
+            <input type="password" name="" id="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Role">Role</label>
+            <select class="form-select" aria-label="Default select example" title="" name="" id="role"></select>
+        </div>
+        <div class="text-center panel-body mt-4">
+            <button type="submit" style="background-color: #e50913; width: 100%; color: white; font-size: 12pt; line-height: 35px; border-radius: 5px;" id="UpdateButton">Update</button>
+        </div>
+    </div>
 
-    <!-- Script -->
-    <script>
+    <!-- Modal -->
+    <div class="modal fade text-dark" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Update User Successfully
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </script>
+    <div class="modal fade text-dark" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Update User Fail
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-</body>
 
+    <script>
+        $(document).ready(function () {
+            //lấy param từ URL
+            let params = (new URL(document.location)).searchParams;
+            let id = params.get("id");
+
+            //get user by Id
+            ShowRoles();
+            GetUser(id);
+
+            //call API để lấy user theo id 
+            function GetUser(id) {
+                $.ajax({
+                    url: "https://localhost:5001/api/User/" + id,
+                    type: "get",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        console.log(result);
+                        $("#id").attr("value", id);
+                        $("#email").attr("value", result["email"]);
+                        $("#name").attr("value", result["username"]);
+                        $("#password").attr("value", result["password"]);
+                        $("#role").val(result["role"]["roleName"]).change();
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                    }
+                });
+            };
+        });
+
+        function ShowRoles() 
+        {
+            $.ajax({
+                url: "https://localhost:5001/api/Role",
+                type: "get",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result, status, xhr) 
+                {
+                    console.log(result);
+                    $.each(result, function (index, value)                         {
+                        appendElement = $("#role");
+                        appendElement.append($("<option>").attr("value", value["roleId"]).html(value["roleName"]));
+                    });
+                },
+
+                error: function (xhr, status, error) 
+                {
+                    console.log(xhr);
+                }
+            });
+        };
+
+        $("#UpdateButton").on("click", function (e) {
+            let params = (new URL(document.location)).searchParams;
+            let id = params.get("id");
+            console.log(id);
+            var json = {
+                userId: id,
+                email: $("#email").val(),
+                username: $("#name").val(),
+                password: $("#password").val(),
+                roleId: $("#role").val()
+            };
+            $.ajax({
+                type: "put",
+                contentType: "application/json; charset=UTF-8",
+                url: "https://localhost:5001/api/User/id?id=" + id,
+                data: JSON.stringify(json),
+                dataType: "json",
+                success: function (result, status, xhr) {
+                    $("#myModal").modal('show');
+                },
+                error: function (e) {
+                    $("#myModal1").modal('show');
+                    console.log(e);
+                }
+            });
+        });
+
+        $("#closeBtn").click(function (e) {
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
 </html>
