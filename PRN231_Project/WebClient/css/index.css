@@ -203,3 +203,8 @@ body {
     opacity: 0.5;
     cursor: pointer;
 }
+
+/* Movie Detail Modal */
+#movieDetailModalBody {
+    font-size: large;
+}
