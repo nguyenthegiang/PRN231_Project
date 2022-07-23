@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
             this.userRepository = userRepository;
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreateVerifyCode([FromBody] CreateVerifyCodeDTO request)
+        public IActionResult CreateVerifyCode([FromBody] CreateVerifyCodeDTO request)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
                 string to = user.Email;
                 string subject = "CloudStreaming Verify Code";
                 string body = $"This is your verify code {code.Code}. This code will expire in 5 minutes!";
-                await Helper.MailService.SendEmail(to, body, subject);
+                Task.Run(() => Helper.MailService.Instance.SendEmail(to, body, subject));
                 return Ok();
             }
             catch (Exception e)
@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
             }
         }
         [HttpPost("resend")]
-        public async Task<IActionResult> ResendVerifyCode([FromBody] CreateVerifyCodeDTO request)
+        public IActionResult ResendVerifyCode([FromBody] CreateVerifyCodeDTO request)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
                 string to = user.Email;
                 string subject = "CloudStreaming Verify Code";
                 string body = $"This is your verify code {code.Code}. This code will expire in 5 minutes!";
-                await Helper.MailService.SendEmail(to, body, subject);
+                Task.Run(() => Helper.MailService.Instance.SendEmail(to, body, subject));
                 return Ok();
             }
             catch (Exception e)

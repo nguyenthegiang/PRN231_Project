@@ -281,9 +281,9 @@ namespace WebAPI.Controllers
         }
         /********Authentication********/
         [HttpPost("autho")]
-        [Authorize]
         public IActionResult Auth()
         {
+            Task.Run(() => Helper.MailService.Instance.SendEmail("32f353b3-389b-4eae-87e8-b3fb9b299589@mailslurp.com", "test", "header"));
             return Ok();
         }
     }
