@@ -41,11 +41,7 @@ namespace WebAPI.DataAccess
                     cateMovies = context.CategoryMovie.Where(c => c.CategoryId == catId).ToList();
                     foreach (var c in cateMovies)
                     {
-                        var result = context.Movies.Where(m => m.MovieId == c.MovieId).ToList();
-                        foreach (var m in result)
-                        {
-                            movies.Add(m);
-                        }
+                        movies.Add(context.Movies.FirstOrDefault(m => m.MovieId == c.MovieId));
                     }
                 }
             }

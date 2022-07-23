@@ -43,7 +43,7 @@ namespace WebAPI
                 cfg.IdleTimeout = new TimeSpan(0, 60, 0);
             });
 
-            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
             services.AddControllers();
             //For AJAX in Clients

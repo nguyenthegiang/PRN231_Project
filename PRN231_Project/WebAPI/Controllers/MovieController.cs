@@ -74,9 +74,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("catId")]
-        public ActionResult<IEnumerable<Movie>> GetmoviesByCategory(int catId)
+        public ActionResult<IEnumerable<MovieDTO>> GetmoviesByCategory(int catId)
         {
-            return repository.GetMoviesByCategory(catId);
+            List<Movie> movies = repository.GetMoviesByCategory(catId);
+            List<MovieDTO> moviesDTOs = movies.Select(m => mapper.Map<Movie, MovieDTO>(m)).ToList();
+            return moviesDTOs;
         }
 
         //Paging List Movies
