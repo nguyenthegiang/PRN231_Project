@@ -158,7 +158,7 @@ $("#navbar-profile-button").click(function (e) {
   window.location.href = "../Client/UpdateProfile.html?id=" + userId;
 });
 
-// Determine whether to display [Login] or [Logout] button on Navbar
+// Determine whether to display [Login], [Logout] or [Profile] button on Navbar
 // (based on token storage)
 function DisplayAuthenButton() {
   //Check if Token exist
@@ -168,10 +168,12 @@ function DisplayAuthenButton() {
     //Display button
     $("#logoutButton").show();
     $("#loginButton").hide();
+    $("#navbar-profile-button").show();
   } else {
     //Display button
     $("#logoutButton").hide();
     $("#loginButton").show();
+    $("#navbar-profile-button").hide();
   }
 }
 
