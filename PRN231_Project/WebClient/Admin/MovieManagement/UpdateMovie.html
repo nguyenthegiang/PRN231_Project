@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Title -->
-    <title>Admin - Update User</title>
+    <title>Admin - Update Movie</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../image/favicon.png">
     <!-- Bootstrap -->
@@ -15,14 +15,14 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     <style>
         body {
-                color: #fff;
-                background-color: #292929;
-                background-image: url(../../image/adminBackground3.png);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
-                height: 100vh;
-                overflow-y: hidden;
+            color: #fff;
+            background-color: #292929;
+            background-image: url(../../image/adminBackground3.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            height: 100vh;
         }
 
         .updateForm{
@@ -42,7 +42,7 @@
     <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #000000;">
         <div class="container-fluid">
             <!-- Home button -->
-            <a class="navbar-brand" href="UserManagement.html">
+            <a class="navbar-brand" href="MovieManagement.html">
                 <!-- Logo image -->
                 <img src="../../image/CloudStreamLogo.png" width="300px">
             </a>
@@ -58,27 +58,52 @@
     <!-- End Navbar -->
 
     <div class="updateForm" style="background-color: rgba(0, 0, 0, 0.6); padding: 30px; margin-top: 100px;">
-        <h2 class="text-center" style="color: white; font-weight: 700; font-size: 30px;">Update an user</h2>
+        <h2 class="text-center" style="color: white; font-weight: 700; font-size: 30px;">Update a Movie</h2>
         <div class="form-group">
-            <label for="Id">User ID</label>
+            <label for="Id">Movie ID</label>
             <input type="text" name="" id="id" class="form-control" readonly>
         </div>
         <div class="form-group">
-            <label for="startLocation">Email</label>
-            <input type="text" name="" id="email" class="form-control">
+            <label for="startLocation">Movie Name</label>
+            <input type="text" name="" id="movieName" class="form-control">
         </div>
         <div class="form-group">
-            <label for="Name">User Name</label>
-            <input type="text" name="" id="name" class="form-control">
+            <label for="Name">Video</label>
+            <input type="file" name="video" id="video" class="form-control" accept="video/*">
         </div>
         <div class="form-group">
-            <label for="startLocation">Password</label>
-            <input type="password" name="" id="password" class="form-control" readonly>
+            <label for="startLocation">Description</label>
+            <input type="text" name="" id="description" class="form-control">
         </div>
         <div class="form-group">
-            <label for="Role">Role</label>
-            <select class="form-select" aria-label="Default select example" title="" name="" id="role"></select>
+            <label for="Name">Duration</label>
+            <input type="text" name="" id="duration" class="form-control">
         </div>
+        <div class="form-group">
+            <label for="Name">Rated</label>
+            <input type="text" name="" id="rated" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Name">Pulished Year</label>
+            <input type="text" name="" id="publishedYear" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Name">Country</label>
+            <input type="text" name="" id="country" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Name">Image</label>
+            <input type="file" name="image" id="image" class="form-control" accept="image/*">
+        </div>
+        <div class="form-group" style="display: none;" >
+            <label for="Name">VideoPath</label>
+            <input type="text" name="image" id="videoPath" class="form-control" accept="image/*">
+        </div>
+        <div class="form-group" style="display: none;">
+            <label for="Name">ImagePath</label>
+            <input type="text" name="image" id="imagePath" class="form-control" accept="image/*">
+        </div>
+
         <div class="text-center panel-body mt-4">
             <button type="submit" style="background-color: #e50913; width: 100%; color: white; font-size: 12pt; line-height: 35px; border-radius: 5px;" id="UpdateButton">Update</button>
         </div>
@@ -93,7 +118,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Update User Successfully
+                    Update Movie Successfully
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -110,7 +135,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Update User Fail
+                    Update Movie Fail
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -131,83 +156,399 @@
             let id = params.get("id");
 
             //get user by Id
-            ShowRoles();
             GetUser(id);
 
             //call API để lấy user theo id 
             function GetUser(id) {
                 $.ajax({
-                    url: "https://localhost:5001/api/User/" + id,
+                    url: "https://localhost:5001/api/Movie/" + id,
                     type: "get",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (result, status, xhr) {
                         console.log(result);
                         $("#id").attr("value", id);
-                        $("#email").attr("value", result["email"]);
-                        $("#name").attr("value", result["username"]);
+                        $("#movieName").attr("value", result["movieName"]);
+                        $("#description").attr("value", result["description"]);
+                        $("#videoPath").attr("value", result["videoPath"]);
+                        $("#imagePath").attr("value", result["imagePath"]);
+                        $("#duration").attr("value", result["duration"]);
                         $("#password").attr("value", result["password"]);
-                        $("#role").val(result["role"]["roleName"]).change();
+                        $("#rated").val(result["rated"]);
+                        $("#publishedYear").val(result["publishedYear"]);
+                        $("#country").val(result["country"]);
+
                     },
                     error: function (xhr, status, error) {
+                        
                         console.log(xhr);
                     }
                 });
             };
         });
 
-        function ShowRoles() 
-        {
-            $.ajax({
-                url: "https://localhost:5001/api/Role",
-                type: "get",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (result, status, xhr) 
-                {
-                    console.log(result);
-                    $.each(result, function (index, value)                         {
-                        appendElement = $("#role");
-                        appendElement.append($("<option>").attr("value", value["roleId"]).html(value["roleName"]));
-                    });
-                },
+        $("#UpdateButton").on("click", function (e) {
 
-                error: function (xhr, status, error) 
-                {
-                    console.log(xhr);
+            var checkImgNull = false;
+            var checkVideoNull = false;
+            var nameV = $("#videoPath").val();
+            var nameI = $("#imagePath").val();
+            console.log(nameV);
+            console.log(nameI);
+     
+            var nameVideo = null;
+            var nameImg = null;
+
+            const imageUpload = document.getElementById("image");
+            imageUpload.addEventListener("change", event => {
+                const fileImage = event.target.files[0];
+
+                if (typeof (fileImage) != "undefined") {
+                    //fileImageU = fileImage;
+                    const imageEl = document.createElement("img");
+                    imageEl.src = window.URL.createObjectURL(fileImage);
+                    console.log(imageEl);
+                    // When the image  has loaded, check
+                    // the image width/height
+
+                    imageEl.onload = event => {
+                        window.URL.revokeObjectURL(imageEl.src);
+                        const { name, type } = fileImage;
+                        const { imageWidth, imageHeight } = imageEl;
+                        checkImgNull = true;
+                        nameImg = name;
+                        console.log(`Filename: ${name} - Type: ${type} - Size: ${imageWidth}px x ${imageHeight}px`);
+                    }
+
+                    // If there's an error, most likely because the file
+                    // is not a image, display an error.
+                    imageEl.onerror = () => {
+                        checkImgNull = false
+                    }
                 }
             });
-        };
+            const fileUpload = document.getElementById("video");
+            fileUpload.addEventListener("change", event => {
+                const file = event.target.files[0];
+                //console.log(file);
+                //console.log(file);
+                if (typeof (file) != "undefined") {
+                    //fileVideoU = file;
+                    const videoEl = document.createElement("video");
+                    console.log(videoEl);
+                    videoEl.src = window.URL.createObjectURL(file);
+                    // When the video metadata has loaded, check
+                    // the video width/height
+                    videoEl.onloadedmetadata = event => {
+                        window.URL.revokeObjectURL(videoEl.src);
+                        const { name, type } = file;
+                        const { videoWidth, videoHeight } = videoEl;
+                        checkVideoNull = true;
+                        nameVideo = name;
+                        console.log(`Filename: ${name} - Type: ${type} - Size: ${videoWidth}px x ${videoHeight}px`);
+                    }
 
-        $("#UpdateButton").on("click", function (e) {
+                    // If there's an error, most likely because the file
+                    // is not a video, display an error.
+                    videoEl.onerror = () => {
+                        checkVideoNull = false
+                    }
+                }
+
+            });
             let params = (new URL(document.location)).searchParams;
             let id = params.get("id");
             console.log(id);
-            var json = {
-                userId: id,
-                email: $("#email").val(),
-                username: $("#name").val(),
-                password: $("#password").val(),
-                roleId: $("#role").val()
-            };
-            $.ajax({
-                type: "put",
-                contentType: "application/json; charset=UTF-8",
-                url: "https://localhost:5001/api/User/id?id=" + id,
-                data: JSON.stringify(json),
-                dataType: "json",
-                success: function (result, status, xhr) {
-                    $("#myModal").modal('show');
-                },
-                error: function (e) {
-                    $("#myModal1").modal('show');
-                    console.log(e);
-                }
-            });
+            
+            //Case 1: Img = false , Video = false
+            // Path video, img = > lay nhu cu k sua
+
+            if (checkVideoNull == false && checkImgNull == false) {
+                var json = {
+                    movieId: id,
+                    movieName: $("#movieName").val(),
+                    videoPath: nameV,
+                    description: $("#description").val(),
+                    duration: $("#duration").val(),
+                    rated: $("#rated").val(),
+                    publishedYear: $("#publishedYear").val(),
+                    country: $("#country").val(),
+                    imagePath: nameI
+                };
+
+                $.ajax({
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/Movie/id?id=" + id,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        $("#myModal").modal('show');
+                    },
+                    error: function (e) {
+                        $("#myModal1").modal('show');
+                        console.log(e);
+                    }
+                });
+            }
+            //Case 2: Img = false , Video = true
+            else if (checkVideoNull == true && checkImgNull == false) {
+
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + movie,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                       
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+
+                var fileVideoU = $("#video")[0];
+                var formdataVideo = new FormData();
+                console.log(fileVideoU.files[0]);
+                formdataVideo.append('file', fileVideoU.files[0]);
+                var pathvideo = "Video/" + nameVideo;
+
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + pathvideo,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+                $.ajax({
+                    url: "http://localhost:5000/api/Movie/UploadVideo",
+                    type: "post",
+                    contentType: false,
+                    processData: false,
+                    data: formdataVideo,
+                    success: function (result, status, xhr) {
+
+                        //$("#myModal").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#myModal1").modal('show');
+                        console.log(err);
+                    }
+                });
+
+                var json = {
+                    movieId: id,
+                    movieName: $("#movieName").val(),
+                    videoPath: pathvideo,
+                    description: $("#description").val(),
+                    duration: $("#duration").val(),
+                    rated: $("#rated").val(),
+                    publishedYear: $("#publishedYear").val(),
+                    country: $("#country").val(),
+                    imagePath: nameI
+                };
+
+                $.ajax({
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/Movie/id?id=" + id,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        $("#myModal").modal('show');
+                    },
+                    error: function (e) {
+                        $("#myModal1").modal('show');
+                        console.log(e);
+                    }
+                });
+
+
+
+            }
+            //Case 3: Img = true; Video = false;
+            else if (checkVideoNull == false && checkImgNull == true) {
+
+                //delete img file
+                var pathImg = "Image/" + nameImg;
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + pathImg,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                       
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+                var fileImgU = $("#image")[0];
+                var formdataImg = new FormData();
+                formdataImg.append('file', fileImgU.files[0]);
+                $.ajax({
+                    url: "http://localhost:5000/api/Movie/UploadImage",
+                    type: "post",
+                    contentType: false,
+                    processData: false,
+                    data: formdataImg,
+                    success: function (result, status, xhr) {
+                        //$("#myModal").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#myModal1").modal('show');
+                        console.log(err);
+                    }
+                });
+
+                var json = {
+                    movieId: id,
+                    movieName: $("#movieName").val(),
+                    videoPath: nameV,
+                    description: $("#description").val(),
+                    duration: $("#duration").val(),
+                    rated: $("#rated").val(),
+                    publishedYear: $("#publishedYear").val(),
+                    country: $("#country").val(),
+                    imagePath: nameImg
+                };
+
+                $.ajax({
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/Movie/id?id=" + id,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        $("#myModal").modal('show');
+                    },
+                    error: function (e) {
+                        $("#myModal1").modal('show');
+                        console.log(e);
+                    }
+                });
+
+
+            }
+            //Case 4: Img = true, Video = true
+            else if (checkVideoNull == true && checkImgNull == true) {
+
+
+                //delete video file
+                var pathvideo = "Video/" + nameVideo;
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + pathvideo,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                       
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+                //delete img file
+                var pathImg = "Image/" + nameImg;
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + pathImg,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                      
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+                //update file video
+                var fileVideoU = $("#video")[0];
+                var formdataVideo = new FormData();
+                console.log(fileVideoU.files[0]);
+                formdataVideo.append('file', fileVideoU.files[0]);
+                var pathvideo = "Video/" + nameVideo;
+                $.ajax({
+                    url: "http://localhost:5000/api/Movie/UploadVideo",
+                    type: "post",
+                    contentType: false,
+                    processData: false,
+                    data: formdataVideo,
+                    success: function (result, status, xhr) {
+
+                        //$("#myModal").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#myModal1").modal('show');
+                        console.log(err);
+                    }
+                });
+
+
+                //update file img
+                var fileImgU = $("#image")[0];
+                var formdataImg = new FormData();
+                formdataImg.append('file', fileImgU.files[0]);
+                $.ajax({
+                    url: "http://localhost:5000/api/Movie/UploadImage",
+                    type: "post",
+                    contentType: false,
+                    processData: false,
+                    data: formdataImg,
+                    success: function (result, status, xhr) {
+                        //$("#myModal").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#myModal1").modal('show');
+                        console.log(err);
+                    }
+                });
+
+                //update movie
+                var json = {
+                    movieId: id,
+                    movieName: $("#movieName").val(),
+                    videoPath: pathvideo,
+                    description: $("#description").val(),
+                    duration: $("#duration").val(),
+                    rated: $("#rated").val(),
+                    publishedYear: $("#publishedYear").val(),
+                    country: $("#country").val(),
+                    imagePath: nameImg
+                };
+
+                $.ajax({
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/Movie/id?id=" + id,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        $("#myModal").modal('show');
+                    },
+                    error: function (e) {
+                        $("#myModal1").modal('show');
+                        console.log(e);
+                    }
+                });
+                
+
+            }          
+            
         });
 
         $("#closeBtn").click(function (e) {
-            window.location.href = "UserManagement.html";
+            window.location.href = "MovieManagement.html";
         });
     </script>
 </body>

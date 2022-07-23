@@ -25,7 +25,7 @@
 
 <body>
     <!-- Navbar: Dark color & Stick at top of page -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top my-main-navbar">
         <div class="container-fluid">
             <!-- Home button -->
             <a class="navbar-brand" href="#">
@@ -43,15 +43,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="my-nav-link my-nav-link-active nav-link" aria-current="page">Home</a>
                     </li>
                     <!-- Login Link (go to Login.html) -->
                     <li class="nav-item">
-                        <a class="nav-link" href="../Authentication/Login.html" id="loginButton">Login</a>
+                        <a class="my-nav-link nav-link" href="../Authentication/Login.html" id="loginButton">Login</a>
                     </li>
                     <!-- Logout Link (call JS function) -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="logoutButton">Logout</a>
+                        <a class="my-nav-link nav-link" href="#" id="logoutButton">Logout</a>
                     </li>
                 </ul>
 
@@ -63,7 +63,8 @@
 
                 <!-- Update Profile -->
                 <form class="d-flex" role="search">
-                    <button type="button" class="btn btn-outline-light navbar-profile-button" id="navbar-profile-button">
+                    <button type="button" class="btn btn-outline-light navbar-profile-button"
+                        id="navbar-profile-button">
                         <i class="fa-solid fa-user"></i>
                         <i class="fa-solid fa-caret-down"></i>
                     </button>
@@ -143,6 +144,39 @@
         <!-- End Movie Lists -->
     </div>
     <!-- End Content -->
+
+    <!-- MovieDetail Modal -->
+    <div class="modal fade" id="movieDetailModal" tabindex="-1" aria-labelledby="movieDetailName" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieDetailName">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="movieDetailModalBody">
+                    <!-- Movie Detail infos -->
+                    <img id="movieDetailImage" width="470px">
+                    <br>
+                    <div>Duration: <span class="badge text-bg-dark" id="movieDetailDuration">Dark</span></div>
+                    <div>Rated: <span class="badge text-bg-dark" id="movieDetailRated">Dark</span></div>
+                    <div>Published Year: <span class="badge text-bg-dark" id="movieDetailPublishedYear">Dark</span>
+                    </div>
+                    <div>Country: <span class="badge text-bg-dark" id="movieDetailCountry">Dark</span></div>
+                    <br>
+                    <p id="movieDetailDescription"></p>
+                    <br>
+                    <div>Cast: <span id="movieDetailActors"></span></div>
+                </div>
+                <div class="modal-footer" id="movieDetailModalFooter">
+                    <!-- Play Button -->
+                    <a type="button" class="btn btn-secondary featured-button"
+                        href="./WatchMovie.html?id=">
+                        <i class="featured-button-icon fa-solid fa-play"></i> Play
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Script -->
     <script src="../js/auth.js"></script>

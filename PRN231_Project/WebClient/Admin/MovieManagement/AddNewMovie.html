@@ -21,8 +21,8 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+            background-attachment: fixed;
             height: 100vh;
-            overflow-y: hidden;
         }
 
         .updateForm {
@@ -60,7 +60,7 @@
     <!-- End Navbar -->
 
     <div class="updateForm" style="background-color: rgba(0, 0, 0, 0.6); padding: 30px; margin-top: 25px;">
-        <h2 class="text-center" style="color: white; font-weight: 700; font-size: 30px;">Add a movier</h2>
+        <h2 class="text-center" style="color: white; font-weight: 700; font-size: 30px;">Add  movie</h2>
         <div class="form-group">
             <label for="startLocation">Movie Name</label>
             <input type="text" name="" id="movieName" class="form-control">
@@ -75,15 +75,15 @@
         </div>
         <div class="form-group">
             <label for="Name">Duration</label>
-            <input type="text" name="" id="duration" class="form-control">
+            <input type="number" min=0 name="" id="duration" class="form-control">
         </div>
         <div class="form-group">
             <label for="Name">Rated</label>
-            <input type="text" name="" id="rated" class="form-control">
+            <input type="number" min=0 name="" id="rated" class="form-control">
         </div>
         <div class="form-group">
             <label for="Name">Pulished Year</label>
-            <input type="text" name="" id="publishedYear" class="form-control">
+            <input type="number" min=0 name="" id="publishedYear" class="form-control">
         </div>
         <div class="form-group">
             <label for="Name">Country</label>
@@ -206,7 +206,7 @@
 
             //when submit form
             $("#AddButton").click(function (e) {
-                var pathvideo = "Video/" + nameVideo
+                var pathvideo = "Video/" + nameVideo;
                 var name = nameVideo.substr(0, nameVideo.lastIndexOf('.'));
                 if (check == true && checkImage == true) {
                     var fileVideoU = $("#video")[0];

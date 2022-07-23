@@ -13,7 +13,7 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- Jquery -->
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-    
+
     <style>
         body {
             color: #fff;
@@ -25,26 +25,28 @@
             background-attachment: fixed;
             height: 100vh;
         }
+
         div.pager {
             text-align: center;
             margin: 1em 0;
         }
 
-            div.pager span {
-                display: inline-block;
-                width: 1.8em;
-                height: 1.8em;
-                line-height: 1.8;
-                text-align: center;
-                cursor: pointer;
-                background: #000;
-                color: #fff;
-                margin-right: 0.5em;
-            }
+        div.pager span {
+            display: inline-block;
+            width: 1.8em;
+            height: 1.8em;
+            line-height: 1.8;
+            text-align: center;
+            cursor: pointer;
+            background: #000;
+            color: #fff;
+            margin-right: 0.5em;
+        }
 
-                div.pager span.active {
-                    background: grey;
-                }
+        div.pager span.active {
+            background: grey;
+        }
+
         #clearSearch {
             margin-left: 10px;
         }
@@ -53,12 +55,13 @@
 
 <body>
     <!-- Navbar: Dark color & Stick at top of page -->
-    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #000000;">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
         <div class="container-fluid">
             <!-- Home button -->
-            <a class="navbar-brand" href="UserManagement.html">
+            <a class="navbar-brand" href="#">
                 <!-- Logo image -->
-                <img src="../../image/CloudStreamLogo.png" alt="Logo" width="300px" class="d-inline-block align-text-top">
+                <img src="../../image/CloudStreamLogo.png" alt="Logo" width="190px"
+                    class="d-inline-block align-text-top">
             </a>
 
             <!-- Collapse button (for responsive) -->
@@ -69,9 +72,19 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto" style="background-color: #1f1f1f; border: solid 1px #1f1f1f; border-radius: 5px; padding: 0px 15px;">
-                    <li style="padding: 0px;">
-
+                <!-- Links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Movie Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../UserManagement/UserManagement.html">User Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutButton">Logout</a>
                     </li>
                 </ul>
 
@@ -89,10 +102,17 @@
     </nav>
     <!-- End Navbar -->
 
+    <div id="nodata" class="text-center mt-5" style="display: none;">
+        <!-- Search Result: No Data -->
+        <h1 style="color: #ffc200; font-size: 70px;">OOPS!</h1>
+        <h2 style="font-size: 50px; color: #dc3545;">No <span style="color: #ffc200;">Data</span> Available</h2>
+    </div>
+
     <div class="container-fluid " id="resultDiv">
         <div class="row rounded p-5">
             <!--Add new movie button-->
-            <a class="btn btn-danger" aria-current="page" href="AddNewMovie.html" style="color: #fff; text-align: center;text-decoration: none; margin: 30px 0px; padding: 0px 15px 8px 15px; width: 150px;">
+            <a class="btn btn-danger" aria-current="page" href="AddNewMovie.html"
+                style="color: #fff; text-align: center;text-decoration: none; margin: 30px 0px; padding: 0px 15px 8px 15px; width: 150px;">
                 <span style="margin-right: 5px; font-weight: 700; font-size: 20px; padding: 0px;">+</span>
                 Add New
             </a>
@@ -102,7 +122,6 @@
                     <tr>
                         <th>ID</th>
                         <th style="width:150px">Movie Name</th>
-                        <th>Video Path</th>
                         <th>Description</th>
                         <th>Duration</th>
                         <th>Rated</th>
@@ -124,8 +143,8 @@
         <h2 style="font-size: 50px; color: #dc3545;">No <span style="color: #ffc200;">Data</span> Available</h2>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal ok -->
+    <div class="modal fade text-dark" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -143,7 +162,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-dark" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -160,7 +180,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-dark" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -179,8 +200,8 @@
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-            crossorigin="anonymous"></script>
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -205,13 +226,15 @@
                             appendElement = $("tbody tr").last();
                             appendElement.append($("<td>").html(value["movieId"]));
                             appendElement.append($("<td>").html(value["movieName"]));
-                            appendElement.append($("<td>").html(value["videoPath"]));
                             appendElement.append($("<td>").html(value["description"]));
                             appendElement.append($("<td>").html(value["duration"]));
                             appendElement.append($("<td>").html(value["rated"]));
                             appendElement.append($("<td>").html(value["publishedYear"]));
                             appendElement.append($("<td>").html(value["country"]));
-                            appendElement.append($("<td>").html(value["imagePath"]));
+                            appendElement.append($("<td>").html('<img ' +
+                                'src="..\\..\\image\\movies\\' +
+                                value["imagePath"] +
+                                '" width="100px" alt="">'));
 
                             appendElement.append($("<td>").html("<a href=\"UpdateMoive.html?id=" + value["movieId"]
                                 + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
@@ -220,8 +243,11 @@
                         });
 
                     }
-                    else {
-                        $("table tbody").append("<td colspan=\"4\">No User</td>");
+                    
+                    if (result.length == 0) {
+                        console.log("get here");
+                        $("#nodata").show();
+                        $("#resultDiv").hide();
                     }
                 },
                 error: function (xhr, status, error) {
@@ -243,13 +269,15 @@
                         appendElement = $("tbody tr").last();
                         appendElement.append($("<td>").html(value["movieId"]));
                         appendElement.append($("<td>").html(value["movieName"]));
-                        appendElement.append($("<td>").html(value["videoPath"]));
                         appendElement.append($("<td>").html(value["description"]));
                         appendElement.append($("<td>").html(value["duration"]));
                         appendElement.append($("<td>").html(value["rated"]));
                         appendElement.append($("<td>").html(value["publishedYear"]));
                         appendElement.append($("<td>").html(value["country"]));
-                        appendElement.append($("<td>").html(value["imagePath"]));
+                        appendElement.append($("<td>").html('<img ' +
+                            'src="..\\..\\image\\movies\\' +
+                            value["imagePath"] +
+                            '" width="100px" alt="">'));
 
                         appendElement.append($("<td>").html("<a href=\"UpdateMovie.html?id=" + value["movieId"]
                             + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
