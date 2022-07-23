@@ -1,4 +1,5 @@
-﻿function Login() {
+﻿// Login
+function Login() {
   var json = {
     email: $("#Email").val(),
     password: $("#Password").val(),
@@ -21,7 +22,12 @@
       } else {
         window.sessionStorage.setItem("token", result["token"]);
       }
-      window.location.href = "../Client/index.html";
+
+      if (result["role"]["roleName"] === "Admin") {
+        window.location.href = "../Admin/Dashboard.html";
+      } else {
+        window.location.href = "../Client/index.html";
+      }
     },
     error: function (e) {
       console.log(e);
@@ -29,6 +35,7 @@
   });
 }
 
+// Login with Facebook
 function LoginFacebook(email, facebookUID, name) {
   var json = {
     email: email,
@@ -61,6 +68,7 @@ function LoginFacebook(email, facebookUID, name) {
   });
 }
 
+// Logout
 function Logout() {
   //remove token & userId
   window.localStorage.removeItem("token");
@@ -69,6 +77,7 @@ function Logout() {
   window.location.href = "../Client/index.html";
 }
 
+// Sign up
 function Signup() {
   var json = {
     email: $("#Email").val(),
