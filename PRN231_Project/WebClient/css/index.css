@@ -8,8 +8,26 @@ body {
 }
 
 /* Navbar */
+.my-main-navbar{
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    padding: 0px 30px;
+    background-image: linear-gradient(rgba(0,0,0, .8) ,rgba(0,0,0, 0));
+}
+
 .navbar-profile-button {
     margin-left: 10px;
+}
+
+.nav-link{
+    color: white;
+}
+
+/*Feature Space*/
+.featureSpace{
+    position: relative;
+    top: 0;
 }
 
 /* Content */
