@@ -51,7 +51,10 @@ function GetAllMovies() {
             '"><i class="movie-item-button-icon fa-solid fa-play"></i></a>' +
             // Detail button
             '<button type="button" class="btn btn-light movie-list-item-button movie-list-item-detail-button"' +
-            '><i class="movie-item-button-icon fa-solid fa-angle-down"></i></button>' +
+            'data-bs-toggle="modal" data-bs-target="#movieDetailModal" onclick="displayMovieDetail(' +
+            value["movieId"] +
+            ')">' +
+            '<i class="movie-item-button-icon fa-solid fa-angle-down"></i></button>' +
             "</div>"
         );
       });
@@ -92,7 +95,10 @@ function GetMoviesByCategory(categoryId) {
             '"><i class="movie-item-button-icon fa-solid fa-play"></i></a>' +
             // Detail button
             '<button type="button" class="btn btn-light movie-list-item-button movie-list-item-detail-button"' +
-            '><i class="movie-item-button-icon fa-solid fa-angle-down"></i></button>' +
+            'data-bs-toggle="modal" data-bs-target="#movieDetailModal" onclick="displayMovieDetail(' +
+            value["movieId"] +
+            ')">' +
+            '<i class="movie-item-button-icon fa-solid fa-angle-down"></i></button>' +
             "</div>"
         );
       });
@@ -136,20 +142,26 @@ function GetFeaturedMovie(id) {
       // Set to HTML
       $("#featureSpace").append(
         '<div class="featured-content"' +
+          // Featured Image
           'style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515),' +
           "url('../image/movies/" +
           result["imagePath"] +
           "');\">" +
           '<img class="featured-title" src="../image/movie_titles/ant-man-title.png" alt="">' +
+          // Featured Description
           '<p class="featured-desc">' +
           result["description"] +
           "</p>" +
+          // Play Button
           '<a type="button" class="btn btn-light featured-button featured-play-button" href="./WatchMovie.html?id=' +
           result["movieId"] +
           '"><i class="featured-button-icon fa-solid fa-play"></i> Play</a>' +
-          '<a type="button" class="btn btn-secondary featured-button" href="" ' +
-          'data-bs-toggle="modal" data-bs-target="#movieDetailModal">' +
-          '<i class="featured-button-icon fa-solid fa-circle-info"></i> More Info</a>' +
+          // Detail Button
+          '<button type="button" class="btn btn-secondary featured-button" href="" ' +
+          'data-bs-toggle="modal" data-bs-target="#movieDetailModal" onclick="displayMovieDetail(' +
+          result["movieId"] +
+          ')">' +
+          '<i class="featured-button-icon fa-solid fa-circle-info"></i> More Info</button>' +
           "</div>"
       );
     },
@@ -190,3 +202,65 @@ function DisplayAuthenButton() {
 $("#logoutButton").click(function (e) {
   Logout();
 });
+
+// Get Detail Information of a Movie and set it to the Modal to display
+function displayMovieDetail(movieId) {
+  // Get Detail infos of Movie
+  $.ajax({
+    url: "https://localhost:5001/api/Movie/" + movieId,
+    type: "get",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (result, status, xhr) {
+      $("#movieDetailModal > div > div > div > #movieDetailName").html(
+        result["movieName"]
+      );
+      $(
+        "#movieDetailModal > div > div > #movieDetailModalBody > #movieDetailImage"
+      ).attr("src", "../image/movies/" + result["imagePath"]);
+      $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailDuration").html(
+        result["duration"]
+      );
+      $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailRated").html(
+        result["rated"]
+      );
+      $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailPublishedYear").html(
+        result["publishedYear"]
+      );
+      $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailCountry").html(
+        result["country"]
+      );
+      $("#movieDetailModal > div > div > #movieDetailModalBody > #movieDetailDescription").html(
+        result["description"]
+      );
+    },
+    error: function (xhr, status, error) {
+      console.log(xhr);
+    },
+  });
+
+  // Get Actors of Movie
+  $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailActors").html("");
+  $.ajax({
+    url: "https://localhost:5001/GetActorsByMovieId/" + movieId,
+    type: "get",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (result, status, xhr) {
+      $.each(result, function (index, value) {
+        if (index > 0) {
+          $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailActors").append(
+            ", " + value["actorName"]
+          );
+        } else {
+          $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailActors").append(
+            value["actorName"]
+          );
+        }
+      });
+    },
+    error: function (xhr, status, error) {
+      console.log(xhr);
+    },
+  });
+}

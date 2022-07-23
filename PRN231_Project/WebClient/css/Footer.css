@@ -1,0 +1,17 @@
+.footer_social_media{
+    width: 20px; 
+    margin: 10px;
+}
+
+.footer-link{
+    color: #808080;
+    margin-top: 20px;
+}
+
+#footer-service-button{
+    border: 1px solid #808080; 
+    background-color: transparent; 
+    color: #808080; 
+    padding: 10px;
+    margin: 20px 0px;
+}
