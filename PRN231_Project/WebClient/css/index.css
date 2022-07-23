@@ -38,11 +38,13 @@ body {
 /* Featured: button */
 .featured-button {
     padding: 10px 25px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: larger;
+    margin-right: 10px;
 }
 
-#featured-button-icon {
-    font-size: x-large;
+.featured-button-icon {
+    font-size: larger;
     padding-right: 10px;
 }
 
@@ -59,7 +61,7 @@ body {
 .movie-list {
     display: flex;
     align-items: center;
-    height: 300px;
+    height: 200px;
     transform: translateX(0);
     transition: all 1s ease-in-out;
 }
