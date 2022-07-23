@@ -10,8 +10,13 @@ GetMovieName(id);
 //Get movie name
 //call API để lấy user theo id 
 function GetMovieName(id) {
+    let token = ((localStorage.getItem("token") !== null)
+        ? localStorage.getItem("token") : sessionStorage.getItem("token"));
   $.ajax({
       url: "https://localhost:5001/api/Movie/" + id,
+      beforeSend: function (request) {
+          request.setRequestHeader("Authorization", "Bearer " + token);
+      },
       type: "get",
       contentType: "application/json; charset=utf-8",
       dataType: "json",

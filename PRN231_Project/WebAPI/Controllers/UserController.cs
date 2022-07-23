@@ -19,7 +19,6 @@ using WebAPI.DTO.Request;
 using WebAPI.Helper;
 using WebAPI.IRepository;
 using WebAPI.Models;
-using WebAPI.Repositories;
 
 namespace WebAPI.Controllers
 {
@@ -43,6 +42,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult<IEnumerable<User>> GetUsers()
         {
             List<UserDTO> userDTOs;
@@ -58,6 +58,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult GetUserById(int id)
         {
             UserDTO userDTO;
@@ -74,6 +75,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddUser([FromBody] User user)
         {
             try
@@ -89,6 +91,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("id")]
+        [Authorize]
         public IActionResult UpdateUser(int id, User user)
         {
             try
@@ -110,6 +113,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("id")]
+        [Authorize(Roles="Admin")]
         public IActionResult DeleteUser(int id)
         {
             try
@@ -132,6 +136,7 @@ namespace WebAPI.Controllers
 
         // Search by Name
         [HttpGet("search")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Search(string name)
         {
             List<UserDTO> userDTOs;
@@ -251,6 +256,7 @@ namespace WebAPI.Controllers
             }
         }
         [HttpPost("change_password")]
+        [Authorize]
         public IActionResult ChangePassword([FromBody] ChangePasswordRequestDTO request)
         {
             try
@@ -275,9 +281,9 @@ namespace WebAPI.Controllers
         }
         /********Authentication********/
         [HttpPost("autho")]
+        [Authorize]
         public IActionResult Auth()
         {
-            Helper.MailService.SendEmail("4bb5dcf2-3878-4795-8962-f132a2dee64f@mailslurp.mx", "body test", "header test");
             return Ok();
         }
     }

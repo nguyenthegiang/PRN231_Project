@@ -322,9 +322,14 @@
         });
 
         $("#deleteBtn").click(function (e) {
+            let token = ((localStorage.getItem("token") !== null)
+                ? localStorage.getItem("token") : sessionStorage.getItem("token"));
             $.ajax({
                 url: "https://localhost:5001/api/Movie/id?id=" + movie,
                 type: "delete",
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
                 contentType: "application/json",
                 success: function (result, status, xhr) {
                     window.location.href = "MovieManagement.html";

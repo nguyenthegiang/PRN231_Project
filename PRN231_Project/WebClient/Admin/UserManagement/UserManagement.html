@@ -206,11 +206,15 @@
         });
 
         $("#GetButton").click(function (e) {
+            let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : sessionStorage.getItem("token");
             console.log($("#Name").val());
             $("table tbody").html("");
             $.ajax({
                 url: "https://localhost:5001/api/User/search?name=" + $("#Name").val(),
                 type: "get",
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result, status, xhr) {
@@ -244,9 +248,13 @@
         });
 
         function ShowUsers() {
+            let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : sessionStorage.getItem("token");
             $("table tbody").html("");
             $.ajax({
                 url: "https://localhost:5001/api/User",
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
                 type: "get",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -302,8 +310,12 @@
         });
 
         $("#deleteBtn").click(function (e) {
+            let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : sessionStorage.getItem("token");
             $.ajax({
                 url: "https://localhost:5001/api/User/id?id=" + userId,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
                 type: "delete",
                 contentType: "application/json",
                 success: function (result, status, xhr) {

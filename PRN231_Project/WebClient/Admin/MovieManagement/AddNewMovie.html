@@ -206,6 +206,9 @@
 
             //when submit form
             $("#AddButton").click(function (e) {
+                let token = ((localStorage.getItem("token") !== null)
+                    ? localStorage.getItem("token") : sessionStorage.getItem("token"));
+
                 var pathvideo = "Video/" + nameVideo;
                 var name = nameVideo.substr(0, nameVideo.lastIndexOf('.'));
                 if (check == true && checkImage == true) {
@@ -221,6 +224,9 @@
                     $.ajax({
                         url: "http://localhost:5000/api/Movie/UploadVideo",
                         type: "post",
+                        beforeSend: function (request) {
+                            request.setRequestHeader("Authorization", "Bearer " + token);
+                        },
                         contentType: false,
                         processData: false,
                         data: formdataVideo,
@@ -236,6 +242,9 @@
                     $.ajax({
                         url: "http://localhost:5000/api/Movie/UploadImage",
                         type: "post",
+                        beforeSend: function (request) {
+                            request.setRequestHeader("Authorization", "Bearer " + token);
+                        },
                         contentType: false,
                         processData: false,
                         data: formdataImg,
@@ -250,6 +259,9 @@
                     $.ajax({
                         url: "http://localhost:5000/api/Movie",
                         type: "post",
+                        beforeSend: function (request) {
+                            request.setRequestHeader("Authorization", "Bearer " + token);
+                        },
                         contentType: "application/json",
                         data: JSON.stringify({
                             movieId: 0,

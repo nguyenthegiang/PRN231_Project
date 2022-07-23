@@ -143,8 +143,13 @@
 
             //call API để lấy user theo id 
             function GetUser(id) {
+                let token = ((localStorage.getItem("token") !== null)
+                    ? localStorage.getItem("token") : sessionStorage.getItem("token"));
                 $.ajax({
                     url: "https://localhost:5001/api/User/" + id,
+                    beforeSend: function (request) {
+                        request.setRequestHeader("Authorization", "Bearer " + token);
+                    },
                     type: "get",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -165,8 +170,13 @@
 
         function ShowRoles() 
         {
+            let token = ((localStorage.getItem("token") !== null)
+                ? localStorage.getItem("token") : sessionStorage.getItem("token"));
             $.ajax({
                 url: "https://localhost:5001/api/Role",
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
                 type: "get",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -187,6 +197,8 @@
         };
 
         $("#UpdateButton").on("click", function (e) {
+            let token = ((localStorage.getItem("token") !== null)
+                ? localStorage.getItem("token") : sessionStorage.getItem("token"));
             let params = (new URL(document.location)).searchParams;
             let id = params.get("id");
             console.log(id);
@@ -201,6 +213,9 @@
                 type: "put",
                 contentType: "application/json; charset=UTF-8",
                 url: "https://localhost:5001/api/User/id?id=" + id,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
                 data: JSON.stringify(json),
                 dataType: "json",
                 success: function (result, status, xhr) {

@@ -15,6 +15,7 @@ using WebAPI.Helper;
 using System.Net.Http;
 using AutoMapper;
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
@@ -84,6 +85,7 @@ namespace WebAPI.Controllers
 
         //Function [Watch Movie]
         [HttpGet("WatchMovie")]
+        [Authorize]
         public async Task<IActionResult> WatchMovie(int movieId)
         {
             Movie movie = repository.GetMovieById(movieId);
@@ -118,6 +120,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("[action]")]
+        [Authorize(Roles = "Admin")]
         public IActionResult UploadImage(IFormFile file)
         {
             string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath, "Image");
@@ -140,6 +143,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("[action]")]
+        [Authorize(Roles = "Admin")]
         public IActionResult UploadVideo(IFormFile file)
         {
             string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath, "Video");
@@ -153,6 +157,7 @@ namespace WebAPI.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddMovie([FromBody] Movie movie)
         {
             try
@@ -167,6 +172,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("id")]
+        [Authorize(Roles = "Admin")]
         public IActionResult UpdateMovie(int id, Movie movie)
         {
             try
@@ -187,6 +193,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("deleteFile")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteVideo(string path2)
         {
             string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath);
@@ -196,6 +203,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("id")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteMovie(int id)
         {
             try
