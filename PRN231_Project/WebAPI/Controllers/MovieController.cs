@@ -175,6 +175,15 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpDelete("deleteFile")]
+        public IActionResult DeleteVideo(string path2)
+        {
+            string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath);
+            string filePath = Path.Combine(directoryPath, path2);
+            System.IO.File.Delete(filePath);
+            return Ok();
+        }
+
         [HttpDelete("id")]
         public IActionResult DeleteMovie(int id)
         {

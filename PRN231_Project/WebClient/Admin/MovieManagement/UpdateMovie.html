@@ -190,64 +190,370 @@
 
             var checkImgNull = false;
             var checkVideoNull = false;
+            var nameV = $("#videoPath").val();
+            var nameI = $("#imagePath").val();
+            console.log(nameV);
+            console.log(nameI);
+     
+            var nameVideo = null;
+            var nameImg = null;
+
             const imageUpload = document.getElementById("image");
             imageUpload.addEventListener("change", event => {
                 const fileImage = event.target.files[0];
-                if (typeof (file) != "undefined") {
-                    checkImgNull = true;
+
+                if (typeof (fileImage) != "undefined") {
+                    //fileImageU = fileImage;
+                    const imageEl = document.createElement("img");
+                    imageEl.src = window.URL.createObjectURL(fileImage);
+                    console.log(imageEl);
+                    // When the image  has loaded, check
+                    // the image width/height
+
+                    imageEl.onload = event => {
+                        window.URL.revokeObjectURL(imageEl.src);
+                        const { name, type } = fileImage;
+                        const { imageWidth, imageHeight } = imageEl;
+                        checkImgNull = true;
+                        nameImg = name;
+                        console.log(`Filename: ${name} - Type: ${type} - Size: ${imageWidth}px x ${imageHeight}px`);
+                    }
+
+                    // If there's an error, most likely because the file
+                    // is not a image, display an error.
+                    imageEl.onerror = () => {
+                        checkImgNull = false
+                    }
                 }
             });
             const fileUpload = document.getElementById("video");
             fileUpload.addEventListener("change", event => {
                 const file = event.target.files[0];
+                //console.log(file);
+                //console.log(file);
                 if (typeof (file) != "undefined") {
-                    checkVideoNull = true;
+                    //fileVideoU = file;
+                    const videoEl = document.createElement("video");
+                    console.log(videoEl);
+                    videoEl.src = window.URL.createObjectURL(file);
+                    // When the video metadata has loaded, check
+                    // the video width/height
+                    videoEl.onloadedmetadata = event => {
+                        window.URL.revokeObjectURL(videoEl.src);
+                        const { name, type } = file;
+                        const { videoWidth, videoHeight } = videoEl;
+                        checkVideoNull = true;
+                        nameVideo = name;
+                        console.log(`Filename: ${name} - Type: ${type} - Size: ${videoWidth}px x ${videoHeight}px`);
+                    }
+
+                    // If there's an error, most likely because the file
+                    // is not a video, display an error.
+                    videoEl.onerror = () => {
+                        checkVideoNull = false
+                    }
                 }
+
             });
             let params = (new URL(document.location)).searchParams;
             let id = params.get("id");
             console.log(id);
-            var json = {
-                userId: id,
-                email: $("#email").val(),
-                username: $("#name").val(),
-                password: $("#password").val(),
-                roleId: $("#role").val()
-            };
+            
             //Case 1: Img = false , Video = false
             // Path video, img = > lay nhu cu k sua
 
             if (checkVideoNull == false && checkImgNull == false) {
+                var json = {
+                    movieId: id,
+                    movieName: $("#movieName").val(),
+                    videoPath: nameV,
+                    description: $("#description").val(),
+                    duration: $("#duration").val(),
+                    rated: $("#rated").val(),
+                    publishedYear: $("#publishedYear").val(),
+                    country: $("#country").val(),
+                    imagePath: nameI
+                };
 
+                $.ajax({
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/Movie/id?id=" + id,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        $("#myModal").modal('show');
+                    },
+                    error: function (e) {
+                        $("#myModal1").modal('show');
+                        console.log(e);
+                    }
+                });
             }
             //Case 2: Img = false , Video = true
             else if (checkVideoNull == true && checkImgNull == false) {
+
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + movie,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        window.location.href = "MovieManagement.html";
+                        $('#myModal').modal('toggle');
+                        $("#myModal2").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+
+                var fileVideoU = $("#video")[0];
+                var formdataVideo = new FormData();
+                console.log(fileVideoU.files[0]);
+                formdataVideo.append('file', fileVideoU.files[0]);
+                var pathvideo = "Video/" + nameVideo;
+
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + pathvideo,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        window.location.href = "MovieManagement.html";
+                        $('#myModal').modal('toggle');
+                        $("#myModal2").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+                $.ajax({
+                    url: "http://localhost:5000/api/Movie/UploadVideo",
+                    type: "post",
+                    contentType: false,
+                    processData: false,
+                    data: formdataVideo,
+                    success: function (result, status, xhr) {
+
+                        //$("#myModal").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#myModal1").modal('show');
+                        console.log(err);
+                    }
+                });
+
+                var json = {
+                    movieId: id,
+                    movieName: $("#movieName").val(),
+                    videoPath: pathvideo,
+                    description: $("#description").val(),
+                    duration: $("#duration").val(),
+                    rated: $("#rated").val(),
+                    publishedYear: $("#publishedYear").val(),
+                    country: $("#country").val(),
+                    imagePath: nameI
+                };
+
+                $.ajax({
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/Movie/id?id=" + id,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        $("#myModal").modal('show');
+                    },
+                    error: function (e) {
+                        $("#myModal1").modal('show');
+                        console.log(e);
+                    }
+                });
+
+
 
             }
             //Case 3: Img = true; Video = false;
             else if (checkVideoNull == false && checkImgNull == true) {
 
+                //delete img file
+                var pathImg = "Image/" + nameImg;
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + pathImg,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        window.location.href = "MovieManagement.html";
+                        $('#myModal').modal('toggle');
+                        $("#myModal2").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+                var fileImgU = $("#image")[0];
+                var formdataImg = new FormData();
+                formdataImg.append('file', fileImgU.files[0]);
+                $.ajax({
+                    url: "http://localhost:5000/api/Movie/UploadImage",
+                    type: "post",
+                    contentType: false,
+                    processData: false,
+                    data: formdataImg,
+                    success: function (result, status, xhr) {
+                        //$("#myModal").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#myModal1").modal('show');
+                        console.log(err);
+                    }
+                });
+
+                var json = {
+                    movieId: id,
+                    movieName: $("#movieName").val(),
+                    videoPath: nameV,
+                    description: $("#description").val(),
+                    duration: $("#duration").val(),
+                    rated: $("#rated").val(),
+                    publishedYear: $("#publishedYear").val(),
+                    country: $("#country").val(),
+                    imagePath: nameImg
+                };
+
+                $.ajax({
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/Movie/id?id=" + id,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        $("#myModal").modal('show');
+                    },
+                    error: function (e) {
+                        $("#myModal1").modal('show');
+                        console.log(e);
+                    }
+                });
+
+
             }
             //Case 4: Img = true, Video = true
             else if (checkVideoNull == true && checkImgNull == true) {
 
-            }
 
+                //delete video file
+                var pathvideo = "Video/" + nameVideo;
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + pathvideo,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        window.location.href = "MovieManagement.html";
+                        $('#myModal').modal('toggle');
+                        $("#myModal2").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+                //delete img file
+                var pathImg = "Image/" + nameImg;
+                $.ajax({
+                    url: "https://localhost:5001/api/Movie/deleteFile?path2=" + pathImg,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        window.location.href = "MovieManagement.html";
+                        $('#myModal').modal('toggle');
+                        $("#myModal2").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal1").modal('show');
+                        console.log(xhr)
+                    }
+                });
+
+                //update file video
+                var fileVideoU = $("#video")[0];
+                var formdataVideo = new FormData();
+                console.log(fileVideoU.files[0]);
+                formdataVideo.append('file', fileVideoU.files[0]);
+                var pathvideo = "Video/" + nameVideo;
+                $.ajax({
+                    url: "http://localhost:5000/api/Movie/UploadVideo",
+                    type: "post",
+                    contentType: false,
+                    processData: false,
+                    data: formdataVideo,
+                    success: function (result, status, xhr) {
+
+                        //$("#myModal").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#myModal1").modal('show');
+                        console.log(err);
+                    }
+                });
+
+
+                //update file img
+                var fileImgU = $("#image")[0];
+                var formdataImg = new FormData();
+                formdataImg.append('file', fileImgU.files[0]);
+                $.ajax({
+                    url: "http://localhost:5000/api/Movie/UploadImage",
+                    type: "post",
+                    contentType: false,
+                    processData: false,
+                    data: formdataImg,
+                    success: function (result, status, xhr) {
+                        //$("#myModal").modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#myModal1").modal('show');
+                        console.log(err);
+                    }
+                });
+
+                //update movie
+                var json = {
+                    movieId: id,
+                    movieName: $("#movieName").val(),
+                    videoPath: pathvideo,
+                    description: $("#description").val(),
+                    duration: $("#duration").val(),
+                    rated: $("#rated").val(),
+                    publishedYear: $("#publishedYear").val(),
+                    country: $("#country").val(),
+                    imagePath: nameImg
+                };
+
+                $.ajax({
+                    type: "put",
+                    contentType: "application/json; charset=UTF-8",
+                    url: "https://localhost:5001/api/Movie/id?id=" + id,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        $("#myModal").modal('show');
+                    },
+                    error: function (e) {
+                        $("#myModal1").modal('show');
+                        console.log(e);
+                    }
+                });
+                
+
+            }          
             
-            $.ajax({
-                type: "put",
-                contentType: "application/json; charset=UTF-8",
-                url: "https://localhost:5001/api/User/id?id=" + id,
-                data: JSON.stringify(json),
-                dataType: "json",
-                success: function (result, status, xhr) {
-                    $("#myModal").modal('show');
-                },
-                error: function (e) {
-                    $("#myModal1").modal('show');
-                    console.log(e);
-                }
-            });
         });
 
         $("#closeBtn").click(function (e) {
