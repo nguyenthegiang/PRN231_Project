@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  DisplayAuthenButton();
+
   GetFeaturedMovie(3);
   GetAllMovies();
 });
@@ -111,3 +113,20 @@ $("#navbar-profile-button").click(function (e) {
   //move to Update Profile
   window.location.href = "../Client/UpdateProfile.html?id=" + userId;
 });
+
+// Determine whether to display [Login] or [Logout] button on Navbar
+// (based on token storage)
+function DisplayAuthenButton() {
+  //Check if Token exist
+  permanentToken = window.localStorage.getItem("token");
+  sessionToken = window.sessionStorage.getItem("token");
+  if (permanentToken !== null || sessionToken !== null) {
+    //Display button
+    $("#logoutButton").show();
+    $("#loginButton").hide();
+  } else {
+    //Display button
+    $("#logoutButton").hide();
+    $("#loginButton").show();
+  }
+}
