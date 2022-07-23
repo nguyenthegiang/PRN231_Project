@@ -154,20 +154,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="movieDetailModalBody">
+                    <!-- Movie Detail infos -->
                     <img id="movieDetailImage" width="470px">
                     <br>
                     <div>Duration: <span class="badge text-bg-dark" id="movieDetailDuration">Dark</span></div>
                     <div>Rated: <span class="badge text-bg-dark" id="movieDetailRated">Dark</span></div>
-                    <div>Published Year: <span class="badge text-bg-dark" id="movieDetailPublishedYear">Dark</span></div>
+                    <div>Published Year: <span class="badge text-bg-dark" id="movieDetailPublishedYear">Dark</span>
+                    </div>
                     <div>Country: <span class="badge text-bg-dark" id="movieDetailCountry">Dark</span></div>
                     <br>
                     <p id="movieDetailDescription"></p>
                     <br>
                     <div>Cast: <span id="movieDetailActors"></span></div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer" id="movieDetailModalFooter">
+                    <!-- Play Button -->
+                    <a type="button" class="btn btn-secondary featured-button"
+                        href="./WatchMovie.html?id=">
+                        <i class="featured-button-icon fa-solid fa-play"></i> Play
+                    </a>
                 </div>
             </div>
         </div>
