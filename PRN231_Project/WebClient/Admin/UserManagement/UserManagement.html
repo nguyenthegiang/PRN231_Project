@@ -56,7 +56,7 @@
 
 <body>
     <!-- Navbar: Dark color & Stick at top of page -->
-    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #000000;">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
         <div class="container-fluid">
             <!-- Home button -->
             <a class="navbar-brand" href="UserManagement.html">
@@ -73,8 +73,22 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
+                <!-- Links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../MovieManagement/MovieManagement.html">Movie Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">User Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutButton">Logout</a>
+                    </li>
                 </ul>
+
                 <!-- Search Movie -->
                 <div class="form-group d-flex">
                     <input class="form-control me-2" type="text" id="Name" placeholder="Search" aria-label="Search">
@@ -182,7 +196,11 @@
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
+    <!-- Script -->
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+
+    <script>
         $(document).ready(function () {
             ShowUsers();
         });
