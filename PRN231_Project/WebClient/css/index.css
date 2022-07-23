@@ -59,6 +59,10 @@ body {
     padding: 0 20px;
 }
 
+.after-first-container {
+    margin-top: 50px;
+}
+
 .movie-list-wrapper {
     position: relative;
     overflow: hidden;
