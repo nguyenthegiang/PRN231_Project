@@ -233,6 +233,9 @@ function displayMovieDetail(movieId) {
       $("#movieDetailModal > div > div > #movieDetailModalBody > #movieDetailDescription").html(
         result["description"]
       );
+      // Play button
+      $("#movieDetailModal > div > div > #movieDetailModalFooter > a")
+        .attr("href", "./WatchMovie.html?id=" + result["movieId"]);
     },
     error: function (xhr, status, error) {
       console.log(xhr);
