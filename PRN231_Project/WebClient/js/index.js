@@ -33,6 +33,7 @@ function GetAllMovies() {
       //Set to HTML
       $.each(result, function (index, value) {
         $("#allMovies").append(
+          //Movie item
           '<div class="movie-list-item">' +
             '<img class="movie-list-item-img"' +
             'src="..\\image\\movies\\' +
@@ -43,9 +44,14 @@ function GetAllMovies() {
             "</span>" +
             // "<p class=\"movie-list-item-desc\">" +
             // "</p>" +
-            '<a type="button" class="btn btn-light movie-list-item-watch-button" href="./WatchMovie.html?id=' +
+            // Watch button
+            '<a type="button" class="btn btn-light movie-list-item-button movie-list-item-watch-button"' +
+            'href="./WatchMovie.html?id=' +
             value["movieId"] +
             '"><i class="movie-item-button-icon fa-solid fa-play"></i></a>' +
+            // Detail button
+            '<button type="button" class="btn btn-light movie-list-item-button movie-list-item-detail-button"' +
+            '><i class="movie-item-button-icon fa-solid fa-angle-down"></i></button>' +
             "</div>"
         );
       });
@@ -76,9 +82,9 @@ function GetMoviesByCategory(categoryId) {
             '<span class="movie-list-item-title">' +
             value["movieName"] +
             "</span>" +
-            '<a href="./WatchMovie.html?id=' +
+            '<a type="button" class="btn btn-light movie-list-item-watch-button" href="./WatchMovie.html?id=' +
             value["movieId"] +
-            '" class="movie-list-item-watch-button">Watch</a>' +
+            '"><i class="movie-item-button-icon fa-solid fa-play"></i></a>' +
             "</div>"
         );
       });
