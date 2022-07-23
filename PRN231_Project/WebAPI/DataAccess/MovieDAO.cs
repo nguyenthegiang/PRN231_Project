@@ -30,6 +30,32 @@ namespace WebAPI.DataAccess
             }
             return movies;
         }
+        public static List<Movie> GetMoviesByCategory(int catId)
+        {
+            List<CategoryMovie> cateMovies;
+            List<Movie> movies = new List<Movie>();
+            try
+            {
+                using (var context = new MyDbContext())
+                {
+                    cateMovies = context.CategoryMovie.Where(c => c.CategoryId == catId).ToList();
+                    foreach (var c in cateMovies)
+                    {
+                        var result = context.Movies.Where(m => m.MovieId == c.MovieId).ToList();
+                        foreach (var m in result)
+                        {
+                            movies.Add(m);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return movies;
+        }
+
         public static  List<Movie> Paging5Movies(int page)
         {
             List<Movie> movies;

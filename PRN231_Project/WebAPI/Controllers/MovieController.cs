@@ -73,6 +73,12 @@ namespace WebAPI.Controllers
             return repository.GetAll();
         }
 
+        [HttpGet("catId")]
+        public ActionResult<IEnumerable<Movie>> GetmoviesByCategory(int catId)
+        {
+            return repository.GetMoviesByCategory(catId);
+        }
+
         //Paging List Movies
         [HttpGet("paging5")]
         public ActionResult<IEnumerable<Movie>> Paging5Movies(int page = 1) => repository.Paging5Movies(page);

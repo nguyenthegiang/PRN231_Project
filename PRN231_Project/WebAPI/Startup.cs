@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WebAPI.Authentication;
 using WebAPI.IRepository;
@@ -41,6 +42,8 @@ namespace WebAPI
                 cfg.Cookie.Name = "JWToken";
                 cfg.IdleTimeout = new TimeSpan(0, 60, 0);
             });
+
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
             services.AddControllers();
             //For AJAX in Clients

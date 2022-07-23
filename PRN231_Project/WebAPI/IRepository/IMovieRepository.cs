@@ -12,6 +12,7 @@ namespace WebAPI.IRepository
         List<Movie> GetAll();
         List<Movie> Paging5Movies(int page);
         List<Movie> Paging10Movie(int page);
+        List<Movie> GetMoviesByCategory(int catid);
         Movie GetMovieById(int id);
         void SaveMovie(Movie movie);
         void UpdateMovie(Movie movie);

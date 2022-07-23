@@ -22,5 +22,7 @@ namespace WebAPI.Repositories
 
         public void UpdateMovie(Movie movie) => MovieDAO.UpdateMovie(movie);
         public void DeleteMovie(int id) =>MovieDAO.DeleteMovie(id);
+
+        public List<Movie> GetMoviesByCategory(int catid) => MovieDAO.GetMoviesByCategory(catid);
     }
 }
