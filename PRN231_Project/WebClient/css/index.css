@@ -6,6 +6,12 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+/* Navbar */
+.navbar-profile-button {
+    margin-left: 10px;
+}
+
 /* Content */
 .myContainer {
     background-color: #151515;

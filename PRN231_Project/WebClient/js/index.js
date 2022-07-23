@@ -103,3 +103,11 @@ function GetFeaturedMovie(id) {
     },
   });
 }
+
+//[Link to Update Profile]
+$("#navbar-profile-button").click(function (e) {
+  //Get UserID from local storage
+  let userId = window.localStorage.getItem("userId");
+  //move to Update Profile
+  window.location.href = "../Client/UpdateProfile.html?id=" + userId;
+});
