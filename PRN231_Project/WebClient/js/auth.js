@@ -13,15 +13,19 @@ function Login() {
     success: function (result, status, xhr) {
       console.log("success");
       console.log(result["token"]);
+
+      //reset storage
       window.localStorage.removeItem("token");
+      window.localStorage.removeItem("userId");
       window.sessionStorage.removeItem("token");
+
+      //save token & userId to local storage
       if ($("#Remember").is(":checked")) {
-        //save token & userId to local storage
         window.localStorage.setItem("token", result["token"]);
-        window.localStorage.setItem("userId", result["userId"]);
       } else {
         window.sessionStorage.setItem("token", result["token"]);
       }
+      window.localStorage.setItem("userId", result["userId"]);
 
       if (result["role"]["roleName"] === "Admin") {
         window.location.href = "../Admin/Dashboard.html";
@@ -51,15 +55,21 @@ function LoginFacebook(email, facebookUID, name) {
     success: function (result, status, xhr) {
       console.log("success");
       console.log(result["token"]);
+      
+      //reset storage
       window.localStorage.removeItem("token");
+      window.localStorage.removeItem("userId");
       window.sessionStorage.removeItem("token");
+
+      //save token & userId to local storage
       if ($("#Remember").is(":checked")) {
-        //save token & userId to local storage
         window.localStorage.setItem("token", result["token"]);
-        window.localStorage.setItem("userId", result["userId"]);
       } else {
         window.sessionStorage.setItem("token", result["token"]);
       }
+      window.localStorage.setItem("userId", result["userId"]);
+
+      //back to Home
       window.location.href = "../Client/index.html";
     },
     error: function (e) {
@@ -70,7 +80,7 @@ function LoginFacebook(email, facebookUID, name) {
 
 // Logout
 function Logout() {
-  //remove token & userId
+  //remove storage
   window.localStorage.removeItem("token");
   window.localStorage.removeItem("userId");
   window.sessionStorage.removeItem("token");
@@ -94,8 +104,12 @@ function Signup() {
     success: function (result, status, xhr) {
       console.log("success");
       console.log(result["token"]);
+
+      //reset storage
       window.localStorage.removeItem("token");
+      window.localStorage.removeItem("userId");
       window.sessionStorage.removeItem("token");
+
       //save token & userId to local storage
       window.sessionStorage.setItem("token", result["token"]);
       window.localStorage.setItem("userId", result["userId"]);
