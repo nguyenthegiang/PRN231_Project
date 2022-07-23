@@ -47,6 +47,11 @@ body {
     font-weight: 600;
     font-size: larger;
     margin-right: 10px;
+    border: none;
+}
+
+.featured-play-button:hover {
+    background-color: #e2e6ea;
 }
 
 .featured-button-icon {
@@ -88,7 +93,7 @@ body {
 }
 
 .movie-list-item-title {
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 0 10px;
     font-size: 32px;
     font-weight: bold;
@@ -97,6 +102,7 @@ body {
     left: 50px;
     opacity: 0;
     transition: 0.5s all ease-in-out;
+    border-radius: 10px;
 }
 
 .movie-list-item-desc {
@@ -111,20 +117,28 @@ body {
     transition: 0.5s all ease-in-out;
 }
 
-/* Movie List: button */
+/* Movie List Item: button */
 .movie-list-item-watch-button {
-    padding: 10px;
-    background-color: #4dbf00;
-    color: white;
-    border-radius: 10%;
-    outline: none;
-    border: none;
+    padding-top: 10px;
+    padding-left: 15px;
+    border-radius: 50%;
     cursor: pointer;
     position: absolute;
     bottom: 20px;
     left: 15px;
     opacity: 0;
     transition: 0.5s all ease-in-out;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 1) 0px 22px 70px 4px;
+}
+
+.movie-list-item-watch-button:hover {
+    background-color: #e2e6ea;
+}
+
+.movie-item-button-icon {
+    font-size: x-large;
+    text-align: center;
 }
 
 /* Movie List: Item [Hover] */
