@@ -13,6 +13,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using WebAPI.Helper;
 using System.Net.Http;
+using AutoMapper;
 
 namespace WebAPI.Controllers
 {
@@ -22,11 +23,17 @@ namespace WebAPI.Controllers
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private IMovieRepository repository;
+        private readonly MyDbContext context;
+        private MapperConfiguration config;
+        private IMapper mapper;
 
-        public MovieController(IMovieRepository repository, IWebHostEnvironment hostingEnvironment)
+        public MovieController(IMovieRepository repository, IWebHostEnvironment hostingEnvironment, MyDbContext _context)
         {
             this.repository = repository;
             _hostingEnvironment = hostingEnvironment;
+            context = _context;
+            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+            mapper = config.CreateMapper();
         }
 
         //Without Paging
@@ -177,6 +184,21 @@ namespace WebAPI.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet("search")]
+        public IActionResult Search(string name)
+        {
+            List<MovieDTO> movieDTOs;
+            movieDTOs = context.Movies.Where(u => u.MovieName.Contains(name))
+                .ProjectTo<MovieDTO>(config).ToList();
+
+            if (movieDTOs == null)
+            {
+                return NotFound(); // Response with status code: 404
+            }
+
+            return Ok(movieDTOs);
         }
 
     }

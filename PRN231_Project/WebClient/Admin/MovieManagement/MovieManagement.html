@@ -15,6 +15,17 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     
     <style>
+        body {
+            color: #fff;
+            background-color: #292929;
+            background-image: url(../../image/adminBackground3.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            overflow-y: hidden;
+        }
+
         div.pager {
             text-align: center;
             margin: 1em 0;
@@ -35,10 +46,14 @@
                 div.pager span.active {
                     background: grey;
                 }
+
+        #clearSearch {
+            margin-left: 10px;
+        }
     </style>
 </head>
 
-<body class="bg-danger">
+<body>
     <!-- Navbar: Dark color & Stick at top of page -->
     <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #000000;">
         <div class="container-fluid">
@@ -56,19 +71,17 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto" style="background-color: #1f1f1f; border: solid 1px #1f1f1f; border-radius: 5px; padding: 0px 15px;">
-                    <li style="padding: 0px;">
-                        <a class="nav-link active" aria-current="page" href="AddNewMovie.html" style="color: #fff; margin: 0px;">
-                            <span style="margin-right: 5px; font-weight: 700; font-size: 20px; padding: 0px;">+</span>
-                            Add New
-                        </a>
-                    </li>
+                <ul class="navbar-nav me-auto">
                 </ul>
 
                 <!-- Search Movie -->
                 <div class="form-group d-flex">
                     <input class="form-control me-2" type="text" id="Name" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light" id="GetButton">Search</button>
+                </div>
+                <!-- Clear Search value button -->
+                <div class="form-group d-flex">
+                    <button id="clearSearch" class="btn btn-outline-danger">Clear Search</button>
                 </div>
             </div>
         </div>
@@ -77,6 +90,12 @@
 
     <div class="container-fluid " id="resultDiv">
         <div class="row rounded p-5">
+            <!-- Add New User Button -->
+            <a aria-current="page" href="AddNewMovie.html" class="btn btn-danger"
+               style="color: #fff; text-align: center;text-decoration: none; margin: 30px 0px; padding: 0px 15px 8px 15px; width: 150px;">
+                <span style="margin-right: 5px; font-weight: 700; font-size: 20px; padding: 0px;">+</span>
+                Add New
+            </a>
             <!-- Code here: Add, Edit, Delete User -->
             <table class="table table-sm table-hover table-dark paginated">
                 <thead>
@@ -99,8 +118,13 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="nodata" class="text-center mt-5" style="display: none;">
+        <!-- Search Result: No Data -->
+        <h2 class="text-white">No Data</h2>
+    </div>
+
+    <!-- Modal: Delete -->
+    <div class="modal fade text-dark" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -108,7 +132,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Do you really want to delete this Movie
+                    Do you really want to delete this User
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -118,6 +142,7 @@
         </div>
     </div>
 
+    <!-- Modal: Delete Fail -->
     <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -126,7 +151,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Delete Movie Fail
+                    Delete User Fail
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -135,6 +160,7 @@
         </div>
     </div>
 
+    <!-- Modal: Delete Success -->
     <div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -143,13 +169,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Delete Movie Successfully
+                    Delete User Successfully
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+        <!-- <img src="../../image/iconDelete.svg"> -->
     </div>
 
     <!-- Bootstrap -->
@@ -165,33 +192,39 @@
 
         $("#GetButton").click(function (e) {
             console.log($("#Name").val());
-            $("table tbody").empty();
+            $("table tbody").html("");
             $.ajax({
-                url: "https://localhost:5001/api/User/search?name=" + $("#Name").val(),
+                url: "https://localhost:5001/api/Movie/search?name=" + $("#Name").val(),
                 type: "get",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result, status, xhr) {
-                    $("#resultDiv").show();
-
-                    if (typeof result !== 'undefined') {
+                    console.log(result);
+                    if (typeof result !== 'undefined' || result.length > 0) {
                         $.each(result, function (index, value) {
                             $("tbody").append($("<tr>"));
                             appendElement = $("tbody tr").last();
-                            appendElement.append($("<td>").html(value["userId"]));
-                            appendElement.append($("<td>").html(value["email"]));
-                            appendElement.append($("<td>").html(value["username"]));
-                            appendElement.append($("<td>").html(value["roleId"]));
+                            appendElement.append($("<td>").html(value["movieId"]));
+                            appendElement.append($("<td>").html(value["movieName"]));
+                            appendElement.append($("<td>").html(value["videoPath"]));
+                            appendElement.append($("<td>").html(value["description"]));
+                            appendElement.append($("<td>").html(value["duration"]));
+                            appendElement.append($("<td>").html(value["rated"]));
+                            appendElement.append($("<td>").html(value["publishedYear"]));
+                            appendElement.append($("<td>").html(value["country"]));
+                            appendElement.append($("<td>").html(value["imagePath"]));
 
-                            appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
-                                + "\"><img src=\"image/edit.png\" width=\"30\" /></a>"));
+                            appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["movieId"]
+                                + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
                             appendElement.append($("<td>")
-                                .html("<img class=\"delete\" src=\"image/close.png\" width=\"30\" />"));
+                                .html("<img src=\"../../image/iconDelete1.png\" width=\"30\" />"));
                         });
-
                     }
-                    else {
-                        $("table tbody").append("<td colspan=\"4\">No User</td>");
+
+                    if (result.length == 0) {
+                        console.log("get here");
+                        $("#nodata").show();
+                        $("#resultDiv").hide();
                     }
                 },
                 error: function (xhr, status, error) {
@@ -221,7 +254,7 @@
                         appendElement.append($("<td>").html(value["country"]));
                         appendElement.append($("<td>").html(value["imagePath"]));
 
-                        appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
+                        appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["movieId"]
                             + "\"><img src=\"../../image/edit.png\" width=\"30\" /></a>"));
                         appendElement.append($("<td>")
                             .html("<img class=\"delete\" src=\"../../image/close.png\" width=\"30\" />"));
@@ -278,6 +311,9 @@
                     console.log(xhr)
                 }
             });
+        });
+        $("#clearSearch").click(function (e) {
+            location.reload();
         });
     </script>
 

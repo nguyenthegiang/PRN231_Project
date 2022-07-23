@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Title -->
-    <title>Admin - Add User</title>
+    <title>Admin - Add Movie</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../image/favicon.png">
     <!-- Bootstrap -->
@@ -16,11 +16,17 @@
     <style>
         body {
             color: #fff;
-            background-image: url(../../image/netflixteaser.png);
+            background-color: #292929;
+            background-image: url(../../image/adminBackground3.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            overflow-y: hidden;
         }
 
         .updateForm {
-            width: 400px;
+            width: 600px;
             margin: 0 auto;
             padding: 100px 0 30px;
             margin-bottom: 20px;
@@ -53,7 +59,7 @@
     </nav>
     <!-- End Navbar -->
 
-    <div class="updateForm" style="background-color: rgba(0, 0, 0, 0.6); padding: 30px; margin-top: 100px;">
+    <div class="updateForm" style="background-color: rgba(0, 0, 0, 0.6); padding: 30px; margin-top: 25px;">
         <h2 class="text-center" style="color: white; font-weight: 700; font-size: 30px;">Add a movier</h2>
         <div class="form-group">
             <label for="startLocation">Movie Name</label>
@@ -93,7 +99,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-dark" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -110,7 +116,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-dark" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -273,22 +279,7 @@
         });
 
         $("#closeBtn").click(function (e) {
-            window.location.href = "UserManagement.html";
-        });
-
-        $.ajax({
-            type: "GET",
-            url: "https://localhost:5001/api/Role",
-            data: "{}",
-            success: function (data) {
-                console.log(data);
-                var s = '';
-                for (var i = 0; i < data.length; i++) {
-                    s += '<option value="' + data[i].roleId + '">' + data[i].roleName + '</option>';
-                }
-
-                $("#role").html(s);
-            }
+            window.location.href = "MovieManagement.html";
         });
     </script>
 </body>
