@@ -24,7 +24,8 @@
       window.location.href = "../Client/index.html";
     },
     error: function (e) {
-      console.log(e);
+        console.log(e);
+        $("#WrongAccountModal").modal().show();
     },
   });
 }

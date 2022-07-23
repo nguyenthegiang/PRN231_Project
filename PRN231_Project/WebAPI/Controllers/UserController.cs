@@ -230,11 +230,54 @@ namespace WebAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpPost("forgot_password")]
+        public IActionResult ForgotPasswordReset([FromBody] ForgotPasswordRequestDTO request)
+        {
+            try
+            {
+                User user = repository.GetUserByEmail(request.Email).FirstOrDefault();
+                if (user == null) return NotFound();
+                if (request.Password != request.RePassword)
+                {
+                    return Conflict("Password must match!");
+                }
+                user.Password = Hashing.Encrypt(request.Password);
+                repository.UpdateUser(user);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpPost("change_password")]
+        public IActionResult ChangePassword([FromBody] ChangePasswordRequestDTO request)
+        {
+            try
+            {
+                User user = repository.GetUserById(request.UserId);
+                if (user == null) return NotFound();
+                string hashedPassword = Hashing.Encrypt(request.CurrentPassword);
+                if (hashedPassword != user.Password)
+                    return Conflict("Password Incorrect!");
+                if (request.NewPassword != request.RePassword)
+                {
+                    return Conflict("Password must match!");
+                }
+                user.Password = Hashing.Encrypt(request.NewPassword);
+                repository.UpdateUser(user);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         /********Authentication********/
         [HttpPost("autho")]
-        [Authorize]
         public IActionResult Auth()
         {
+            Helper.MailService.SendEmail("4bb5dcf2-3878-4795-8962-f132a2dee64f@mailslurp.mx", "body test", "header test");
             return Ok();
         }
     }

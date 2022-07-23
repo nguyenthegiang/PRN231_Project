@@ -79,17 +79,73 @@
             </div>
             <div class="clearfix">
                 <label class="pull-left checkbox-inline"><input type="checkbox" id="Remember"> Remember me</label>
-                <a href="#" class="pull-right" style="color: #7a7a7a;">Forgot Password?</a>
+                <a href="#" class="pull-right" style="color: #7a7a7a;" data-toggle="modal" data-target="#EmailModal">Forgot Password?</a>
             </div>
         </form>
         <div class="text-center" style="background-color: rgba(0, 0, 0, 0.6); margin: 0px; padding-bottom: 20px;">
             Don't have an account? <a href="Signup.html" style="color: #7a7a7a;">
                 Register here!
             </a>
+            <br />
+            <br />
             <div class="fb-login-button" data-width=""
                  data-size="large" data-button-type="continue_with"
                  data-layout="default" data-auto-logout-link="false"
                  data-use-continue-as="false" data-onlogin="checkLoginState();">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="WrongAccountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:black">Alert</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="color:red">
+                    Incorrect Email or Password!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EmailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel" style="color:black">Forgot Password</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div id="email-input" style="display: block">
+                        <div style="display: none; color: red" id="email-alert">
+                            Invalid Email!
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Enter Your Email To Receive Verification Code:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                    </div>
+                    <div id="code-input" style="display: none">
+                        <div style="display: none; color: red" id="code-alert">
+                            Invalid Code!
+                        </div>
+                        <div class="form-group">
+                            <label for="verification-code" class="col-form-label">Enter Your Verification Code:</label>
+                            <input type="text" class="form-control" id="verification-code">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="Submit()">Send Code</button>
+                </div>
             </div>
         </div>
     </div>
@@ -130,6 +186,14 @@
         }
     </script>
     <script>
+        let sendEmail = true;
+        $('#EmailModal').on('hidden.bs.modal', function () {
+            $('#email-alert').hide();
+            $('#code-alert').hide();
+            $("#email-input").show();
+            $("#code-input").hide();
+            sendEmail = true;
+        });
         $(document).ready(function () {
             permanentToken = window.localStorage.getItem("token");
             sessionToken = window.sessionStorage.getItem("token");
@@ -148,6 +212,57 @@
             e.preventDefault();
             Login();
         });
+
+        function Submit() {
+            if (sendEmail) {
+                CreateVerifyCode($('#recipient-name').val());
+            }
+            else {
+                VerifyCode($('#recipient-name').val(), $('#verification-code').val());
+            }
+        }
+
+        function CreateVerifyCode(email) {
+            var json = {
+                email: email
+            };
+            $.ajax({
+                type: "post",
+                contentType: "application/json; charset=UTF-8",
+                url: "https://localhost:5001/api/verifycode/create",
+                data: JSON.stringify(json),
+                success: function (result, status, xhr) {
+                    console.log("success");
+                    $("#code-input").show();
+                    $("#email-input").hide();
+                    sendEmail = false;
+                },
+                error: function (e) {
+                    console.log(e);
+                    $("#email-alert").show();
+                },
+            });
+        }
+        function VerifyCode(email, code) {
+            var json = {
+                email: email,
+                code: code
+            };
+            $.ajax({
+                type: "post",
+                contentType: "application/json; charset=UTF-8",
+                url: "https://localhost:5001/api/verifycode/verify",
+                data: JSON.stringify(json),
+                success: function (result, status, xhr) {
+                    localStorage.setItem("email", $('#recipient-name').val());
+                    window.location.href = "ForgotPassword.html";
+                },
+                error: function (e) {
+                    console.log(e);
+                    $("#code-alert").show();
+                },
+            });
+        }
     </script>
 </body>
 </html>

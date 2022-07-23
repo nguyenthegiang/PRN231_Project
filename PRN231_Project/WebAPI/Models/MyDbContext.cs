@@ -32,6 +32,7 @@ namespace WebAPI.Models
         public virtual DbSet<Actor> Actors { get; set; }
         public virtual DbSet<ActorMovie> ActorMovies { get; set; }
         public virtual DbSet<CategoryMovie> CategoryMovie { get; set; }
+        public virtual DbSet<VerifyCode> VerifyCodes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
