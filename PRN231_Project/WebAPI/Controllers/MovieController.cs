@@ -211,8 +211,9 @@ namespace WebAPI.Controllers
                 string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath);
                 string filePath = Path.Combine(directoryPath, movie.VideoPath);
                 System.IO.File.Delete(filePath);
-                string directoryPath2 = Path.Combine(_hostingEnvironment.WebRootPath,"Image");
-                string filePath2 = Path.Combine(directoryPath, movie.ImagePath);
+                string directoryPath2 = Path.Combine(_hostingEnvironment.WebRootPath);
+                string path3 = "Image/" + movie.ImagePath;
+                string filePath2 = Path.Combine(directoryPath, path3);
                 System.IO.File.Delete(filePath2);
                 repository.DeleteMovie(id);
                 return Ok();
