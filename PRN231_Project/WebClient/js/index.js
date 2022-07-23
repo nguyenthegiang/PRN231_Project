@@ -11,15 +11,15 @@ $(document).ready(function () {
 });
 
 //Change navbar color
-const [red, green, blue] = [0, 0, 0]
-const navbar = document.querySelector('.my-main-navbar')
+const [red, green, blue] = [0, 0, 0];
+const navbar = document.querySelector(".my-main-navbar");
 
-window.addEventListener('scroll', () => {
-  let y = 1 + (window.scrollY || window.pageYOffset) / 150
-  y = y < 1 ? 1 : y // ensure y is always >= 1 (due to Safari's elastic scroll)
-  const [r, g, b] = [red/y, green/y, blue/y].map(Math.round)
-  navbar.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
-})
+window.addEventListener("scroll", () => {
+  let y = 1 + (window.scrollY || window.pageYOffset) / 150;
+  y = y < 1 ? 1 : y; // ensure y is always >= 1 (due to Safari's elastic scroll)
+  const [r, g, b] = [red / y, green / y, blue / y].map(Math.round);
+  navbar.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+});
 
 //[Category] All Movies
 function GetAllMovies() {
@@ -74,6 +74,7 @@ function GetMoviesByCategory(categoryId) {
       //Set to HTML
       $.each(result, function (index, value) {
         $("#moviesByCategory").append(
+          //Movie item
           '<div class="movie-list-item">' +
             '<img class="movie-list-item-img"' +
             'src="..\\image\\movies\\' +
@@ -82,9 +83,16 @@ function GetMoviesByCategory(categoryId) {
             '<span class="movie-list-item-title">' +
             value["movieName"] +
             "</span>" +
-            '<a type="button" class="btn btn-light movie-list-item-watch-button" href="./WatchMovie.html?id=' +
+            // "<p class=\"movie-list-item-desc\">" +
+            // "</p>" +
+            // Watch button
+            '<a type="button" class="btn btn-light movie-list-item-button movie-list-item-watch-button"' +
+            'href="./WatchMovie.html?id=' +
             value["movieId"] +
             '"><i class="movie-item-button-icon fa-solid fa-play"></i></a>' +
+            // Detail button
+            '<button type="button" class="btn btn-light movie-list-item-button movie-list-item-detail-button"' +
+            '><i class="movie-item-button-icon fa-solid fa-angle-down"></i></button>' +
             "</div>"
         );
       });
@@ -139,7 +147,7 @@ function GetFeaturedMovie(id) {
           '<a type="button" class="btn btn-light featured-button featured-play-button" href="./WatchMovie.html?id=' +
           result["movieId"] +
           '"><i class="featured-button-icon fa-solid fa-play"></i> Play</a>' +
-          '<a type="button" class="btn btn-secondary featured-button" href="" ' + 
+          '<a type="button" class="btn btn-secondary featured-button" href="" ' +
           'data-bs-toggle="modal" data-bs-target="#movieDetailModal">' +
           '<i class="featured-button-icon fa-solid fa-circle-info"></i> More Info</a>' +
           "</div>"
