@@ -60,14 +60,17 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
         {
-            var u = repository.GetUserById(id);
+            UserDTO userDTO;
+            userDTO = context.Users.Include(u => u.Role).ProjectTo<UserDTO>(config)
+                .FirstOrDefault(u1 => u1.UserId == id);
+            //var u = repository.GetUserById(id);
 
-            if (u == null)
+            if (userDTO == null)
             {
                 return NotFound(); //Response with status code: 404
             }
 
-            return Ok(u);
+            return Ok(userDTO);
         }
 
         [HttpPost]
