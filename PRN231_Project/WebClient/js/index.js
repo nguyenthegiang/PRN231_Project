@@ -205,6 +205,7 @@ $("#logoutButton").click(function (e) {
 
 // Get Detail Information of a Movie and set it to the Modal to display
 function displayMovieDetail(movieId) {
+  // Get Detail infos of Movie
   $.ajax({
     url: "https://localhost:5001/api/Movie/" + movieId,
     type: "get",
@@ -232,9 +233,31 @@ function displayMovieDetail(movieId) {
       $("#movieDetailModal > div > div > #movieDetailModalBody > #movieDetailDescription").html(
         result["description"]
       );
-      $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailActors").html(
-        result["duration"]
-      );
+    },
+    error: function (xhr, status, error) {
+      console.log(xhr);
+    },
+  });
+
+  // Get Actors of Movie
+  $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailActors").html("");
+  $.ajax({
+    url: "https://localhost:5001/GetActorsByMovieId/" + movieId,
+    type: "get",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (result, status, xhr) {
+      $.each(result, function (index, value) {
+        if (index > 0) {
+          $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailActors").append(
+            ", " + value["actorName"]
+          );
+        } else {
+          $("#movieDetailModal > div > div > #movieDetailModalBody > div > #movieDetailActors").append(
+            value["actorName"]
+          );
+        }
+      });
     },
     error: function (xhr, status, error) {
       console.log(xhr);
