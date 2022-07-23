@@ -167,7 +167,7 @@
                     dataType: "json",
                     success: function (result, status, xhr) {
                         console.log(result);
-                        $("#movieName").attr("value", id);
+                        $("#movieName").attr("value", result["movieName"]);
                         $("#description").attr("value", result["description"]);
                         $("#videoPath").attr("value", result["videoPath"]);
                         $("#imagePath").attr("value", result["imagePath"]);
@@ -179,7 +179,7 @@
 
                     },
                     error: function (xhr, status, error) {
-                        co
+                        
                         console.log(xhr);
                     }
                 });
