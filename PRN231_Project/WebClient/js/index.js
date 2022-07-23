@@ -7,7 +7,7 @@ $(document).ready(function () {
 
   //Movie Lists
   GetAllMovies();
-  GetMoviesByCategory(1);
+  GetMoviesByCategory(4);
 });
 
 //[Category] All Movies
@@ -32,7 +32,7 @@ function GetAllMovies() {
             "</span>" +
             '<a href="./WatchMovie.html?id=' +
             value["movieId"] +
-            '" class="movie-list-item-button">Watch</a>' +
+            '" class="movie-list-item-watch-button">Watch</a>' +
             "</div>"
         );
       });
@@ -88,7 +88,7 @@ function GetMoviesByCategory(categoryId) {
             // "</p>" +
             '<a href="./WatchMovie.html?id=' +
             value["movieId"] +
-            '" class="movie-list-item-button">Watch</a>' +
+            '" class="movie-list-item-watch-button">Watch</a>' +
             "</div>"
         );
 

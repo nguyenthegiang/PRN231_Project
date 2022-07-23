@@ -12,7 +12,7 @@ namespace WebAPI.DTO
         
         public string MovieName { get; set; }
 
-        public string Path { get; set; }
+        public string VideoPath { get; set; }
 
         public string Description { get; set; }
 
@@ -24,9 +24,6 @@ namespace WebAPI.DTO
 
         public string Country { get; set; }
 
-        public string Image { get; set; }
-
-        public virtual CategoryDTO Categories { get; set; }
-
+        public string ImagePath { get; set; }
     }
 }
