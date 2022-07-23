@@ -167,6 +167,7 @@
                     dataType: "json",
                     success: function (result, status, xhr) {
                         console.log(result);
+                        $("#id").attr("value", id);
                         $("#movieName").attr("value", result["movieName"]);
                         $("#description").attr("value", result["description"]);
                         $("#videoPath").attr("value", result["videoPath"]);
