@@ -30,9 +30,12 @@
           <source id="videoSource" src="" type="video/mp4"></source>
         </video>
 
-        <a href="index.html">
-          <img src="../image/back.png" style="width: 20px; position: fixed; top: 20px; left: 10px;">
-        </a>
+        <div style="position: fixed; top: 20px; left: 10px; display: flex; flex-wrap: wrap;">
+          <a href="index.html">
+            <img src="../image/back.png" style="height: 30px;">
+          </a>
+        </div>
+        
   
         <div class="video-controls hidden" id="video-controls">
           <div class="video-progress">
@@ -77,6 +80,8 @@
                 <time id="duration">00:00</time>
               </div>
             </div>
+
+            <h2 id="movieName" style="color: white; text-align: center; width: 400px; left: 50%; margin-left: -200px;"></h2>
   
             <div class="right-controls">
               <button data-title="PIP (p)" class="pip-button" id="pip-button">
