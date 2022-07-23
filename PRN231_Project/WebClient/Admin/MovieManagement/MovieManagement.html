@@ -22,10 +22,9 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+            background-attachment: fixed;
             height: 100vh;
-            overflow-y: hidden;
         }
-
         div.pager {
             text-align: center;
             margin: 1em 0;
@@ -46,10 +45,6 @@
                 div.pager span.active {
                     background: grey;
                 }
-
-        #clearSearch {
-            margin-left: 10px;
-        }
     </style>
 </head>
 
@@ -65,23 +60,22 @@
 
             <!-- Collapse button (for responsive) -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav me-auto" style="background-color: #1f1f1f; border: solid 1px #1f1f1f; border-radius: 5px; padding: 0px 15px;">
+                    <li style="padding: 0px;">
+                        
+                    </li>
                 </ul>
 
                 <!-- Search Movie -->
                 <div class="form-group d-flex">
                     <input class="form-control me-2" type="text" id="Name" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light" id="GetButton">Search</button>
-                </div>
-                <!-- Clear Search value button -->
-                <div class="form-group d-flex">
-                    <button id="clearSearch" class="btn btn-outline-danger">Clear Search</button>
                 </div>
             </div>
         </div>
@@ -90,9 +84,8 @@
 
     <div class="container-fluid " id="resultDiv">
         <div class="row rounded p-5">
-            <!-- Add New User Button -->
-            <a aria-current="page" href="AddNewMovie.html" class="btn btn-danger"
-               style="color: #fff; text-align: center;text-decoration: none; margin: 30px 0px; padding: 0px 15px 8px 15px; width: 150px;">
+            <!--Add new movie button-->
+            <a class="btn btn-danger" aria-current="page" href="AddNewMovie.html" style="color: #fff; text-align: center;text-decoration: none; margin: 30px 0px; padding: 0px 15px 8px 15px; width: 150px;">
                 <span style="margin-right: 5px; font-weight: 700; font-size: 20px; padding: 0px;">+</span>
                 Add New
             </a>
@@ -118,13 +111,8 @@
         </div>
     </div>
 
-    <div id="nodata" class="text-center mt-5" style="display: none;">
-        <!-- Search Result: No Data -->
-        <h2 class="text-white">No Data</h2>
-    </div>
-
-    <!-- Modal: Delete -->
-    <div class="modal fade text-dark" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -132,7 +120,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Do you really want to delete this User
+                    Do you really want to delete this Movie
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -142,7 +130,6 @@
         </div>
     </div>
 
-    <!-- Modal: Delete Fail -->
     <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -151,7 +138,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Delete User Fail
+                    Delete Movie Fail
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -160,7 +147,6 @@
         </div>
     </div>
 
-    <!-- Modal: Delete Success -->
     <div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -169,14 +155,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Delete User Successfully
+                    Delete Movie Successfully
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <!-- <img src="../../image/iconDelete.svg"> -->
     </div>
 
     <!-- Bootstrap -->
@@ -192,39 +177,33 @@
 
         $("#GetButton").click(function (e) {
             console.log($("#Name").val());
-            $("table tbody").html("");
+            $("table tbody").empty();
             $.ajax({
-                url: "https://localhost:5001/api/Movie/search?name=" + $("#Name").val(),
+                url: "https://localhost:5001/api/User/search?name=" + $("#Name").val(),
                 type: "get",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result, status, xhr) {
-                    console.log(result);
-                    if (typeof result !== 'undefined' || result.length > 0) {
+                    $("#resultDiv").show();
+
+                    if (typeof result !== 'undefined') {
                         $.each(result, function (index, value) {
                             $("tbody").append($("<tr>"));
                             appendElement = $("tbody tr").last();
-                            appendElement.append($("<td>").html(value["movieId"]));
-                            appendElement.append($("<td>").html(value["movieName"]));
-                            appendElement.append($("<td>").html(value["videoPath"]));
-                            appendElement.append($("<td>").html(value["description"]));
-                            appendElement.append($("<td>").html(value["duration"]));
-                            appendElement.append($("<td>").html(value["rated"]));
-                            appendElement.append($("<td>").html(value["publishedYear"]));
-                            appendElement.append($("<td>").html(value["country"]));
-                            appendElement.append($("<td>").html(value["imagePath"]));
+                            appendElement.append($("<td>").html(value["userId"]));
+                            appendElement.append($("<td>").html(value["email"]));
+                            appendElement.append($("<td>").html(value["username"]));
+                            appendElement.append($("<td>").html(value["roleId"]));
 
-                            appendElement.append($("<td>").html("<a href=\"UpdateMoive.html?id=" + value["movieId"]
+                            appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
                                 + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
                             appendElement.append($("<td>")
-                                .html("<img src=\"../../image/iconDelete1.png\" width=\"30\" />"));
+                                .html("<img class=\"delete\" src=\"../../image/iconDelete1.png\" width=\"30\" />"));
                         });
-                    }
 
-                    if (result.length == 0) {
-                        console.log("get here");
-                        $("#nodata").show();
-                        $("#resultDiv").hide();
+                    }
+                    else {
+                        $("table tbody").append("<td colspan=\"4\">No User</td>");
                     }
                 },
                 error: function (xhr, status, error) {
@@ -254,7 +233,7 @@
                         appendElement.append($("<td>").html(value["country"]));
                         appendElement.append($("<td>").html(value["imagePath"]));
 
-                        appendElement.append($("<td>").html("<a href=\"UpdateMoive.html?id=" + value["movieId"]
+                        appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
                             + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
                         appendElement.append($("<td>")
                             .html("<img class=\"delete\" src=\"../../image/iconDelete1.png\" width=\"30\" />"));
@@ -289,20 +268,20 @@
             });
         }
 
-        var movie = 0;
+        var userId = 0;
 
         $("table").on("click", "img.delete", function () {
-            movie = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
+            userId = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
             $("#myModal").modal('show');
         });
 
         $("#deleteBtn").click(function (e) {
             $.ajax({
-                url: "https://localhost:5001/api/Movie/id?id=" + movie,
+                url: "https://localhost:5001/api/User/id?id=" + userId,
                 type: "delete",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
-                    window.location.href = "MovieManagement.html";
+                    ShowUsers();
                     $('#myModal').modal('toggle');
                     $("#myModal2").modal('show');
                 },
@@ -311,9 +290,6 @@
                     console.log(xhr)
                 }
             });
-        });
-        $("#clearSearch").click(function (e) {
-            location.reload();
         });
     </script>
 
