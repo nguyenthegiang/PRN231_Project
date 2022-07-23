@@ -23,8 +23,6 @@ namespace WebAPI.Controllers
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private IMovieRepository repository;
-        private IActorRepository repositoryA;
-        private ICategoryRepository repositoryC;
         private readonly MyDbContext context;
         private MapperConfiguration config;
         private IMapper mapper;
@@ -32,8 +30,6 @@ namespace WebAPI.Controllers
         public MovieController(IMovieRepository repository, IWebHostEnvironment hostingEnvironment, MyDbContext _context, IActorRepository repositoryA , ICategoryRepository repositoryC)
         {
             this.repository = repository;
-            this.repositoryA = repositoryA;
-            this.repositoryC = repositoryC;
             _hostingEnvironment = hostingEnvironment;
             context = _context;
             config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
