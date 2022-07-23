@@ -73,7 +73,7 @@ namespace WebAPI.Controllers
             return repository.GetAll();
         }
 
-        [HttpGet("catId")]
+        [HttpGet("GetMoviesByCategory/{catId}")]
         public ActionResult<IEnumerable<MovieDTO>> GetmoviesByCategory(int catId)
         {
             List<Movie> movies = repository.GetMoviesByCategory(catId);
