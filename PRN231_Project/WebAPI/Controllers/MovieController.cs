@@ -23,13 +23,17 @@ namespace WebAPI.Controllers
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private IMovieRepository repository;
+        private IActorRepository repositoryA;
+        private ICategoryRepository repositoryC;
         private readonly MyDbContext context;
         private MapperConfiguration config;
         private IMapper mapper;
 
-        public MovieController(IMovieRepository repository, IWebHostEnvironment hostingEnvironment, MyDbContext _context)
+        public MovieController(IMovieRepository repository, IWebHostEnvironment hostingEnvironment, MyDbContext _context, IActorRepository repositoryA , ICategoryRepository repositoryC)
         {
             this.repository = repository;
+            this.repositoryA = repositoryA;
+            this.repositoryC = repositoryC;
             _hostingEnvironment = hostingEnvironment;
             context = _context;
             config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
@@ -172,11 +176,31 @@ namespace WebAPI.Controllers
         {
             try
             {
+
                 var m = repository.GetMovieById(id);
                 if (m == null)
                 {
                     return NotFound();
                 }
+                List<ActorMovie> actorMovies = context.ActorMovies.Where(m => m.MovieId == id).ToList();
+                foreach(ActorMovie a in actorMovies)
+                {
+                    context.ActorMovies.Remove(a);
+                    context.SaveChanges();
+                }
+                List<CategoryMovie> categoryMovies = context.CategoryMovie.Where(m => m.MovieId == id).ToList();
+                foreach (CategoryMovie c in categoryMovies)
+                {
+                    context.CategoryMovie.Remove(c);
+                    context.SaveChanges();
+                }
+                var movie = repository.GetMovieById(id);
+                string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath);
+                string filePath = Path.Combine(directoryPath, movie.VideoPath);
+                System.IO.File.Delete(filePath);
+                string directoryPath2 = Path.Combine(_hostingEnvironment.WebRootPath,"Image");
+                string filePath2 = Path.Combine(directoryPath, movie.ImagePath);
+                System.IO.File.Delete(filePath2);
                 repository.DeleteMovie(id);
                 return Ok();
             }

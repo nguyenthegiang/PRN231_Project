@@ -289,20 +289,20 @@
             });
         }
 
-        var userId = 0;
+        var movie = 0;
 
         $("table").on("click", "img.delete", function () {
-            userId = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
+            movie = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
             $("#myModal").modal('show');
         });
 
         $("#deleteBtn").click(function (e) {
             $.ajax({
-                url: "https://localhost:5001/api/User/id?id=" + userId,
+                url: "https://localhost:5001/api/Movie/id?id=" + movie,
                 type: "delete",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
-                    ShowUsers();
+                    window.location.href = "MovieManagement.html";
                     $('#myModal').modal('toggle');
                     $("#myModal2").modal('show');
                 },
