@@ -20,8 +20,17 @@ body {
     margin-left: 10px;
 }
 
-.nav-link{
+/* Navbar: nav link */
+.my-nav-link{
     color: white;
+}
+
+.my-nav-link:hover{
+    color: #e2e6ea;
+}
+
+.my-nav-link-active {
+    font-weight: bold;
 }
 
 /*Feature Space*/
