@@ -56,11 +56,7 @@ body {
 
 /* Movie List: Content */
 .movie-list-container {
-    padding: 0 20px;
-}
-
-.after-first-container {
-    margin-top: 50px;
+    padding: 0 20px 50px 20px;
 }
 
 .movie-list-wrapper {
@@ -80,6 +76,7 @@ body {
 .movie-list-item {
     margin-right: 30px;
     position: relative; 
+    border-radius: 5px;
 }
 
 .movie-list-item:hover .movie-list-item-img {
@@ -146,7 +143,7 @@ body {
 .arrow {
     font-size: 120px;
     position: absolute;
-    top: 90px;
+    top: 45px;
     right: 0;
     color: lightgray;
     opacity: 0.5;
