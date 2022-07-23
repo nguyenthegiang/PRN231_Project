@@ -5,6 +5,25 @@ let id = params.get("id");
 //Change URL source of Video
 $("#videoSource").attr("src", "https://localhost:5001/api/Movie/WatchMovie?movieId=" + id);
 
+GetMovieName(id);
+
+//Get movie name
+//call API để lấy user theo id 
+function GetMovieName(id) {
+  $.ajax({
+      url: "https://localhost:5001/api/Movie/" + id,
+      type: "get",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function (result, status, xhr) {
+          $("#movieName").html(result["movieName"]);
+      },
+      error: function (xhr, status, error) {
+          console.log(xhr);
+      }
+  });
+};
+
 // Select elements here
 const video = document.getElementById("video");
 const videoControls = document.getElementById("video-controls");
