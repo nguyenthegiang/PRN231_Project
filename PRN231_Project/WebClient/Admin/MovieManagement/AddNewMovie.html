@@ -253,11 +253,11 @@
                         contentType: "application/json",
                         data: JSON.stringify({
                             movieId: 0,
-                            movieName: name,
+                            movieName: $("#movieName").val(),
                             videoPath: pathvideo,
                             description: $("#description").val(),
                             duration: $("#duration").val(),
-                            rated: 0,
+                            rated: $("#rated").val(),
                             publishedYear: $("#publishedYear").val(),
                             country: $("#country").val(),
                             imagePath: nameImg
