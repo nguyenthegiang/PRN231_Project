@@ -45,6 +45,9 @@
                 div.pager span.active {
                     background: grey;
                 }
+        #clearSearch {
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -68,7 +71,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto" style="background-color: #1f1f1f; border: solid 1px #1f1f1f; border-radius: 5px; padding: 0px 15px;">
                     <li style="padding: 0px;">
-                        
+
                     </li>
                 </ul>
 
@@ -76,6 +79,10 @@
                 <div class="form-group d-flex">
                     <input class="form-control me-2" type="text" id="Name" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light" id="GetButton">Search</button>
+                </div>
+                <!-- Clear Search value button -->
+                <div class="form-group d-flex">
+                    <button id="clearSearch" class="btn btn-outline-danger">Clear Search</button>
                 </div>
             </div>
         </div>
@@ -185,7 +192,7 @@
             console.log($("#Name").val());
             $("table tbody").empty();
             $.ajax({
-                url: "https://localhost:5001/api/User/search?name=" + $("#Name").val(),
+                url: "https://localhost:5001/api/Movie/search?name=" + $("#Name").val(),
                 type: "get",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -196,15 +203,20 @@
                         $.each(result, function (index, value) {
                             $("tbody").append($("<tr>"));
                             appendElement = $("tbody tr").last();
-                            appendElement.append($("<td>").html(value["userId"]));
-                            appendElement.append($("<td>").html(value["email"]));
-                            appendElement.append($("<td>").html(value["username"]));
-                            appendElement.append($("<td>").html(value["roleId"]));
+                            appendElement.append($("<td>").html(value["movieId"]));
+                            appendElement.append($("<td>").html(value["movieName"]));
+                            appendElement.append($("<td>").html(value["videoPath"]));
+                            appendElement.append($("<td>").html(value["description"]));
+                            appendElement.append($("<td>").html(value["duration"]));
+                            appendElement.append($("<td>").html(value["rated"]));
+                            appendElement.append($("<td>").html(value["publishedYear"]));
+                            appendElement.append($("<td>").html(value["country"]));
+                            appendElement.append($("<td>").html(value["imagePath"]));
 
-                            appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
+                            appendElement.append($("<td>").html("<a href=\"UpdateMoive.html?id=" + value["movieId"]
                                 + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
                             appendElement.append($("<td>")
-                                .html("<img class=\"delete\" src=\"../../image/iconDelete1.png\" width=\"30\" />"));
+                                .html("<img src=\"../../image/iconDelete1.png\" width=\"30\" />"));
                         });
 
                     }
@@ -239,7 +251,7 @@
                         appendElement.append($("<td>").html(value["country"]));
                         appendElement.append($("<td>").html(value["imagePath"]));
 
-                        appendElement.append($("<td>").html("<a href=\"UpdateUser.html?id=" + value["userId"]
+                        appendElement.append($("<td>").html("<a href=\"UpdateMovie.html?id=" + value["movieId"]
                             + "\"><img src=\"../../image/iconEdit.png\" width=\"30\" /></a>"));
                         appendElement.append($("<td>")
                             .html("<img class=\"delete\" src=\"../../image/iconDelete1.png\" width=\"30\" />"));
@@ -274,20 +286,20 @@
             });
         }
 
-        var userId = 0;
+        var movie = 0;
 
         $("table").on("click", "img.delete", function () {
-            userId = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
+            movie = $(this).parent("td").parent("tr").find("td:nth-child(1)").text();
             $("#myModal").modal('show');
         });
 
         $("#deleteBtn").click(function (e) {
             $.ajax({
-                url: "https://localhost:5001/api/User/id?id=" + userId,
+                url: "https://localhost:5001/api/Movie/id?id=" + movie,
                 type: "delete",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
-                    ShowUsers();
+                    window.location.href = "MovieManagement.html";
                     $('#myModal').modal('toggle');
                     $("#myModal2").modal('show');
                 },
@@ -296,6 +308,9 @@
                     console.log(xhr)
                 }
             });
+        });
+        $("#clearSearch").click(function (e) {
+            location.reload();
         });
     </script>
 
