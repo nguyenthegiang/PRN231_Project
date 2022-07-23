@@ -55,7 +55,7 @@ function LoginFacebook(email, facebookUID, name) {
     success: function (result, status, xhr) {
       console.log("success");
       console.log(result["token"]);
-      
+
       //reset storage
       window.localStorage.removeItem("token");
       window.localStorage.removeItem("userId");
@@ -84,7 +84,7 @@ function Logout() {
   window.localStorage.removeItem("token");
   window.localStorage.removeItem("userId");
   window.sessionStorage.removeItem("token");
-  
+
   window.location.href = "../Client/index.html";
 }
 
