@@ -136,7 +136,7 @@ namespace WebAPI.Controllers
             {
                 file.CopyTo(stream);
             }
-            return Ok("Upload dc");
+            return Ok("Ok");
         }
 
         [HttpPost("[action]")]
