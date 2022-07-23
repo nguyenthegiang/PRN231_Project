@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using WebAPI.Helper;
 using System.Net.Http;
 using AutoMapper;
+using System.Reflection;
 
 namespace WebAPI.Controllers
 {
@@ -120,12 +121,22 @@ namespace WebAPI.Controllers
         public IActionResult UploadImage(IFormFile file)
         {
             string directoryPath = Path.Combine(_hostingEnvironment.WebRootPath, "Image");
+            //This will strip just the working path name:
+            //C:\Program Files\MyApplication
+            string strWorkPath = System.IO.Path.GetDirectoryName(_hostingEnvironment.ContentRootPath);
+            string directoryPath3 = Path.Combine(strWorkPath, "WebClient","image","movies");
+
             string filePath = Path.Combine(directoryPath, file.FileName);
-            using(var stream = new FileStream(filePath, FileMode.Create))
+            string filePath2 = Path.Combine(directoryPath3, file.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 file.CopyTo(stream);
             }
-            return Ok("Upload Ok");
+            using (var stream = new FileStream(filePath2, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            return Ok("Upload dc");
         }
 
         [HttpPost("[action]")]
