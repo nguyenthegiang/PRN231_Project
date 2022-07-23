@@ -90,9 +90,11 @@ function GetFeaturedMovie(id) {
           '<p class="featured-desc">' +
           result["description"] +
           "</p>" +
-          '<a class="featured-button" href="./WatchMovie.html?id=' +
+          '<a type="button" class="btn btn-light featured-button" href="./WatchMovie.html?id=' +
           result["movieId"] +
-          '">WATCH</a>' +
+          '"><i class="featured-button-icon fa-solid fa-play"></i> Play</a>' +
+          '<a type="button" class="btn btn-secondary featured-button" href="">' +
+          '<i class="featured-button-icon fa-solid fa-circle-info"></i> More Info</a>' +
           "</div>"
       );
     },
