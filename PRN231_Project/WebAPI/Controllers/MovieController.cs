@@ -199,9 +199,9 @@ namespace WebAPI.Controllers
             string filePath = Path.Combine(directoryPath, path2);
             System.IO.File.Delete(filePath);
 
-            string strWorkPath = System.IO.Path.GetDirectoryName(_hostingEnvironment.ContentRootPath);
+           /* string strWorkPath = System.IO.Path.GetDirectoryName(_hostingEnvironment.ContentRootPath);
             string directoryPath3 = Path.Combine(strWorkPath, "WebClient", "image", "movies",path2);
-            System.IO.File.Delete(directoryPath3);
+            System.IO.File.Delete(directoryPath3);*/
             return Ok();
         }
 
