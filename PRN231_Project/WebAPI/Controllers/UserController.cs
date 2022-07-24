@@ -102,8 +102,11 @@ namespace WebAPI.Controllers
                 {
                     return NotFound();
                 }
-
-                repository.UpdateUser(user);
+                uTmp.Email = user.Email;
+                uTmp.Username = user.Username;
+                if (user.RoleId != 0)
+                    uTmp.RoleId = user.RoleId;
+                repository.UpdateUser(uTmp);
                 return Ok(user);
             }
             catch (Exception)
