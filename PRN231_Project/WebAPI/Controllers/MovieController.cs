@@ -85,7 +85,6 @@ namespace WebAPI.Controllers
 
         //Function [Watch Movie]
         [HttpGet("WatchMovie")]
-        [Authorize]
         public async Task<IActionResult> WatchMovie(int movieId)
         {
             Movie movie = repository.GetMovieById(movieId);
