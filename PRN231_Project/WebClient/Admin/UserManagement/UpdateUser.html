@@ -151,7 +151,7 @@
                         $("#email").attr("value", result["email"]);
                         $("#name").attr("value", result["username"]);
                         $("#password").attr("value", result["password"]);
-                        $("#role").val(result["role"]["roleName"]).change();
+                        $("#role").val(result["role"]["roleId"]);
                     },
                     error: function (xhr, status, error) {
                         console.log(xhr);
